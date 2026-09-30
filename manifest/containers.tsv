@@ -1,0 +1,14 @@
+image	note
+gitea/gitea:latest	self-hosted git for the agents
+qdrant/qdrant:latest	vector db
+chromadb/chroma:latest	vector db
+quay.io/jupyter/scipy-notebook:latest	notebooks
+pgvector/pgvector:pg17	postgres + vectors
+postgres:17	
+redis:7	
+nginx:stable	
+ollama/ollama:latest	model runner
+ghcr.io/open-webui/open-webui:main	chat front
+infiniflow/ragflow:nightly-slim	RAG app
+valkey/valkey:8	
+minio/minio:latest	S3-compatible object store

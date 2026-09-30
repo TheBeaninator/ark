@@ -1,0 +1,18 @@
+hf_id	include	note
+HuggingFaceFW/fineweb-edu	sample/10BT/*	pretraining sample (10B tokens)
+HuggingFaceTB/smoltalk		SFT
+allenai/tulu-3-sft-mixture		SFT
+teknium/OpenHermes-2.5		SFT
+HuggingFaceH4/ultrafeedback_binarized		preference/DPO
+open-r1/OpenR1-Math-220k		reasoning SFT
+nvidia/HelpSteer3		preference
+cais/mmlu		eval
+openai/gsm8k		eval
+openai/openai_humaneval		eval (code)
+Rowan/hellaswag		eval
+HuggingFaceH4/MATH-500		eval
+bigcode/the-stack-smol		code sample
+keithito/lj_speech		TTS training
+pcuenq/oxford-pets		image LoRA
+linoyts/Tuxemon		image LoRA (tiny)
+jaredpalmer/kev-suites		decision-model eval
