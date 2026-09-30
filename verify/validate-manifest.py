@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
-"""verify/validate-manifest.py [--online] — check every manifest row is well-formed and (with --online) that the reference resolves.
-Runs in CI on every pull request, so a contribution is just a line in a TSV that this script accepts. Exit 1 on any problem."""
-import csv,re,sys,os,json,urllib.request,concurrent.futures as cf
-ON='--online' in sys.argv; M=os.path.join(os.path.dirname(__file__),'..','manifest'); bad=[]
+"""verify/validate-manifest.py [--online] [--changed BASE] — check every manifest row is well-formed and (with --online) that the
+reference resolves. --changed BASE limits the online checks to rows added or modified since git ref BASE (what CI does for a pull
+request); a full online sweep is a scheduled job. GitHub rate-limits anonymous requests hard: set GITHUB_TOKEN (CI has one) and the
+script uses the API; without it, it goes slowly and retries on 429. Exit 1 on any problem; rate-limited rows are reported, not failed."""
+import csv,re,sys,os,json,time,subprocess,urllib.request,concurrent.futures as cf
+ON='--online' in sys.argv; CH=sys.argv[sys.argv.index('--changed')+1] if '--changed' in sys.argv else None
+TOK=os.environ.get('GITHUB_TOKEN'); limited=[]
+changed=set()
+if CH:
+    diff=subprocess.run(['git','diff','--unified=0',CH,'--','manifest/'],capture_output=True,text=True).stdout
+    for l in diff.splitlines():
+        if l.startswith('+') and not l.startswith('+++'): changed.update(x.strip() for x in l[1:].split('\t'))
+M=os.path.join(os.path.dirname(__file__),'..','manifest'); bad=[]
 def rows(f):
     with open(os.path.join(M,f)) as fh:
         r=csv.reader(fh,delimiter='\t'); h=next(r)
@@ -10,10 +19,15 @@ def rows(f):
             if not row or row[0].startswith('#'): continue
             yield i,dict(zip(h,row+['']*(len(h)-len(row))))
 def head(u,timeout=20):
-    try:
-        req=urllib.request.Request(u,method='HEAD',headers={'User-Agent':'ark-validate/1'}); return urllib.request.urlopen(req,timeout=timeout).status
-    except urllib.error.HTTPError as e: return e.code
-    except Exception: return 0
+    m=re.match(r'https://github\.com/([\w.-]+)/([\w.-]+)',u)
+    if m and TOK: u=f'https://api.github.com/repos/{m.group(1)}/{m.group(2)}'
+    for attempt in range(4):
+        try:
+            req=urllib.request.Request(u,method='HEAD' if not m else 'GET',headers={'User-Agent':'ark-validate/1',**({'Authorization':f'Bearer {TOK}'} if m and TOK else {})}); return urllib.request.urlopen(req,timeout=timeout).status
+        except urllib.error.HTTPError as e:
+            if e.code in (429,403) and attempt<3: time.sleep(5*(attempt+1)); continue
+            return e.code
+        except Exception: return 0
 def hf(id,kind='models'):
     try: return urllib.request.urlopen(urllib.request.Request(f'https://huggingface.co/api/{kind}/{id}',headers={'User-Agent':'ark-validate/1'}),timeout=20).status==200
     except urllib.error.HTTPError as e: return e.code in (401,403)   # gated repos answer 401/403 but exist
@@ -47,13 +61,18 @@ for u in set(dups):
 if ON:
     def run(c):
         k,i,x=c
-        if k=='repo': return None if head(x) in (200,301,302) else f'repos.tsv:{i}: unreachable {x}'
+        if k=='repo':
+            c=head(x)
+            if c in (429,403): limited.append(x); return None
+            return None if c in (200,301,302) else f'repos.tsv:{i}: unreachable {x} (HTTP {c})'
         if k=='hf-model': return None if hf(x) else f'models.tsv:{i}: not on Hugging Face: {x}'
         if k=='hf-dataset': return None if hf(x,'datasets') else f'datasets.tsv:{i}: not on Hugging Face: {x}'
         if k=='url': return None if head(x) in (200,301,302,403) else f'reference.tsv:{i}: unreachable {x}'
-    with cf.ThreadPoolExecutor(12) as ex:
+    if CH: checks=[c for c in checks if c[2] in changed or any(c[2] in v for v in changed)]
+    with cf.ThreadPoolExecutor(3 if not TOK else 8) as ex:
         for r in ex.map(run,checks):
             if r: bad.append(r)
-print(f'{len(checks)} references checked{" online" if ON else ""}; categories: {", ".join(sorted(CATS))}')
+print(f'{len(checks)} references checked{" online" if ON else ""}{f" (changed since {CH})" if CH else ""}; categories: {", ".join(sorted(CATS))}')
+if limited: print(f'{len(limited)} GitHub rows rate-limited (429) and NOT verified; set GITHUB_TOKEN or rerun later')
 if bad: print('\n'.join(bad)); sys.exit(1)
 print('manifest OK')
