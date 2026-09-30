@@ -11,8 +11,10 @@ openai/gsm8k		eval
 openai/openai_humaneval		eval (code)
 Rowan/hellaswag		eval
 HuggingFaceH4/MATH-500		eval
-bigcode/the-stack-smol		code sample
 keithito/lj_speech		TTS training
 pcuenq/oxford-pets		image LoRA
 linoyts/Tuxemon		image LoRA (tiny)
 jaredpalmer/kev-suites		decision-model eval
+ise-uiuc/Magicoder-OSS-Instruct-75K		code instruction (MIT)
+glaiveai/glaive-code-assistant-v3		code instruction (Apache-2.0)
+nvidia/OpenCodeInstruct		code instruction, large (CC-BY-4.0)
