@@ -122,3 +122,6 @@ zai-org/SCAIL-2	raw	Wan2.1_VAE.pth model/1/fsdp2_rank_0000_checkpoint.pt model/b
 zai-org/glm-4-voice-9b	hf-asset		voice stack
 zai-org/glm-4-voice-decoder	hf-asset		voice stack
 zai-org/glm-4-voice-tokenizer	hf-asset		voice stack
+meta-models/Muse-Glimmer-30B	raw		agentic 30B VLM (Meta), bf16 safetensors
+unsloth/Muse-Glimmer-30B-GGUF	gguf	Muse-Glimmer-30B-UD-Q8_K_XL.gguf Muse-Glimmer-30B-UD-Q4_K_XL.gguf mmproj-Muse-Glimmer-30B-BF16.gguf	UD quants + mmproj
+SupraLabs/SupraElegans-500k	raw		500k-param sparse recurrent LM (no attention), BCI/biosignal-adjacent architecture experiment

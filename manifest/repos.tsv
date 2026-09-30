@@ -523,3 +523,5 @@ voice	https://github.com/speaches-ai/speaches
 voice	https://github.com/stepfun-ai/Step-Audio2	
 voice	https://github.com/thewh1teagle/kokoro-onnx	
 voice	https://github.com/zai-org/GLM-4-Voice	
+offline-reference	https://github.com/GPUOpen-Tools/isa_spec_manager	AMD machine-readable ISA XML (CDNA1-4, RDNA1-4, RDNA3.5) + parser; basis of the cdna4-isa/rdna35 shelves
+dev-infra	https://github.com/squirtymcgirt/agent-kanban	agent-kanban: kanban board as agent working memory (akb)

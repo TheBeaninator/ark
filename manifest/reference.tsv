@@ -10,3 +10,35 @@ url	https://ftp.ensembl.org/pub/release-{REL}/variation/indexed_vep_cache/homo_s
 url	https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz	genome	ClinVar (+ .tbi)
 url	https://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.40.gz	genome	dbSNP GRCh38.p14 (~30 GB, + .tbi)
 url	https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/exomes/gnomad.exomes.v4.1.sites.chr22.vcf.bgz	genome	gnomAD v4.1 exomes, chr22 sample only
+url	https://arxiv.org/pdf/2205.14135	papers	FlashAttention; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2307.08691	papers	FlashAttention-2; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2407.08608	papers	FlashAttention-3; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2311.01282	papers	FlashDecoding++; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2211.17192	papers	speculative decoding (Leviathan); Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2406.16858	papers	EAGLE-2; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2401.10774	papers	Medusa; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2404.19737	papers	multi-token prediction; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2210.17323	papers	GPTQ; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2306.00978	papers	AWQ; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2211.10438	papers	SmoothQuant; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2310.10537	papers	OCP Microscaling (MX) paper; the spec itself is registration-gated; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2106.09685	papers	LoRA; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2402.09353	papers	DoRA; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2210.02747	papers	flow matching; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2209.03003	papers	rectified flow; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2006.16668	papers	GShard; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2101.03961	papers	Switch Transformer; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/1909.08053	papers	Megatron-LM; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2211.15841	papers	MegaBlocks; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2211.05102	papers	efficiently scaling transformer inference (Pope); Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2007.00072	papers	data movement is all you need; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2405.04434	papers	DeepSeek-V2 (MLA); Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2412.19437	papers	DeepSeek-V3 report; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2606.19348	papers	DeepSeek-V4 report; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2606.09079	papers	FlashMemory-DeepSeek-V4 (lookahead sparse attention); Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2501.00103	papers	LTX-Video; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2601.03233	papers	LTX-2 report; Leitner Reference Library shelf
+url	https://arxiv.org/pdf/2511.21631	papers	Qwen3-VL report; Leitner Reference Library shelf
+url	https://www.agner.org/optimize/instruction_tables.pdf	cpu	Agner Fog instruction tables
+url	https://www.agner.org/optimize/microarchitecture.pdf	cpu	Agner Fog microarchitecture
+url	https://www.agner.org/optimize/optimizing_assembly.pdf	cpu	Agner Fog optimizing assembly
