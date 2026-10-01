@@ -587,3 +587,15 @@ circuit-design	https://github.com/VUnit/vunit
 circuit-design	https://github.com/cocotb/cocotb	
 inference	https://github.com/JustVugg/colibri	NVMe-streaming MoE engine: 744B on 25 GB RAM, slow
 inference	https://github.com/s-b-repo/peregrine	Rust spin-off of colibri
+netboot	https://github.com/ipxe/ipxe	iPXE: build a custom UEFI netboot binary with an embedded script (snponly.efi for Realtek RTL8125 via firmware SNP); the Ubuntu ipxe deb is in the apt mirror
+netboot	https://github.com/danderson/netboot	pixiecore: one static Go binary = proxyDHCP + TFTP + HTTP PXE server; boots nodes on a segment with no DHCP server
+netboot	https://github.com/warewulf/warewulf	stateless image-based cluster provisioning (overlay + container images over PXE); the HPC way to run a diskless GPU fleet
+netboot	https://github.com/canonical/subiquity	Ubuntu Server installer + autoinstall schema source (ships as a snap inside the live ISO, not in apt)
+netboot	https://github.com/canonical/curtin	the installer's storage/curtin layer that autoinstall drives
+netboot	https://github.com/canonical/cloud-init	NoCloud datasource reference for autoinstall user-data/meta-data
+netboot	https://github.com/ltsp/ltsp	diskless clients booting a squashfs image over NFS/NBD (ltsp deb is in the apt mirror)
+netboot	https://github.com/dracut-ng/dracut-ng	initramfs with network root (nfs/iscsi/nbd/livenet); dracut-network deb is in the apt mirror
+netboot	https://github.com/systemd/mkosi	build bootable OS images (UKI, squashfs, disk) from the apt mirror without a live ISO
+netboot	https://github.com/canonical/ubuntu-image	Canonical's image builder (image definitions, gadget trees)
+netboot	https://github.com/netbootxyz/netboot.xyz	iPXE menu system; usable offline when its assets are mirrored locally
+netboot	https://github.com/ventoy/Ventoy	multi-ISO USB stick: the no-network fallback for installing a node

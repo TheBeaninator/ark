@@ -1,0 +1,86 @@
+# Debs a node-provisioning / PXE server needs from the apt mirror. Checked with verify/apt-coverage.sh.
+# boot chain (UEFI): shim-signed carries shimx64.efi.signed, grub-efi-amd64-signed carries grubnetx64.efi.signed; ipxe carries ipxe.efi / snponly.efi
+shim-signed
+grub-efi-amd64-signed
+grub-efi-amd64-bin
+grub-common
+ipxe
+pxelinux
+syslinux-common
+syslinux-efi
+# DHCP / proxyDHCP / TFTP / HTTP
+dnsmasq
+dnsmasq-base
+isc-dhcp-server
+kea-dhcp4-server
+tftpd-hpa
+atftpd
+nginx
+apache2
+lighttpd
+# network root for diskless nodes
+nfs-kernel-server
+nfs-common
+nbd-server
+nbd-client
+open-iscsi
+tgt
+overlayroot
+ltsp
+# initramfs / live / image building
+initramfs-tools
+dracut
+dracut-network
+casper
+squashfs-tools
+live-build
+debootstrap
+mmdebstrap
+fai-server
+xorriso
+isolinux
+mtools
+dosfstools
+cloud-init
+cloud-initramfs-growroot
+cloud-initramfs-copymods
+cloud-initramfs-dyn-netconf
+# target OS and disks
+linux-generic-hwe-24.04
+linux-image-generic-hwe-24.04
+linux-firmware
+ubuntu-server-minimal
+efibootmgr
+parted
+gdisk
+mdadm
+lvm2
+btrfs-progs
+xfsprogs
+zfsutils-linux
+kexec-tools
+memtest86+
+# fleet plumbing
+openssh-server
+avahi-daemon
+chrony
+ethtool
+wakeonlan
+etherwake
+lldpd
+nftables
+iptables-persistent
+rsync
+ansible
+# offline repo tooling
+dpkg-dev
+apt-cacher-ng
+apt-mirror
+aptly
+reprepro
+debmirror
+ubuntu-keyring
+# test the image in a VM before touching hardware
+qemu-system-x86
+qemu-utils
+ovmf

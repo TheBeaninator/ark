@@ -6,6 +6,7 @@ $ARK_HF_ASSETS/<org>/<repo>/            helper weights that mirrored code downlo
 $ARK_SOFTWARE/src/<host>__<owner>__<repo>/   latest-only shallow clones (Node repos carry node_modules/)
 $ARK_SOFTWARE/{wheels,binaries,debs,rocm,containers,cargo-home,cmake-deps,gomodcache,npm-cache,pnpm-store,bun-cache,embedded,docs}/
 $ARK_SOFTWARE/binaries/python/<tag>/    python-build-standalone tarballs (uv-mirror layout)
+$ARK_SOFTWARE/binaries/iso/             OS installer ISOs + their SHA256SUMS (reference.tsv kind=iso)
 $ARK_DATA/reference/{zim,genome}/  $ARK_DATA/datasets/<org__name>/  $ARK_DATA/assets/{polyhaven,ambientcg}/
 comfy/<type>/<base>/                    ComfyUI assets: one root, one extra_model_paths entry
 ```

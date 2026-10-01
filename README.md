@@ -21,7 +21,7 @@ Fetchers are idempotent and resumable; re-run them to refresh. Expect several TB
 
 ## What is in the ark
 
-Numbers are live counts from `manifest/` (588 repos, 138 weight repos, 21 datasets, 43 reference sets, 12 container images). The drill-down with every entry is `docs/directory.html`.
+Numbers are live counts from `manifest/` (600 repos, 138 weight repos, 21 datasets, 44 reference sets, 12 container images). The drill-down with every entry is `docs/directory.html`.
 
 ### Capabilities, not just lists
 
@@ -34,6 +34,7 @@ An island with this mirror can, with no network:
 - **Talk**: a complete voice-assistant stack (speech-to-speech models, streaming STT and TTS, VAD, wake word, turn-taking, pipelines) that runs end to end on local hardware.
 - **Act**: 42 agent harnesses and frameworks, 28 multi-agent and swarm frameworks, orchestration, the MCP/A2A/AG-UI protocols, parallel coding agents, and decision models (Jev-style one-pass typed answers) for cheap, calibrated routing and judging.
 - **Know**: Wikipedia, Stack Overflow, Gutenberg and DevDocs as Kiwix ZIMs; retrieval and document tooling (vector stores, RAG frameworks, embedders, parsers) to make them searchable.
+- **Boot**: bring up a bare node from the mirror alone: the Ubuntu live-server ISO plus the signed shim/grub netboot binaries, iPXE, dnsmasq/tftpd/pixiecore, nfs/nbd/overlayroot, cloud-init and autoinstall sources, dracut and mkosi for image builds, Warewulf for stateless diskless fleets (see `docs/NETBOOT.md`).
 - **Build**: Python 3.12/3.13/3.14 with wheel lanes proven to resolve offline, Node/Go/Rust/bun toolchains with offline registries, a latest-only apt mirror plus ROCm and CUDA pools, container images for the heavy services, and firmware toolchains for the island's own microcontrollers.
 - **Specialise**: genome analysis with GRCh38 reference data, circuit design and HDL simulation, 3D capture, BCI/EEG tooling.
 
@@ -58,6 +59,7 @@ An island with this mirror can, with no network:
 | `agent-protocols`, `coding-agents`, `fronts-eval` | 30 | A2A, AG-UI, fastmcp, mcp-use; vibe-kanban, claude-squad, humanlayer, stagewise, SWE-ReX, pr-agent, skills; LibreChat, AnythingLLM, Lobe Chat, NeMo Guardrails, SWE-bench, AgentBench |
 | `retrieval` | 16 | chroma, qdrant, faiss, lancedb, pgvector, ragflow, txtai, LightRAG, graphrag, sentence-transformers, FlagEmbedding, colpali, docling, marker, unstructured, PyMuPDF |
 | `dev-infra`, `dev-toolchains`, `offline-reference` | 26 | gitea, jupyterlab, marimo, mkdocs, pandoc, typst, neovim, emacs; node, go, code-server, git, sqlite, postgres, redis, nginx, flask, fastapi, django, electron, tauri, flutter; kiwix and zim tools |
+| `netboot` | 12 | iPXE, pixiecore, Warewulf, subiquity/curtin/cloud-init (autoinstall), LTSP, dracut, mkosi, ubuntu-image, netboot.xyz, Ventoy; the Ubuntu live-server ISO under `reference.tsv` and the full PXE/DHCP/TFTP/NFS deb set in the apt mirror |
 | `embedded`, `edge-vision` | 20 | platformio, esp-idf, pico-sdk, arduino-cli and cores, QMK, freerouting; Grove Vision AI V2 / Himax WiseEye2 toolchain (SSCMA, vela, tflite-micro, LiteRT, onnx2tf) |
 | `games`, `3d` | 33 | Godot, Bevy, raylib, LÖVE, SDL, pygame, Phaser, Defold, GDevelop, Tiled, LDtk, glTF samples, Google Fonts; Blender, FreeCAD, OpenSCAD, CadQuery, MeshLab, Open3D, trimesh, slicers, colmap, nerfstudio, Meshroom, gaussian-splatting |
 | `circuit-design` | 25 | KiCad and its libraries, ngspice, Verilator, Icarus, yosys, nextpnr, OpenROAD, openEMS, LibrePCB, GHDL, nvc, VUnit, cocotb, CERN's colibri VHDL library |

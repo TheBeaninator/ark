@@ -42,3 +42,4 @@ url	https://arxiv.org/pdf/2511.21631	papers	Qwen3-VL report; Leitner Reference L
 url	https://www.agner.org/optimize/instruction_tables.pdf	cpu	Agner Fog instruction tables
 url	https://www.agner.org/optimize/microarchitecture.pdf	cpu	Agner Fog microarchitecture
 url	https://www.agner.org/optimize/optimizing_assembly.pdf	cpu	Agner Fog optimizing assembly
+iso	https://releases.ubuntu.com/24.04/	ubuntu-24.04.*-live-server-amd64.iso	Ubuntu 24.04 LTS live-server installer, latest point release + SHA256SUMS; the base of every node image and of PXE (casper kernel/initrd + squashfs served over HTTP)

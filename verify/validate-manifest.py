@@ -48,10 +48,10 @@ for i,r in rows('datasets.tsv'):
     if not re.match(r'^[\w.-]+/[\w.-]+$',r['hf_id']): bad.append(f'datasets.tsv:{i}: hf_id must be org/name')
     checks.append(('hf-dataset',i,r['hf_id']))
 for i,r in rows('reference.tsv'):
-    if r['kind'] not in ('zim','zim-set','url'): bad.append(f'reference.tsv:{i}: kind must be zim|zim-set|url')
+    if r['kind'] not in ('zim','zim-set','url','iso'): bad.append(f'reference.tsv:{i}: kind must be zim|zim-set|url|iso')
     if not r['source'].startswith('https://'): bad.append(f'reference.tsv:{i}: source must be https')
     if r['kind']=='url' and '{REL}' not in r['source']: checks.append(('url',i,r['source']))
-    if r['kind'] in ('zim','zim-set'): checks.append(('url',i,r['source']))
+    if r['kind'] in ('zim','zim-set','iso'): checks.append(('url',i,r['source']))
 for i,r in rows('containers.tsv'):
     if not re.match(r'^[\w./-]+:[\w.-]+$',r['image']): bad.append(f'containers.tsv:{i}: image must be name:tag')
 for i,r in rows('assets.tsv'):
