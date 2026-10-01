@@ -25,6 +25,9 @@ About 525 repos in 31 purpose-based categories (inference engines, multi-box ser
 ## Private overlay
 Anything you do not want in the public list goes in `manifest-private/` (same files, same columns, git-ignored). Every fetcher reads it after `manifest/`; the validator checks it locally.
 
+## Directory
+`docs/directory.html` is a self-contained dark-mode drill-down of everything the manifest references, regenerated with `python3 report/gen-ark-directory.py` (add `--private` locally to include the overlay; that output is git-ignored).
+
 ## Contributing
 Add a line, not code: see `CONTRIBUTING.md`. CI validates that every reference resolves.
 

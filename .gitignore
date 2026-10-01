@@ -3,3 +3,4 @@ inventory.json
 manifest.html
 __pycache__/
 manifest-private/
+docs/directory-private.html
