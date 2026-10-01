@@ -37,7 +37,20 @@ def rtitle(r):
 def rmeta(r):
     name=r['pattern_or_target'] if r['kind']!='url' else re.sub(r'\{REL\}','<release>',r['source'].split('/')[-1])
     return f"{esc(r['kind'])} · {esc(name)}" if r.get('note') else esc(r['kind'])
-refsec=''.join(leaf(rtitle(r), rmeta(r), kv([('source',r['source']),('lands in',r['pattern_or_target'] if r['kind']=='url' else '')])) for r in ref)
+import collections as _c
+def rgroup(r):
+    t=r['pattern_or_target']; n=r.get('note','').lower()
+    if r['kind'] in ('zim','zim-set'): return 'Offline knowledge (Kiwix ZIM)'
+    if t.startswith('genome') or 'grch38' in n or 'ensembl' in n or 'ncbi' in n or 'gnomad' in n: return 'Genome reference data (GRCh38)'
+    if 'leitner' in n or 'arxiv.org' in r['source']: return 'Paper shelf (Leitner Reference Library)'
+    if 'agner' in n or 'manual' in n or 'instruction' in n: return 'Hardware manuals and references'
+    return 'Other reference files'
+rg=_c.OrderedDict()
+for r in ref: rg.setdefault(rgroup(r),[]).append(r)
+def rleaf(r):
+    t=r.get('note','') or r['source']; t=re.sub(r';\s*Leitner Reference Library shelf','',t)
+    return leaf(esc(t), rmeta(r), kv([('source',r['source']),('lands in',r['pattern_or_target'] if r['kind']=='url' else '')]))
+refsec=''.join(node(esc(g), f"{len(v)}", ''.join(rleaf(r) for r in v)) for g,v in rg.items())
 assets=rows('assets.tsv'); asec=''.join(leaf(f"{esc(a['source'])} · {esc(a['type'])}", esc(a['license']), kv([('selection',a['selection'])])) for a in assets)
 ct=rows('containers.tsv'); ctsec=''.join(leaf(f"<span class='mono'>{esc(c['image'])}</span>", '', kv([('note',c.get('note',''))])) for c in ct)
 pypi=[l for l in lines('pypi-extra.txt') if l and not l.startswith('#')]; apt=[l.lstrip('# ') for l in lines('apt.txt') if l.strip()]
