@@ -4,12 +4,18 @@ def du(p):
     try: return int(subprocess.run(['du','-sB1','-x',p],capture_output=True,text=True).stdout.split()[0])
     except: return 0
 def free(p): s=os.statvfs(p); return s.f_bavail*s.f_frsize, s.f_blocks*s.f_frsize
-inv={'drives':{},'models':[],'comfy':{},'hf_assets':[],'software':{},'docs':[]}
+inv={'drives':{},'models':[],'comfy':{},'hf_assets':[],'software':{},'docs':[],'data':{}}
+PREV=json.load(open(os.path.expanduser('~/storage-review/inventory.json'))) if os.path.exists(os.path.expanduser('~/storage-review/inventory.json')) else {}
+def mounted(n): return os.path.ismount(f'/mnt/nv{n}')
+inv['carried']=[f'nv{n}' for n in range(1,7) if not mounted(n)]
 for n in range(1,7):
-    d=f'/mnt/nv{n}'; fr,tot=free(d); inv['drives'][f'nv{n}']={'free':fr,'total':tot,'top':{e:du(f'{d}/{e}') for e in sorted(os.listdir(d)) if not e.startswith('lost') and not os.path.islink(f'{d}/{e}')}}
+    d=f'/mnt/nv{n}'
+    if not mounted(n): inv['drives'][f'nv{n}']=PREV.get('drives',{}).get(f'nv{n}',{'free':0,'total':0,'top':{}}); continue
+    fr,tot=free(d); inv['drives'][f'nv{n}']={'free':fr,'total':tot,'top':{e:du(f'{d}/{e}') for e in sorted(os.listdir(d)) if not e.startswith('lost') and not os.path.islink(f'{d}/{e}')}}
 # models: <drive>/models/<name>/{raw,gguf,...}
 for n in range(1,7):
     m=f'/mnt/nv{n}/models'
+    if not mounted(n): inv['models']+= [x for x in PREV.get('models',[]) if x['drive']==f'nv{n}']; continue
     if not os.path.isdir(m): continue
     for name in sorted(os.listdir(m)):
         p=f'{m}/{name}'
@@ -25,7 +31,8 @@ for n in range(1,7):
         inv['models'].append({'drive':f'nv{n}','name':name,'size':du(p),'layout':sorted(subs) or ['flat'],'formats':fm,'quants':sorted(quant)[:6]})
 # comfy on nv6: type -> base -> (count,size)
 C='/mnt/nv6/comfy'
-for t in sorted(os.listdir(C)):
+if not mounted(6): inv['comfy']=PREV.get('comfy',{})
+for t in (sorted(os.listdir(C)) if mounted(6) else []):
     tp=f'{C}/{t}'; 
     if not os.path.isdir(tp): continue
     inv['comfy'][t]={}
@@ -35,7 +42,7 @@ for t in sorted(os.listdir(C)):
         cnt=sum(len(fn) for _,_,fn in os.walk(bp)); inv['comfy'][t][b]={'files':cnt,'size':du(bp)}
 # hf-assets on nv3: org/repo
 H='/mnt/nv3/hf-assets'
-for org in sorted(os.listdir(H)):
+for org in (sorted(os.listdir(H)) if mounted(3) else []):
     op=f'{H}/{org}'
     if not os.path.isdir(op): continue
     for r in sorted(os.listdir(op)):
@@ -43,22 +50,41 @@ for org in sorted(os.listdir(H)):
         if os.path.isdir(rp): inv['hf_assets'].append({'org':org,'repo':r,'size':du(rp)})
 # software mirror
 S='/mnt/nv2/software'; sec=None; repos={}
-for line in open(f'{S}/mirrors.txt'):
+for line in (open(f'{S}/mirrors.txt') if mounted(2) else []):
     line=line.strip()
     if line.startswith('#'): sec=line.lstrip('# ').strip(); continue
     if line.startswith('http'):
         n=re.sub(r'^https?://','',line).replace('/','__').removesuffix('.git'); p=f'{S}/src/{n}'
         repos.setdefault(sec or 'other',[]).append({'url':line,'present':os.path.isdir(p),'node_modules':os.path.isdir(f'{p}/node_modules'),'size':du(p) if os.path.isdir(p) else 0})
-inv['software']['repos']=repos
-inv['software']['binaries']=sorted(os.listdir(f'{S}/binaries'))
-inv['software']['python']=sorted(glob.glob(f'{S}/binaries/python/*/*.tar.gz'))
-w=os.listdir(f'{S}/wheels'); inv['software']['wheels']={'total':len(w),'cp312':sum('cp312' in x for x in w),'cp313':sum('cp313' in x for x in w),'cp314':sum('cp314' in x for x in w),'pure':sum('py3-none-any' in x for x in w),'sdist':sum(x.endswith('.tar.gz') for x in w),'size':du(f'{S}/wheels')}
-for e in ['wheels-cuda-cu130','wheels-cuda-cu128','debs','rocm','containers','cargo-home','cmake-deps','gomodcache','npm-cache','pnpm-store','bun-cache','docs']:
-    p=f'{S}/{e}'; inv['software'][e]={'size':du(p),'entries':len(os.listdir(p)) if os.path.isdir(p) else 0} if os.path.exists(p) else None
-inv['software']['ubuntu_mirror']={'size':du('/mnt/nv4/ubuntu-mirror'),'repos':sorted(os.listdir('/mnt/nv4/ubuntu-mirror'))}
-inv['software']['containers_list']=sorted(os.listdir(f'{S}/containers'))
-inv['docs']=sorted(os.listdir(f'{S}/docs'))
-for lane in ('','-cp313','-cp314'):
-    try: inv['software'][f'resolve{lane or "-cp312"}']={k:sum(1 for l in open(os.path.expanduser(f'~/depaudit/{k}{lane}.log')) if l.startswith('OK')) for k in ('reqs','projects')}|{k+'_fail':sum(1 for l in open(os.path.expanduser(f'~/depaudit/{k}{lane}.log')) if l.startswith('FAIL')) for k in ('reqs','projects')}
-    except Exception as e: pass
+inv['software']['repos']=repos if mounted(2) else PREV.get('software',{}).get('repos',{})
+if not mounted(2):
+    for k,v in PREV.get('software',{}).items():
+        if k!='repos': inv['software'][k]=v
+    inv['hf_assets']=PREV.get('hf_assets',[]) if not mounted(3) else inv['hf_assets']
+    inv['docs']=PREV.get('docs',[])
+else:
+  inv['software']['binaries']=sorted(os.listdir(f'{S}/binaries'))
+  inv['software']['python']=sorted(glob.glob(f'{S}/binaries/python/*/*.tar.gz'))
+  w=os.listdir(f'{S}/wheels'); inv['software']['wheels']={'total':len(w),'cp312':sum('cp312' in x for x in w),'cp313':sum('cp313' in x for x in w),'cp314':sum('cp314' in x for x in w),'pure':sum('py3-none-any' in x for x in w),'sdist':sum(x.endswith('.tar.gz') for x in w),'size':du(f'{S}/wheels')}
+  for e in ['wheels-cuda-cu130','wheels-cuda-cu128','debs','rocm','containers','cargo-home','cmake-deps','gomodcache','npm-cache','pnpm-store','bun-cache','docs']:
+      p=f'{S}/{e}'; inv['software'][e]={'size':du(p),'entries':len(os.listdir(p)) if os.path.isdir(p) else 0} if os.path.exists(p) else None
+  inv['software']['ubuntu_mirror']={'size':du('/mnt/nv4/ubuntu-mirror'),'repos':sorted(os.listdir('/mnt/nv4/ubuntu-mirror'))}
+  inv['software']['containers_list']=sorted(os.listdir(f'{S}/containers'))
+  inv['docs']=sorted(os.listdir(f'{S}/docs'))
+if mounted(2):
+ for lane in ('','-cp313','-cp314'):
+     try: inv['software'][f'resolve{lane or "-cp312"}']={k:sum(1 for l in open(os.path.expanduser(f'~/depaudit/{k}{lane}.log')) if l.startswith('OK')) for k in ('reqs','projects')}|{k+'_fail':sum(1 for l in open(os.path.expanduser(f'~/depaudit/{k}{lane}.log')) if l.startswith('FAIL')) for k in ('reqs','projects')}
+     except Exception as e: pass
+def listing(p,depth=1):
+    out={}
+    if not os.path.isdir(p): return out
+    for e in sorted(os.listdir(p)):
+        q=os.path.join(p,e)
+        if e.startswith('.') or e.startswith('lost'): continue
+        out[e]={'size':du(q),'files':sum(len(f) for _,_,f in os.walk(q)) if os.path.isdir(q) else 1}
+    return out
+inv['data']={'zim':{**listing('/mnt/nv4/data/reference/zim'),**({'gutenberg (nv2)':{'size':207e9,'files':1}} if not mounted(2) else listing('/mnt/nv2/data/reference/zim'))},
+ 'devdocs':listing('/mnt/nv4/data/reference/zim/devdocs'),'genome':listing('/mnt/nv4/data/reference/genome'),'datasets':listing('/mnt/nv6/data/datasets') if mounted(6) else PREV.get('data',{}).get('datasets',{}),
+ 'assets':({**listing('/mnt/nv6/data/assets/polyhaven'),**{'ambientcg':listing('/mnt/nv6/data/assets').get('ambientcg',{})}} if mounted(6) else PREV.get('data',{}).get('assets',{})),
+ 'containers':listing('/mnt/nv2/software/containers') if mounted(2) else {},'embedded':listing('/mnt/nv2/software/embedded') if mounted(2) else {}}
 json.dump(inv,open(os.path.expanduser('~/storage-review/inventory.json'),'w'),indent=1); print('models',len(inv['models']),'hf-assets',len(inv['hf_assets']),'repos',sum(len(v) for v in repos.values()))
