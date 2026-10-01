@@ -524,7 +524,6 @@ voice	https://github.com/stepfun-ai/Step-Audio2
 voice	https://github.com/thewh1teagle/kokoro-onnx	
 voice	https://github.com/zai-org/GLM-4-Voice	
 offline-reference	https://github.com/GPUOpen-Tools/isa_spec_manager	AMD machine-readable ISA XML (CDNA1-4, RDNA1-4, RDNA3.5) + parser; basis of the cdna4-isa/rdna35 shelves
-dev-infra	https://github.com/squirtymcgirt/agent-kanban	agent-kanban: kanban board as agent working memory (akb)
 edge-vision	https://github.com/HimaxWiseEyePlus/Seeed_Grove_Vision_AI_Module_V2	Grove Vision AI V2 firmware SDK (Himax WiseEye2)
 edge-vision	https://github.com/HimaxWiseEyePlus/himax_tflm	
 edge-vision	https://github.com/Seeed-Studio/ModelAssistant	SSCMA: train models for the Grove
