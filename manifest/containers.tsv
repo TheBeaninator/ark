@@ -11,4 +11,3 @@ ollama/ollama:latest	model runner
 ghcr.io/open-webui/open-webui:main	chat front
 infiniflow/ragflow:nightly-slim	RAG app
 valkey/valkey:8	
-minio/minio:latest	S3-compatible object store
