@@ -125,3 +125,16 @@ zai-org/glm-4-voice-tokenizer	hf-asset		voice stack
 meta-models/Muse-Glimmer-30B	raw		agentic 30B VLM (Meta), bf16 safetensors
 unsloth/Muse-Glimmer-30B-GGUF	gguf	Muse-Glimmer-30B-UD-Q8_K_XL.gguf Muse-Glimmer-30B-UD-Q4_K_XL.gguf mmproj-Muse-Glimmer-30B-BF16.gguf	UD quants + mmproj
 SupraLabs/SupraElegans-500k	raw		500k-param sparse recurrent LM (no attention), BCI/biosignal-adjacent architecture experiment
+Kijai/MMAudio_safetensors	hf-asset		comfy node weights
+Kijai/LivePortrait_safetensors	hf-asset		
+Kijai/SUPIR_pruned	hf-asset		
+Kijai/DepthAnythingV2-safetensors	hf-asset		
+Kijai/sam2-safetensors	hf-asset		
+Kijai/GIMM-VFI_safetensors	hf-asset		
+Kijai/HunyuanVideo_comfy	hf-asset		
+Kijai/WanVideo_comfy	hf-asset		
+tencent/Hunyuan3D-2.1	hf-asset		
+microsoft/TRELLIS-image-large	hf-asset		
+briaai/RMBG-2.0	hf-asset		gated? check licence
+ZhengPeng7/BiRefNet	hf-asset		
+lllyasviel/fooocus_inpaint	hf-asset		
