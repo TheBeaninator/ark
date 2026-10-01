@@ -131,10 +131,10 @@ Kijai/SUPIR_pruned	hf-asset
 Kijai/DepthAnythingV2-safetensors	hf-asset		
 Kijai/sam2-safetensors	hf-asset		
 Kijai/GIMM-VFI_safetensors	hf-asset		
-Kijai/HunyuanVideo_comfy	hf-asset		
-Kijai/WanVideo_comfy	hf-asset		
+Kijai/HunyuanVideo_comfy	hf-asset	hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors hunyuan_video_I2V_720_fixed_fp8_e4m3fn.safetensors hunyuan_video_FastVideo_720_fp8_e4m3fn.safetensors FramePackI2V_HY_fp8_e4m3fn.safetensors hunyuan_video_vae_*.safetensors hy*lora*.safetensors	collection is 300+ GB unfiltered; keep the loadable fp8 set
 tencent/Hunyuan3D-2.1	hf-asset		
 microsoft/TRELLIS-image-large	hf-asset		
-briaai/RMBG-2.0	hf-asset		gated? check licence
 ZhengPeng7/BiRefNet	hf-asset		
 lllyasviel/fooocus_inpaint	hf-asset		
+zichenshang/Ornith-1.5-35B-colibri-i8	raw		colibri-format (Colibrì engine)
+Krishal/QWen3.6-35B-A3B-Colibri	raw		colibri-format (Colibrì engine)

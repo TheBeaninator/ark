@@ -144,3 +144,7 @@ onnxsim
 ai-edge-litert
 tflite-runtime
 pyserial
+vunit_hdl
+cocotb
+cocotb-bus
+pyuvm

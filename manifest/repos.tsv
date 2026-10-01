@@ -581,3 +581,10 @@ comfyui	https://github.com/filliptm/ComfyUI_Fill-Nodes
 comfyui	https://github.com/Acly/comfyui-tooling-nodes	
 comfyui	https://github.com/stavsap/comfyui-ollama	
 comfyui	https://github.com/AIGODLIKE/AIGODLIKE-ComfyUI-Translation	
+circuit-design	https://gitlab.com/colibri-cern/colibri	CERN VHDL-2008 common library (CERN-OHL-W)
+circuit-design	https://github.com/ghdl/ghdl	VHDL simulator
+circuit-design	https://github.com/nickg/nvc	VHDL simulator
+circuit-design	https://github.com/VUnit/vunit	
+circuit-design	https://github.com/cocotb/cocotb	
+inference	https://github.com/JustVugg/colibri	NVMe-streaming MoE engine: 744B on 25 GB RAM, slow
+inference	https://github.com/s-b-repo/peregrine	Rust spin-off of colibri
