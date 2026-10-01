@@ -599,3 +599,7 @@ netboot	https://github.com/systemd/mkosi	build bootable OS images (UKI, squashfs
 netboot	https://github.com/canonical/ubuntu-image	Canonical's image builder (image definitions, gadget trees)
 netboot	https://github.com/netbootxyz/netboot.xyz	iPXE menu system; usable offline when its assets are mirrored locally
 netboot	https://github.com/ventoy/Ventoy	multi-ISO USB stick: the no-network fallback for installing a node
+eval-data	https://github.com/khimaros/aimbot	model-facts registry + ranked comparison for a 128 GB Strix Halo (GPL-3.0): registry/models.yaml (quants, context, thinking knobs, sampling profiles), docs/data.json + scripts/aimbot roster CLI run offline
+eval-data	https://github.com/khimaros/quantbench	run terminal-bench against llama.cpp quants (the measurements behind aimbot)
+inference	https://github.com/0xShug0/audio.cpp	ggml speech backend: ASR/TTS/diarization GGUFs (the cstr/* ladder aimbot indexes)
+inference	https://github.com/gufo-org/gufo	ggml backend aimbot supports for speech/translation models
