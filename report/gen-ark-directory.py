@@ -30,7 +30,14 @@ for m in models: kinds.setdefault(m['kind'],[]).append(m)
 KN={'raw':'Model picks: raw releases (newest of each line; re-quant source)','gguf':'Model picks: GGUF quants (llama.cpp)','hf-asset':'Dependencies: helper weights that mirrored code downloads at first run (not picks)','comfy':'Dependencies: ComfyUI assets (checkpoints, LoRAs, VAEs, ControlNets)'}
 msec=''.join(node(esc(KN.get(k,k)), f"{len(v)}", ''.join(leaf(f"<a href='https://huggingface.co/{esc(m['hf_id'])}'>{esc(m['hf_id'])}</a>"+plabel(m), '', kv([('include',m.get('include','')),('note',m.get('note',''))])) for m in sorted(v,key=lambda m:m['hf_id'].lower()))) for k,v in kinds.items() if v)
 ds=rows('datasets.tsv'); dsec=''.join(leaf(f"<a href='https://huggingface.co/datasets/{esc(d['hf_id'])}'>{esc(d['hf_id'])}</a>"+plabel(d), '', kv([('include',d.get('include','')),('note',d.get('note',''))])) for d in sorted(ds,key=lambda d:d['hf_id'].lower()))
-ref=rows('reference.tsv'); refsec=''.join(leaf(f"<span class='mono'>{esc(r['kind'])}</span> {esc(r['pattern_or_target'] if r['kind']!='url' else r['source'].split('/')[-1])}", '', kv([('source',r['source']),('note',r.get('note',''))])) for r in ref)
+ref=rows('reference.tsv')
+def rtitle(r):
+    name=r['pattern_or_target'] if r['kind']!='url' else re.sub(r'\{REL\}','<release>',r['source'].split('/')[-1])
+    return (esc(r['note']) if r.get('note') else esc(name))
+def rmeta(r):
+    name=r['pattern_or_target'] if r['kind']!='url' else re.sub(r'\{REL\}','<release>',r['source'].split('/')[-1])
+    return f"{esc(r['kind'])} · {esc(name)}" if r.get('note') else esc(r['kind'])
+refsec=''.join(leaf(rtitle(r), rmeta(r), kv([('source',r['source']),('lands in',r['pattern_or_target'] if r['kind']=='url' else '')])) for r in ref)
 assets=rows('assets.tsv'); asec=''.join(leaf(f"{esc(a['source'])} · {esc(a['type'])}", esc(a['license']), kv([('selection',a['selection'])])) for a in assets)
 ct=rows('containers.tsv'); ctsec=''.join(leaf(f"<span class='mono'>{esc(c['image'])}</span>", '', kv([('note',c.get('note',''))])) for c in ct)
 pypi=[l for l in lines('pypi-extra.txt') if l and not l.startswith('#')]; apt=[l.lstrip('# ') for l in lines('apt.txt') if l.strip()]

@@ -1,11 +1,11 @@
 kind	source	pattern_or_target	note
-zim	https://download.kiwix.org/zim/wikipedia/	wikipedia_en_all_nopic_*.zim	latest; ~53 GB
-zim	https://download.kiwix.org/zim/stack_exchange/	stackoverflow.com_en_all_*.zim	latest; ~115 GB
-zim	https://download.kiwix.org/zim/gutenberg/	gutenberg_en_all_*.zim	latest; ~221 GB (every book)
-zim-set	https://download.kiwix.org/zim/devdocs/	devdocs_en_{python,pytorch,numpy,pandas,matplotlib,scikit_learn,javascript,typescript,node,npm,react,vue,svelte,vite,webpack,jest,vitest,eslint,threejs,d3,electron,tailwindcss,html,css,http,markdown,rust,c,cpp,gcc,cmake,go,zig,lua,julia,r,kotlin,scala,haskell,elixir,erlang,php,ruby,bash,git,docker,kubernetes,terraform,ansible,nix,nginx,redis,postgresql,sqlite,fastapi,flask,django,latex,godot,opengl,vulkan,qt,gtk,jq}_*.zim	latest per tool
+zim	https://download.kiwix.org/zim/wikipedia/	wikipedia_en_all_nopic_*.zim	Wikipedia (English, no pictures), latest; ~53 GB
+zim	https://download.kiwix.org/zim/stack_exchange/	stackoverflow.com_en_all_*.zim	Stack Overflow, latest; ~115 GB
+zim	https://download.kiwix.org/zim/gutenberg/	gutenberg_en_all_*.zim	Project Gutenberg (English), latest; ~221 GB
+zim-set	https://download.kiwix.org/zim/devdocs/	devdocs_en_{python,pytorch,numpy,pandas,matplotlib,scikit_learn,javascript,typescript,node,npm,react,vue,svelte,vite,webpack,jest,vitest,eslint,threejs,d3,electron,tailwindcss,html,css,http,markdown,rust,c,cpp,gcc,cmake,go,zig,lua,julia,r,kotlin,scala,haskell,elixir,erlang,php,ruby,bash,git,docker,kubernetes,terraform,ansible,nix,nginx,redis,postgresql,sqlite,fastapi,flask,django,latex,godot,opengl,vulkan,qt,gtk,jq}_*.zim	DevDocs: latest ZIM per listed language/tool (~70 sets)
 url	https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz	genome	GRCh38 fasta (UCSC)
 url	https://ftp.ensembl.org/pub/release-{REL}/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz	genome	Ensembl primary assembly
-url	https://ftp.ensembl.org/pub/release-{REL}/gtf/homo_sapiens/Homo_sapiens.GRCh38.{REL}.gtf.gz	genome	Ensembl GTF
+url	https://ftp.ensembl.org/pub/release-{REL}/gtf/homo_sapiens/Homo_sapiens.GRCh38.{REL}.gtf.gz	genome	Gene annotation GTF (Ensembl)
 url	https://ftp.ensembl.org/pub/release-{REL}/variation/indexed_vep_cache/homo_sapiens_vep_{REL}_GRCh38.tar.gz	genome	VEP cache (~28 GB)
 url	https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz	genome	ClinVar (+ .tbi)
 url	https://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.40.gz	genome	dbSNP GRCh38.p14 (~30 GB, + .tbi)
