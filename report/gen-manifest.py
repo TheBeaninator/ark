@@ -46,6 +46,25 @@ ROLE={'cp312':'primary GPU lane (ROCm 7.2 torch)','cp313':'second GPU lane (ROCm
 lanes=''.join(f"<tr><td class='mono'>{esc(k.replace('resolve-',''))}</td><td class='num'>{v['reqs']} / {v['reqs']+v['reqs_fail']}</td><td class='num'>{v['projects']} / {v['projects']+v['projects_fail']}</td><td>{ROLE.get(k.replace('resolve-',''),'')}</td></tr>" for k,v in sorted(R.items()))
 extras=''.join(f"<tr><td class='mono'>{esc(e)}/</td><td class='num'>{gb(sw[e]['size'])} GB</td><td class='num'>{sw[e]['entries']} entries</td></tr>" for e in ['wheels-cuda-cu130','wheels-cuda-cu128','debs','rocm','containers','cargo-home','cmake-deps','gomodcache','npm-cache','pnpm-store','bun-cache','docs'] if sw.get(e))
 drow=''.join(f"<div class='drive'><div class='drive-h'><span class='mono big'>{esc(d)}</span><span class='num'>{gb(v['total']-v['free'])} / {gb(v['total'])} GB</span></div><div class='bar'><i style='width:{(v['total']-v['free'])/v['total']*100:.1f}%'></i></div><div class='drive-top'>{' '.join(f'<span><b>{esc(k)}</b> {gb(s)}</span>' for k,s in sorted(v['top'].items(),key=lambda kv:-kv[1]) if s>1e9)}</div></div>" for d,v in drives.items())
+D=inv.get('data',{})
+def dsum(d): return sum(v['size'] for v in d.values())
+dtot=sum(dsum(D.get(k,{})) for k in ('zim','genome','datasets','assets')) + dsum(D.get('devdocs',{}))
+def dlist(d,top=None,showfiles=False):
+    items=sorted(d.items(),key=lambda kv:-kv[1]['size'])[:top]
+    return ' '.join(f"<span class='chip'><b>{esc(k)}</b><i>{gb(v['size'])}{' GB' if v['size']>=1e9 else ''}{(' · '+str(v['files'])+' files') if showfiles and v['files']>1 else ''}</i></span>" for k,v in items)
+zims={k:v for k,v in D.get('zim',{}).items() if k!='devdocs'}
+drow_data=f'''
+<section id="provisions"><div class="sec-h"><h2>Reference data and provisions</h2><span class="num">{tb(dtot)} TB · offline knowledge, genome references, datasets, CC0 assets</span></div>
+<div class="ctype"><div class="ctype-h"><span class="mono">reference/zim/ (nv4; Gutenberg on nv2)</span><span class="num">{gb(dsum(zims))} GB + {len(D.get('devdocs',{}))} DevDocs sets {gb(dsum(D.get('devdocs',{})))}</span></div><div class="chips">{dlist(zims)}</div>
+<p class="note" style="margin-top:8px">Serve with <span class="mono">kiwix-serve --port 8081 *.zim devdocs/*.zim</span> (kiwix-tools mirrored). DevDocs covers {', '.join(sorted(k.split('_')[2] for k in D.get('devdocs',{})))}.</p></div>
+<div class="ctype"><div class="ctype-h"><span class="mono">reference/genome/ (nv4)</span><span class="num">{gb(dsum(D.get('genome',{})))} GB</span></div><div class="chips">{dlist(D.get('genome',{}))}</div>
+<p class="note" style="margin-top:8px">GRCh38 (UCSC hg38 and Ensembl primary assembly + GTF), VEP cache, ClinVar, dbSNP, one gnomAD chromosome as a sample. Tools under Genome analysis in the software register.</p></div>
+<div class="ctype"><div class="ctype-h"><span class="mono">data/datasets/ (nv6)</span><span class="num">{len(D.get('datasets',{}))} sets · {gb(dsum(D.get('datasets',{})))} GB</span></div><div class="chips">{dlist(D.get('datasets',{}))}</div></div>
+<div class="ctype"><div class="ctype-h"><span class="mono">data/assets/ (nv6, CC0)</span><span class="num">{gb(dsum(D.get('assets',{})))} GB</span></div><div class="chips">{dlist(D.get('assets',{}),showfiles=True)}</div></div>
+<div class="ctype"><div class="ctype-h"><span class="mono">software/containers/ and software/embedded/ (nv2)</span><span class="num">{len(D.get('containers',{}))} images · {len(D.get('embedded',{}))} toolchain stores</span></div><div class="chips">{dlist(D.get('containers',{}))} {dlist(D.get('embedded',{}))}</div>
+<p class="note" style="margin-top:8px">Images load with <span class="mono">docker load -i</span>. Embedded toolchains: PlatformIO core with cached compilers for XIAO ESP32-S3/C3/C6, RP2040 and AVR boards, arduino-cli with the AVR and ESP32 cores, esp-idf tools.</p></div>
+</section>
+'''
 today=datetime.date.today().isoformat()
 page=f"""<title>AI Pod Manifest</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -112,7 +131,7 @@ footer{{color:var(--ink-2);font-size:12.5px;border-top:1px solid var(--rule);pad
 <header>
 <span class="eyebrow">Provisions for a voyage with no resupply · bigboy, six 2 TB NVMe stores · surveyed {today}</span>
 <h1>AI Pod Manifest</h1>
-<p class="lede">Every model, asset and software package stocked for the air-gapped Pod. Models are clustered one folder per model with raw releases and quants underneath, Comfy assets share one root on nv6, and the software mirror on nv2 carries the toolchains, wheels, packages and containers to rebuild and convert all of it offline.</p>
+<p class="lede">Every model, asset, software package and reference set stocked for the air-gapped Pod. Models are clustered one folder per model with raw releases and quants underneath, Comfy assets share one root on nv6, and the software mirror on nv2 carries the toolchains, wheels, packages and containers to rebuild and convert all of it offline.</p>
 <div class="tiles">
 <div class="tile"><b>{tb(used)} TB</b><span>stowed of {tb(total)} TB · {tb(free)} TB free</span></div>
 <div class="tile"><b>{len(models)}</b><span>model folders · {tb(msize)} TB</span></div>
@@ -120,9 +139,10 @@ footer{{color:var(--ink-2);font-size:12.5px;border-top:1px solid var(--rule);pad
 <div class="tile"><b>{len(hfa)}</b><span>helper-weight repos · {gb(hsize)} GB</span></div>
 <div class="tile"><b>{nrepos}</b><span>source repos mirrored · {gb(rsize)} GB</span></div>
 <div class="tile"><b>{W['total']:,}</b><span>Python wheels · {gb(W['size'])} GB · 3 interpreters</span></div>
+<div class="tile"><b>{tb(dtot)} TB</b><span>reference data · ZIMs, genome, datasets, assets</span></div>
 </div>
 </header>
-<nav class="toc"><a href="#stores">Stores</a><a href="#models">Models</a><a href="#comfy">Comfy assets</a><a href="#helpers">Helper weights</a><a href="#software">Software</a><a href="#lanes">Python lanes</a><a href="#tools">Conversion tooling</a></nav>
+<nav class="toc"><a href="#stores">Stores</a><a href="#models">Models</a><a href="#comfy">Comfy assets</a><a href="#helpers">Helper weights</a><a href="#provisions">Reference data</a><a href="#software">Software</a><a href="#lanes">Python lanes</a><a href="#tools">Conversion tooling</a></nav>
 
 <section id="stores"><div class="sec-h"><h2>Stores</h2><span class="num">ext4 by label, mounted at /mnt/nv#, RTL9210 enclosures on usb-storage</span></div>
 <div class="drives">{drow}</div></section>
@@ -139,6 +159,7 @@ footer{{color:var(--ink-2);font-size:12.5px;border-top:1px solid var(--rule);pad
 <section id="helpers"><div class="sec-h"><h2>Helper weights</h2><span class="num">/mnt/nv3/hf-assets/&lt;org&gt;/&lt;repo&gt; · {len(hfa)} repos · {gb(hsize)} GB · what mirrored code downloads at first run, plus the voice-assistant stack</span></div>
 {hrow}</section>
 
+{drow_data}
 <section id="software"><div class="sec-h"><h2>Software mirror</h2><span class="num">/mnt/nv2/software · latest-only shallow clones · {nrepos} repos, grouped by purpose</span></div>
 {''.join(srow)}
 <div class="two" style="margin-top:22px">
@@ -165,7 +186,7 @@ footer{{color:var(--ink-2);font-size:12.5px;border-top:1px solid var(--rule);pad
 <p class="note" style="margin-top:10px">Raw releases (Wan 2.2, HunyuanVideo 1.5, DeepSeek V4.1, Coder-Next, AgentWorld, Qwen3.5-122B FP8, GLM-4.6V) are kept on purpose: with this toolchain aboard, every other format can be derived from them.</p></div>
 </div></section>
 
-<footer>Source of truth: bigboy <span class="mono">~/storage-review/inventory.json</span>, <span class="mono">/mnt/nv2/CATALOG-latest.tsv</span> and <span class="mono">MANIFEST.tsv</span> (sha256 per file). Reorganised {today} with journaled, verify-before-delete moves.</footer>
+<footer>{esc(inv.get('note',''))} Source of truth: bigboy <span class="mono">~/storage-review/inventory.json</span>, <span class="mono">/mnt/nv2/CATALOG-latest.tsv</span> and <span class="mono">MANIFEST.tsv</span> (sha256 per file). Reorganised {today} with journaled, verify-before-delete moves.</footer>
 </div>
 <script>
 (function(){{
