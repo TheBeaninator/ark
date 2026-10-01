@@ -11,13 +11,15 @@ if CH:
     diff=subprocess.run(['git','diff','--unified=0',CH,'--','manifest/'],capture_output=True,text=True).stdout
     for l in diff.splitlines():
         if l.startswith('+') and not l.startswith('+++'): changed.update(x.strip() for x in l[1:].split('\t'))
-M=os.path.join(os.path.dirname(__file__),'..','manifest'); bad=[]
+M=os.path.join(os.path.dirname(__file__),'..','manifest'); P=os.path.join(os.path.dirname(__file__),'..','manifest-private'); bad=[]
 def rows(f):
-    with open(os.path.join(M,f)) as fh:
-        r=csv.reader(fh,delimiter='\t'); h=next(r)
-        for i,row in enumerate(r,2):
-            if not row or row[0].startswith('#'): continue
-            yield i,dict(zip(h,row+['']*(len(h)-len(row))))
+    for base in (M,P):
+        if not os.path.exists(os.path.join(base,f)): continue
+        with open(os.path.join(base,f)) as fh:
+            r=csv.reader(fh,delimiter='\t'); h=next(r)
+            for i,row in enumerate(r,2):
+                if not row or row[0].startswith('#'): continue
+                yield (i if base==M else f'private:{i}'),dict(zip(h,row+['']*(len(h)-len(row))))
 def head(u,timeout=20):
     m=re.match(r'https://github\.com/([\w.-]+)/([\w.-]+)',u)
     if m and TOK: u=f'https://api.github.com/repos/{m.group(1)}/{m.group(2)}'

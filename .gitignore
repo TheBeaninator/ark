@@ -2,3 +2,4 @@ ark.local.env
 inventory.json
 manifest.html
 __pycache__/
+manifest-private/

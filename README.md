@@ -22,6 +22,9 @@ Fetchers are idempotent and resumable; re-run them to refresh. Expect several TB
 ## What is in the manifest (2026-09-30)
 About 525 repos in 31 purpose-based categories (inference engines, multi-box serving, ML frameworks, conversion and quantisation, training and RL, ComfyUI and its helper nodes, image/video and vision helpers, voice-assistant stack, audio restoration, agent harnesses, multi-agent and orchestration frameworks, agent protocols, coding agents, retrieval and documents, decision models, developer toolchains and island infrastructure, embedded firmware, games, 3D modelling and capture, circuit design, genome analysis, BCI/biosignals); ~120 weight repos; 17 datasets; Wikipedia, Stack Overflow, DevDocs and Gutenberg ZIMs; GRCh38 reference data; CC0 HDRIs/textures; 13 containers; Python 3.12/3.13/3.14 with three wheel lanes.
 
+## Private overlay
+Anything you do not want in the public list goes in `manifest-private/` (same files, same columns, git-ignored). Every fetcher reads it after `manifest/`; the validator checks it locally.
+
 ## Contributing
 Add a line, not code: see `CONTRIBUTING.md`. CI validates that every reference resolves.
 
