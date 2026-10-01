@@ -525,3 +525,15 @@ voice	https://github.com/thewh1teagle/kokoro-onnx
 voice	https://github.com/zai-org/GLM-4-Voice	
 offline-reference	https://github.com/GPUOpen-Tools/isa_spec_manager	AMD machine-readable ISA XML (CDNA1-4, RDNA1-4, RDNA3.5) + parser; basis of the cdna4-isa/rdna35 shelves
 dev-infra	https://github.com/squirtymcgirt/agent-kanban	agent-kanban: kanban board as agent working memory (akb)
+edge-vision	https://github.com/HimaxWiseEyePlus/Seeed_Grove_Vision_AI_Module_V2	Grove Vision AI V2 firmware SDK (Himax WiseEye2)
+edge-vision	https://github.com/HimaxWiseEyePlus/himax_tflm	
+edge-vision	https://github.com/Seeed-Studio/ModelAssistant	SSCMA: train models for the Grove
+edge-vision	https://github.com/Seeed-Studio/sscma-model-zoo	
+edge-vision	https://github.com/Seeed-Studio/sscma-micro	runtime firmware
+edge-vision	https://github.com/Seeed-Studio/sscma-example-we2	
+edge-vision	https://github.com/Seeed-Studio/Seeed_Arduino_SSCMA	XIAO I2C client
+edge-vision	https://github.com/Seeed-Studio/SenseCraft-Web-Toolkit	browser flasher
+edge-vision	https://github.com/nxp-imx/ethos-u-vela	Ethos-U55 compiler
+edge-vision	https://github.com/tensorflow/tflite-micro	
+edge-vision	https://github.com/google-ai-edge/LiteRT	
+edge-vision	https://github.com/PINTO0309/onnx2tf	ONNX -> TFLite

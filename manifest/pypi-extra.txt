@@ -138,3 +138,9 @@ wyoming-faster-whisper
 wyoming-openwakeword
 wyoming-piper
 wyoming-satellite
+ethos-u-vela
+onnx2tf
+onnxsim
+ai-edge-litert
+tflite-runtime
+pyserial
