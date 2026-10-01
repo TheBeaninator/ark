@@ -75,7 +75,7 @@ An island with this mirror can, with no network:
 Anything you do not want in the public list goes in `manifest-private/` (same files, same columns, git-ignored). Every fetcher reads it after `manifest/`; the validator checks it locally.
 
 ## Directory
-`docs/directory.html` is a self-contained dark-mode drill-down of everything the manifest references, regenerated with `python3 report/gen-ark-directory.py` (add `--private` locally to include the overlay; that output is git-ignored).
+The directory is published at **https://thebeaninator.github.io/ark/** (rebuilt by GitHub Pages on every push from `manifest/`). The same page is checked in as `docs/directory.html`; regenerate locally with `python3 report/gen-ark-directory.py` (add `--private` to include the overlay; that output is git-ignored).
 
 ## Contributing
 Add a line, not code: see `CONTRIBUTING.md`. CI validates that every reference resolves.
