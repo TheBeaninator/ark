@@ -18,3 +18,5 @@ jaredpalmer/kev-suites		decision-model eval
 ise-uiuc/Magicoder-OSS-Instruct-75K		code instruction (MIT)
 glaiveai/glaive-code-assistant-v3		code instruction (Apache-2.0)
 nvidia/OpenCodeInstruct		code instruction, large (CC-BY-4.0)
+nlphuji/flickr30k		Flickr30k captions (was on the crucial drive)
+tanganke/stanford_cars		Stanford Cars (was on the crucial drive)
