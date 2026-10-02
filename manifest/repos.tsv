@@ -415,6 +415,9 @@ multi-agent	https://github.com/ruvnet/claude-flow
 multi-agent	https://github.com/sentient-agi/ROMA	
 multi-agent	https://github.com/strands-agents/sdk-python	
 multi-box	https://github.com/BerriAI/litellm	
+multi-box	https://github.com/hellas-ai/thunderbolt-ibverbs	upstream of donnerkeule: RDMA (ibverbs) over USB4/Thunderbolt, without write striping
+multi-box	https://github.com/neuhaus/donnerkeule#feat/write-striping	thunderbolt_ibverbs kernel module + userspace: USB4/Thunderbolt DMA rings as RoCE v2 RDMA devices (usb4_rdma*); write-striping branch spreads one QP over every ring/cable (2x40G cables ~44 Gbit/s); what gufo TP2 uses
+multi-box	https://github.com/neuhaus/gufo	Gufo RDMA fork (default branch rdma): two-Strix-Halo tensor parallel (TP2) over InfiniBand, RoCE v2 or USB4 cables; Qwen3.8 Flash-Next Q4/Q8; build -DGUFO_ENABLE_TP2_RDMA=ON (libibverbs); docs/models/qwen3.8-flash-next/TP2.md
 multi-box	https://github.com/OpenCPIL/prima.cpp	
 multi-box	https://github.com/b4rtaz/distributed-llama	
 multi-box	https://github.com/exo-explore/exo	
@@ -604,5 +607,5 @@ netboot	https://github.com/ventoy/Ventoy	multi-ISO USB stick: the no-network fal
 eval-data	https://github.com/khimaros/aimbot	model-facts registry + ranked comparison for a 128 GB Strix Halo (GPL-3.0): registry/models.yaml (quants, context, thinking knobs, sampling profiles), docs/data.json + scripts/aimbot roster CLI run offline
 eval-data	https://github.com/khimaros/quantbench	run terminal-bench against llama.cpp quants (the measurements behind aimbot)
 inference	https://github.com/0xShug0/audio.cpp	ggml speech backend: ASR/TTS/diarization GGUFs (the cstr/* ladder aimbot indexes)
-inference	https://github.com/gufo-org/gufo	ggml backend aimbot supports for speech/translation models
+inference	https://github.com/gufo-org/gufo	Gufo: Strix Halo (gfx1151) inference engine, one host: Qwen3.8 27B/Flash-Next, DeepSeek V4 Flash, Qwen3 ASR/TTS, image/video; aimbot backend; nix or podman toolbox build
 inference	https://github.com/peonist-ai/halogen-flash-server	halogen docs, docker-compose, deploy/ host units, AGENTS.md and benchmark tools (engine itself is the ghcr image in containers.tsv)

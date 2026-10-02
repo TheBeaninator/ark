@@ -4,7 +4,7 @@ ark holds **references, never data**. A contribution is a line in one of the TSV
 
 | file | one line per | columns |
 |---|---|---|
-| `repos.tsv` | git repository (GitHub, GitLab, Codeberg, Bitbucket) | `category  url  note` |
+| `repos.tsv` | git repository (GitHub, GitLab, Codeberg, Bitbucket) | `category  url  note` — append `#<branch>` to the url to track a non-default branch |
 | `models.tsv` | Hugging Face model repo | `hf_id  kind  include  note` — kind `raw` (the release as published), `gguf`, `hf-asset` (helper weights code downloads at first run), `comfy`; `include` = space-separated glob patterns, empty = whole repo |
 | `datasets.tsv` | Hugging Face dataset | `hf_id  include  note` |
 | `reference.tsv` | offline reference data | `kind  source  pattern_or_target  note` — `zim` (Kiwix directory + filename pattern, latest wins), `zim-set` (brace list of tools), `url` (`{REL}` = latest Ensembl release) |

@@ -20,11 +20,12 @@ def node(title,meta='',body='',cls=''): return f"<details class='n {cls}'><summa
 def leaf(title,meta='',detail=''): return f"<div class='leaf'><span class='t'>{title}</span><span class='m'>{meta}</span>{('<div class=d>'+detail+'</div>') if detail else ''}</div>"
 def kv(pairs): return ' '.join(f"<span class='kv'><b>{esc(k)}</b> {esc(v)}</span>" for k,v in pairs if v)
 def plabel(r): return " <i class='tag'>private</i>" if r.get('_private') else ''
+def rhref(u): return re.sub(r'#(.+)$',r'/tree/\1',u)   # url#branch -> browsable branch page
 def rlabel(u): return re.sub(r'^https?://(github\.com/|gitlab\.com/|gitlab\.[a-z.]+/)?','',u)
 repos=rows('repos.tsv'); bycat=collections.OrderedDict()
 for r in repos: bycat.setdefault(NAMES.get(r['category'],r['category']),[]).append(r)
 order=[v for v in NAMES.values()]; bycat=collections.OrderedDict(sorted(bycat.items(),key=lambda kv:(order.index(kv[0]) if kv[0] in order else 99)))
-rsec=''.join(node(esc(c), f"{len(v)} repos", ''.join(leaf(f"<a href='{esc(r['url'])}'>{esc(rlabel(r['url']))}</a>"+plabel(r), '', kv([('note',r.get('note',''))])) for r in sorted(v,key=lambda r:rlabel(r['url']).lower()))) for c,v in bycat.items())
+rsec=''.join(node(esc(c), f"{len(v)} repos", ''.join(leaf(f"<a href='{esc(rhref(r['url']))}'>{esc(rlabel(r['url']))}</a>"+plabel(r), '', kv([('note',r.get('note',''))])) for r in sorted(v,key=lambda r:rlabel(r['url']).lower()))) for c,v in bycat.items())
 models=rows('models.tsv'); kinds=collections.OrderedDict((k,[]) for k in ('raw','gguf','hf-asset','comfy'))
 for m in models: kinds.setdefault(m['kind'],[]).append(m)
 KN={'raw':'Model picks: raw releases (newest of each line; re-quant source)','gguf':'Model picks: GGUF quants (llama.cpp)','hf-asset':'Dependencies: helper weights that mirrored code downloads at first run (not picks)','comfy':'Dependencies: ComfyUI assets (checkpoints, LoRAs, VAEs, ControlNets)'}

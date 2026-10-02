@@ -36,7 +36,7 @@ def hf(id,kind='models'):
     except Exception: return False
 CATS=set(); checks=[]
 for i,r in rows('repos.tsv'):
-    if not re.match(r'^https://[a-z0-9.-]+/[\w.-]+(/[\w.-]+)+/?$',r['url']): bad.append(f'repos.tsv:{i}: url must be https://host/owner/repo: {r["url"]}')
+    if not re.match(r'^https://[a-z0-9.-]+/[\w.-]+(/[\w.-]+)+/?(#[\w./-]+)?$',r['url']): bad.append(f'repos.tsv:{i}: url must be https://host/owner/repo[#branch]: {r["url"]}')
     if not re.match(r'^[a-z0-9-]+$',r['category']): bad.append(f'repos.tsv:{i}: category must be kebab-case: {r["category"]}')
     if 'civitai' in r['url'].lower(): bad.append(f'repos.tsv:{i}: not accepted')
     CATS.add(r['category']); checks.append(('repo',i,r['url']))
@@ -64,9 +64,10 @@ if ON:
     def run(c):
         k,i,x=c
         if k=='repo':
-            c=head(x)
+            x,_,br=x.partition('#'); m=re.match(r'https://github\.com/([\w.-]+)/([\w.-]+)',x)
+            c=head(f'https://api.github.com/repos/{m.group(1)}/{m.group(2)}/branches/{br}' if br and m else x)
             if c in (429,403): limited.append(x); return None
-            return None if c in (200,301,302) else f'repos.tsv:{i}: unreachable {x} (HTTP {c})'
+            return None if c in (200,301,302) else f'repos.tsv:{i}: unreachable {x}{"#"+br if br else ""} (HTTP {c})'
         if k=='hf-model': return None if hf(x) else f'models.tsv:{i}: not on Hugging Face: {x}'
         if k=='hf-dataset': return None if hf(x,'datasets') else f'datasets.tsv:{i}: not on Hugging Face: {x}'
         if k=='url': return None if head(x) in (200,301,302,403) else f'reference.tsv:{i}: unreachable {x}'
