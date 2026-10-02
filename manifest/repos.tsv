@@ -23,6 +23,7 @@ agent-protocols	https://github.com/a2aproject/A2A
 agent-protocols	https://github.com/a2aproject/a2a-python	
 agent-protocols	https://github.com/ag-ui-protocol/ag-ui	
 agent-protocols	https://github.com/agent-network-protocol/AgentNetworkProtocol	
+agent-protocols	https://github.com/agentpatternscatalog/mcp	MCP server for the Agent Patterns Catalog; offline: --catalog-dir <mirror>/src/github.com__agentpatternscatalog__patterns (else it fetches from GitHub on first run); no licence file
 agent-protocols	https://github.com/anthropics/anthropic-sdk-python	
 agent-protocols	https://github.com/anthropics/claude-agent-sdk-typescript	
 agent-protocols	https://github.com/jlowin/fastmcp	

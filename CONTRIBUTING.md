@@ -15,7 +15,7 @@ ark holds **references, never data**. A contribution is a line in one of the TSV
 Rules
 - Latest-only. The mirror keeps the current version of each thing; history is not a goal.
 - Newest version of a model line only. Add the new one and remove the superseded one in the same change.
-- Permissive or clearly stated licences only. Note gated repos in the note column; the fetcher tolerates them.
+- Source access matters, licences do not gate inclusion. Prefer things whose source we can mirror; something without source still gets in if it is good enough, with a note on how to obtain and run it. Note gated repos and licence caveats in the note column; the fetcher tolerates gated repos.
 - Categories are kebab-case and by purpose (what it is *for*), never by when it was added.
 - Prefer a repo over a wheel and a raw release over a repack: everything else can be derived offline (see `docs/TOOLCHAIN.md`).
 - Run `python3 verify/validate-manifest.py --online` before opening a PR.
