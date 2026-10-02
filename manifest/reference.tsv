@@ -43,3 +43,4 @@ url	https://www.agner.org/optimize/instruction_tables.pdf	cpu	Agner Fog instruct
 url	https://www.agner.org/optimize/microarchitecture.pdf	cpu	Agner Fog microarchitecture
 url	https://www.agner.org/optimize/optimizing_assembly.pdf	cpu	Agner Fog optimizing assembly
 iso	https://releases.ubuntu.com/24.04/	ubuntu-24.04.*-live-server-amd64.iso	Ubuntu 24.04 LTS live-server installer, latest point release + SHA256SUMS; the base of every node image and of PXE (casper kernel/initrd + squashfs served over HTTP)
+url	https://docs.amd.com/api/khub/documents/fEY1GkRkcoEhenFftZyr8Q/content	hardware-docs	AMD PPR 57930 rev 3.00, Family 1Ah Model 70h A0 = Strix Halo (Ryzen AI Max+ 395, the Bosgame M5 nodes): core/MCA, APML, SB-TSI, DXIO, FCH registers; zip (served as 57930-A0-PUB_3.00.zip), sha256 6eb92cbc…0c52
