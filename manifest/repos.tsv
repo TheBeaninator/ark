@@ -415,8 +415,10 @@ multi-agent	https://github.com/ruvnet/claude-flow
 multi-agent	https://github.com/sentient-agi/ROMA	
 multi-agent	https://github.com/strands-agents/sdk-python	
 multi-box	https://github.com/BerriAI/litellm	
+multi-box	https://github.com/Geramy/OdinLink-Five	OdinLink: Thunderbolt 5/USB4 as an RDMA interconnect (kernel module + ibv_* verbs provider + RCCL/NCCL net plugin); vLLM TP=2 on two Strix Halos +20-26% tok/s over TCP-over-TB; Strix Halo 20/40G negotiation notes in issue #31
 multi-box	https://github.com/hellas-ai/thunderbolt-ibverbs	upstream of donnerkeule: RDMA (ibverbs) over USB4/Thunderbolt, without write striping
 multi-box	https://github.com/neuhaus/donnerkeule#feat/write-striping	thunderbolt_ibverbs kernel module + userspace: USB4/Thunderbolt DMA rings as RoCE v2 RDMA devices (usb4_rdma*); write-striping branch spreads one QP over every ring/cable (2x40G cables ~44 Gbit/s); what gufo TP2 uses
+multi-box	https://github.com/neuhaus/ds4-strix-halo-tp-odinlink	neuhaus fork of the above (also InfiniBand); same author as the gufo RDMA fork
 multi-box	https://github.com/neuhaus/gufo	Gufo RDMA fork (default branch rdma): two-Strix-Halo tensor parallel (TP2) over InfiniBand, RoCE v2 or USB4 cables; Qwen3.8 Flash-Next Q4/Q8; build -DGUFO_ENABLE_TP2_RDMA=ON (libibverbs); docs/models/qwen3.8-flash-next/TP2.md
 multi-box	https://github.com/OpenCPIL/prima.cpp	
 multi-box	https://github.com/b4rtaz/distributed-llama	
@@ -424,6 +426,7 @@ multi-box	https://github.com/exo-explore/exo
 multi-box	https://github.com/lemonade-sdk/lemonade	
 multi-box	https://github.com/sgl-project/sglang	
 multi-box	https://github.com/vllm-project/vllm	
+multi-box	https://github.com/wkljohn/ds4-strix-halo-tp-odinlink	DeepSeek V4 Flash tensor parallel on two Strix Halos over OdinLink USB4/TB5 RDMA or Mellanox RoCE v2
 offline-reference	https://github.com/kiwix/kiwix-desktop	
 offline-reference	https://github.com/kiwix/kiwix-tools	
 offline-reference	https://github.com/openzim/zim-tools	
