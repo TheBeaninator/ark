@@ -40,6 +40,7 @@ agents	https://github.com/SWE-agent/SWE-agent
 agents	https://github.com/SWE-agent/mini-swe-agent	
 agents	https://github.com/Significant-Gravitas/AutoGPT	
 agents	https://github.com/agent0ai/agent-zero	
+agents	https://github.com/agentpatternscatalog/patterns	Agent Patterns Catalog (agentpatternscatalog.org): ~530 agent/LLM design patterns + framework compositions, markdown + JSON, CC BY 4.0
 agents	https://github.com/anthropics/claude-agent-sdk-python	
 agents	https://github.com/anthropics/claude-code	
 agents	https://github.com/block/goose	
