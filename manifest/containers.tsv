@@ -11,3 +11,4 @@ ollama/ollama:latest	model runner
 ghcr.io/open-webui/open-webui:main	chat front
 infiniflow/ragflow:nightly-slim	RAG app
 valkey/valkey:8	
+ghcr.io/peonist-ai/halogen-flash-server:0.16.0	halogen: closed-binary engine for Qwen3.8-Flash-Next on Strix Halo gfx1151 only (ROCm bundled, ~0.9 GB); loads unsloth UD-IQ4_XS GGUF losslessly + its own 1.4 GiB draft head; EULA permits unmodified mirroring; wants the whole box (12 GB left)

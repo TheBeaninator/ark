@@ -137,3 +137,5 @@ ZhengPeng7/BiRefNet	hf-asset		BiRefNet matting (ComfyUI_BiRefNet_ll, rembg)
 lllyasviel/fooocus_inpaint	hf-asset		comfyui-inpaint-nodes weights
 zichenshang/Ornith-1.5-35B-colibri-i8	raw		colibri-format (Colibrì engine)
 Krishal/QWen3.6-35B-A3B-Colibri	raw		colibri-format (Colibrì engine)
+unsloth/DeepSeek-V4-Flash-0731-GGUF	gguf	UD-Q8_K_XL dspark-DeepSeek-V4-Flash-0731-Q8_0.gguf	V4 Flash July-31 refresh: native MXFP4 experts + Q8 attention (151 GiB, fits two 128 GB nodes resident); the MindMeld two-node model. Forgotten until 2026-10-01; fetched to bigboy scratch1t then pod-control /data/models/deepseek-v4-flash-0731
+peonist-ai/halogen-qwen3.8-flash-next	hf-asset	qwen38-flash-next-mtp.hgn qwen38-flash-next-vision.hgn tokenizer/*	draft head (1.5 GB), vision tower (0.9 GB) and tokenizer that halogen-flash-server needs beside our unsloth GGUF; the full .hgn checkpoints (v2 67 GB + ngram 51 GB, 5.53 bpw) are optional and only load in halogen

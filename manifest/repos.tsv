@@ -603,3 +603,4 @@ eval-data	https://github.com/khimaros/aimbot	model-facts registry + ranked compa
 eval-data	https://github.com/khimaros/quantbench	run terminal-bench against llama.cpp quants (the measurements behind aimbot)
 inference	https://github.com/0xShug0/audio.cpp	ggml speech backend: ASR/TTS/diarization GGUFs (the cstr/* ladder aimbot indexes)
 inference	https://github.com/gufo-org/gufo	ggml backend aimbot supports for speech/translation models
+inference	https://github.com/peonist-ai/halogen-flash-server	halogen docs, docker-compose, deploy/ host units, AGENTS.md and benchmark tools (engine itself is the ghcr image in containers.tsv)
