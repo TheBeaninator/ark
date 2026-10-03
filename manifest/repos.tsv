@@ -34,6 +34,7 @@ agents	https://github.com/Aider-AI/aider
 agents	https://github.com/All-Hands-AI/OpenHands	
 agents	https://github.com/Kilo-Org/kilocode	
 agents	https://github.com/NousResearch/hermes-agent	
+agents	https://github.com/overmind-core/overmind	Overmind: agent training platform: repo capability graph, OTel trace scoring, trace->dataset, evals, prompt/tool/control-flow optimisers (winner = git diff), fine-tune + backtest on own traces, MCP server; platform AGPL-3.0, SDK MIT; self-host needs OpenRouter/Modal/AWS keys (not offline as-is)
 agents	https://github.com/Picrew/awesome-agent-harness	
 agents	https://github.com/QwenLM/qwen-code	
 agents	https://github.com/RooCodeInc/Roo-Code	
