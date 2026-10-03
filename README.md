@@ -73,6 +73,16 @@ An island with this mirror can, with no network:
 - `reference.tsv`: Wikipedia, Stack Overflow, Gutenberg and ~70 DevDocs ZIMs; GRCh38 assembly, GTF, VEP cache, ClinVar, dbSNP, a gnomAD sample.
 - `assets.tsv`: CC0 HDRIs, textures and materials. `containers.tsv`: gitea, qdrant, chroma, jupyter, pgvector, postgres, redis, nginx, ollama, open-webui, ragflow, valkey. `pypi-extra.txt`, `apt.txt`: packages and pools beyond what repos declare.
 
+## Rust: offline crates (`fetch/cargo.sh`)
+`fetch/cargo.sh` fills `$ARK_SOFTWARE/cargo-home`, an offline cargo registry cache, from two sources:
+1. every `Cargo.lock` under `$ARK_SOFTWARE/src` (the mirrored repos), and
+2. every row of `manifest/cargo-repos.tsv` + `manifest-private/cargo-repos.tsv`: your **own** Rust repos, which are not in `src/`.
+   Rows are cloned side by side under `$ARK_ROOT/cargo-work/<name>`, so list the sibling repos that path dependencies need.
+
+It needs cargo >= 1.85 and unpacks the mirror's own toolchain from `binaries/rust-*.tar.*` when the host's is older.
+On the air-gapped side: copy `cargo-home` to writable storage, `export CARGO_HOME=<copy>`, then `cargo build --offline --locked`.
+Lesson (2026-10-03): without pass 2 the pod could not build its own tools (agent-kanban, factmap, Loom), because their crates were never fetched.
+
 ## Private overlay
 Anything you do not want in the public list goes in `manifest-private/` (same files, same columns, git-ignored). Every fetcher reads it after `manifest/`; the validator checks it locally.
 
