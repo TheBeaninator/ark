@@ -65,7 +65,7 @@ if ON:
         k,i,x=c
         if k=='repo':
             x,_,br=x.partition('#'); m=re.match(r'https://github\.com/([\w.-]+)/([\w.-]+)',x)
-            c=head(f'https://api.github.com/repos/{m.group(1)}/{m.group(2)}/branches/{br}' if br and m else x)
+            c=head(f'https://api.github.com/repos/{m.group(1)}/{m.group(2)}/{"commits" if re.fullmatch(r"[0-9a-f]{40}",br) else "branches"}/{br}' if br and m else x)
             if c in (429,403): limited.append(x); return None
             return None if c in (200,301,302) else f'repos.tsv:{i}: unreachable {x}{"#"+br if br else ""} (HTTP {c})'
         if k=='hf-model': return None if hf(x) else f'models.tsv:{i}: not on Hugging Face: {x}'

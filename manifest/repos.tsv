@@ -430,6 +430,7 @@ multi-box	https://github.com/lemonade-sdk/lemonade
 multi-box	https://github.com/sgl-project/sglang	
 multi-box	https://github.com/vllm-project/vllm	
 multi-box	https://github.com/wkljohn/ds4-strix-halo-tp-odinlink	DeepSeek V4 Flash tensor parallel on two Strix Halos over OdinLink USB4/TB5 RDMA or Mellanox RoCE v2
+multi-box	https://github.com/wkljohn/ds4-strix-halo-tp-odinlink#71e6a2475952c0dd49677a8dcc42661854047199	PINNED 2026-09-15 commit: last one that builds on ROCm 7.x (HEAD needs ROCm 10); the Pod's DeepSeek V4 Flash TP=2 build (ROCm 7.2.4, DS4_ALLOW_ROCM_MISMATCH=1, RDMA_PROFILE=roce-v2 over usb4_rdma)
 offline-reference	https://github.com/kiwix/kiwix-desktop	
 offline-reference	https://github.com/kiwix/kiwix-tools	
 offline-reference	https://github.com/openzim/zim-tools	

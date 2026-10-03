@@ -1,6 +1,7 @@
 hf_id	kind	include	note
 AesSedai/MiMo-V2.6-Pro-RL-GGUF	gguf	MXFP4 mmproj-MiMo-V2.6-Pro-RL-Q8_0.gguf	
 AngelSlim/Hy4-preview-GGUF	gguf	Hy4-preview-Q4_K_M.gguf	
+antirez/deepseek-v4-gguf	gguf	DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix-0731.gguf DeepSeek-V4-Flash-DSpark-support-0731.gguf DeepSeek-V4-Flash-MTP-Q4K-Q8_0-F32.gguf DeepSeek-V4-Flash-Vision-Encoder.gguf README.md	DeepSeek V4 Flash 0731, antirez IQ2XXS (81 GiB, fits ONE Strix Halo) + DSpark draft + MTP + vision encoder: gufo single-node 18-21 t/s on the Pod (2026-10-03), also the ds4 TP=2 input
 Comfy-Org/Chroma1-HD_repackaged	comfy	split_files/diffusion_models/Chroma1-HD-fp8mixed.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/HiDream-O1-Image	comfy	checkpoints/hidream_o1_image_dev_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/Krea-2	comfy	diffusion_models/krea2_raw_fp8_scaled.safetensors diffusion_models/krea2_turbo_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
