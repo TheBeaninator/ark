@@ -120,6 +120,7 @@ unsloth/NVIDIA-Nemotron-3-Ultra-550B-A55B-GGUF	gguf	UD-Q4_K_XL
 unsloth/Qwen3.8-27B-GGUF	gguf	MTP/mtp-Qwen3.8-27B-Q4_0.gguf Qwen3.8-27B-Q8_0.gguf mmproj-BF16.gguf	
 unsloth/Qwen3.8-Flash-Next-GGUF	gguf	MTP/mtp-Qwen3.8-Flash-Next-Q8_0.gguf MTP/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf UD-IQ4_XS mmproj-BF16.gguf	
 vcruz305/DeepSeek-V4.1-Flash-GGUF	gguf	DeepSeek-V4.1-Flash-Q4_K_M-*.gguf llama.cpp/patches/fix_gguf_engram_kv.py llama.cpp/patches/patch_llamacpp_v41.py	
+wemoh/Qwen3.8-Flash-Next-strixw	raw		Qwen3.8-Flash-Next in strixw (strixite's own format; only strixite loads it): weights.strixw 65.9 GiB (4-bit experts, 8-bit dense, MTP) + ngram.table 48.3 GiB (int8, read from SSD on demand) + tokenizer/config + sha256.txt; ~115 GiB. EMPTY as of 2026-10-04 20:35 UTC (upload pending); place at ~/models/strix-infer, sha256sum -c sha256.txt
 wfzyx/von	raw		decision model
 zai-org/GLM-4.6V-FP8	raw	model-*.safetensors	
 zai-org/GLM-OCR	raw	model.safetensors	
