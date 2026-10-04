@@ -299,6 +299,7 @@ inference	https://github.com/halo-box/llama.cpp	Halo Box near-mainline llama.cpp
 inference	https://github.com/halo-box/strix-llama.cpp	llama.cpp fork tuned only for Strix Halo (gfx1151): RDNA 3.5 Vulkan mat-vec chunking (spec decode), ROCm MMQ/MoE/GDN/FA kernels, ROCmFPx quants, multi-point reasoning budget; superset of halo-box/llama.cpp; has upstream RPC RDMA incl. completion channel (#29440)
 inference	https://github.com/halo-box/strix-llama.cpp#deepseek-v41-core-runtime	strix-llama.cpp branch adding LLM_ARCH_DEEPSEEK41 (DeepSeek V4.1): loader+graph, engram/expert runtime, expert-store and bounded-file/mmap ple-disk streaming
 inference	https://github.com/LostRuins/koboldcpp	
+inference	https://github.com/shawnshekari/strixite	strixite: from-scratch HIP engine for Strix Halo (gfx1151) + Qwen3.8-Flash-Next only: ~48 t/s decode flat to 492k context, 512k YaRN, MTP, RAM+disk prompt cache, OpenAI server (no auth, binds 0.0.0.0); builds on TheRock ROCm nightly gfx1151 10.1; weights in its own strixw format (converters from the raw Qwen release in tools/)
 inference	https://github.com/SillyTavern/SillyTavern	
 inference	https://github.com/antirez/ds4	
 inference	https://github.com/ggml-org/ggml	
