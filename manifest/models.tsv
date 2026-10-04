@@ -142,3 +142,10 @@ unsloth/DeepSeek-V4-Flash-0731-GGUF	gguf	UD-Q8_K_XL dspark-DeepSeek-V4-Flash-073
 peonist-ai/halogen-qwen3.8-flash-next	hf-asset	qwen38-flash-next-mtp.hgn qwen38-flash-next-vision.hgn tokenizer/*	draft head (1.5 GB), vision tower (0.9 GB) and tokenizer that halogen-flash-server needs beside our unsloth GGUF; the full .hgn checkpoints (v2 67 GB + ngram 51 GB, 5.53 bpw) are optional and only load in halogen
 NousResearch/Minos-v1	raw	model.safetensors *.json README.md examples/*	refusal classifier (ModernBERT, chat-pair input): detects model refusals for the Pod adaptive-refusal proxy
 protectai/distilroberta-base-rejection-v1	raw	model.safetensors *.json merges.txt README.md onnx/*	refusal/rejection classifier (DistilRoBERTa, ONNX included): CPU-cheap refusal detection
+LocalLaws/LOCUS-Enforcement-Discretion	raw		LOCUS ModernBERT ordinance classifier/scorer (Enforcement-Discretion), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Function	raw		LOCUS ModernBERT ordinance classifier/scorer (Function), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Opacity	raw		LOCUS ModernBERT ordinance classifier/scorer (Opacity), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Paternalism	raw		LOCUS ModernBERT ordinance classifier/scorer (Paternalism), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Problem-Salience	raw		LOCUS ModernBERT ordinance classifier/scorer (Problem-Salience), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Substantive	raw		LOCUS ModernBERT ordinance classifier/scorer (Substantive), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Topic	raw		LOCUS ModernBERT ordinance classifier/scorer (Topic), pairs with LocalLaws/LOCUS-v1 dataset
