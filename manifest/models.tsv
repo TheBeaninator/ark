@@ -2,55 +2,31 @@ hf_id	kind	include	note
 AesSedai/MiMo-V2.6-Pro-RL-GGUF	gguf	MXFP4 mmproj-MiMo-V2.6-Pro-RL-Q8_0.gguf	
 AngelSlim/Hy4-preview-GGUF	gguf	Hy4-preview-Q4_K_M.gguf	
 antirez/deepseek-v4-gguf	gguf	DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix-0731.gguf DeepSeek-V4-Flash-DSpark-support-0731.gguf DeepSeek-V4-Flash-MTP-Q4K-Q8_0-F32.gguf DeepSeek-V4-Flash-Vision-Encoder.gguf README.md	DeepSeek V4 Flash 0731, antirez IQ2XXS (81 GiB, fits ONE Strix Halo) + DSpark draft + MTP + vision encoder: gufo single-node 18-21 t/s on the Pod (2026-10-03), also the ds4 TP=2 input
-Comfy-Org/Chroma1-HD_repackaged	comfy	split_files/diffusion_models/Chroma1-HD-fp8mixed.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/HiDream-O1-Image	comfy	checkpoints/hidream_o1_image_dev_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/Krea-2	comfy	diffusion_models/krea2_raw_fp8_scaled.safetensors diffusion_models/krea2_turbo_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/Pixal3D	comfy	clip_vision/dino_v3_L_naf_fp32.safetensors diffusion_models/pixal3d_bf16.safetensors diffusion_models/pixal3d_multiview_bf16.safetensors vae/trellis_2_shape_vae_bf16.safetensors vae/trellis_2_texture_	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/Qwen-Image-2.1	comfy	diffusion_models/qwen_image_2.1_bf16.safetensors vae/qwen_image_2.1_vae_bf16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/Qwen3-VL	comfy	text_encoders/qwen3vl_4b_fp8_scaled.safetensors text_encoders/qwen3vl_8b_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Comfy-Org/TRELLIS.2	comfy	clip_vision/dino_v3_vit_l.safetensors diffusion_models/trellis_2_bf16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+bartowski/huihui-ai_Qwen3-Coder-Next-abliterated-GGUF	gguf	huihui-ai_Qwen3-Coder-Next-abliterated-Q8_0/huihui-ai_Qwen3-Coder-Next-abliterated-Q8_0-*.gguf	
+black-forest-labs/FLUX.2-klein-9b-kv-fp8	comfy	flux-2-klein-9b-kv-fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+canopylabs/orpheus-3b-0.1-ft	hf-asset		voice stack
 Comfy-Org/ace_step_1.5_ComfyUI_files	comfy	checkpoints/ace_step_1.5_turbo_aio.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/Chroma1-HD_repackaged	comfy	split_files/diffusion_models/Chroma1-HD-fp8mixed.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/flux1-dev	comfy	flux1-dev-fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/flux1-kontext-dev_ComfyUI	comfy	split_files/diffusion_models/flux1-dev-kontext_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/flux1-schnell	comfy	flux1-schnell-fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/flux2-dev	comfy	split_files/diffusion_models/flux2_dev_fp8mixed.safetensors split_files/text_encoders/mistral_3_small_flux2_fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/gemma-4	comfy	text_encoders/gemma4_e4b_it_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/HiDream-O1-Image	comfy	checkpoints/hidream_o1_image_dev_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/Krea-2	comfy	diffusion_models/krea2_raw_fp8_scaled.safetensors diffusion_models/krea2_turbo_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/ltx-2	comfy	split_files/text_encoders/gemma_3_12B_it.safetensors	ComfyUI asset: Gemma 3 12B text encoder for LTX-2.3 (DarkStudio render.py LTX_TE)
+Comfy-Org/Pixal3D	comfy	clip_vision/dino_v3_L_naf_fp32.safetensors diffusion_models/pixal3d_bf16.safetensors diffusion_models/pixal3d_multiview_bf16.safetensors vae/trellis_2_shape_vae_bf16.safetensors vae/trellis_2_texture_	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/Qwen-Image-2.1	comfy	diffusion_models/qwen_image_2.1_bf16.safetensors vae/qwen_image_2.1_vae_bf16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/Qwen3-VL	comfy	text_encoders/qwen3vl_4b_fp8_scaled.safetensors text_encoders/qwen3vl_8b_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/stable-diffusion-v1-5-archive	comfy	v1-5-pruned-emaonly-fp16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/TRELLIS.2	comfy	clip_vision/dino_v3_vit_l.safetensors diffusion_models/trellis_2_bf16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/vae-text-encorder-for-flux-klein-9b	comfy	split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors split_files/vae/flux2-vae.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/z_image	comfy	split_files/diffusion_models/z_image_bf16.safetensors split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors split_files/vae/ae.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-CrocoCpp/Huihui-Qwen-AgentWorld-35B-A3B-abliterated-Q8_0-GGUF	gguf	huihui-qwen-agentworld-35b-a3b-abliterated-q8_0.gguf	
-Lightricks/LTX-2.5	comfy	diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors vae/ltx-2.5-audio-vae-bf16.safetensors vae/ltx-2.5-video-vae-bf16.safete	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Mapika/decider-0.8b	raw		decision model
-Mapika/decider-2b	raw		decision model
-Mapika/decider-2b-GGUF	gguf		decision model
-Mapika/decider-2b-vision	raw		decision model
-Mapika/decider-35b-a3b	raw		decision model
-Mapika/decider-4b	raw		decision model
-Mapika/decider-4b-GGUF	gguf		decision model
-OnomaAIResearch/Illustrious-XL-v2.0	comfy	Illustrious-XL-v2.0.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-OnomaAIResearch/Illustrious-xl-early-release-v0	comfy	Illustrious-XL-v0.1.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-PixArt-alpha/PixArt-Sigma-XL-2-1024-MS	comfy	transformer/diffusion_pytorch_model.safetensors vae/diffusion_pytorch_model.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Plachta/Seed-VC	hf-asset		audio tooling
-Qwen/Qwen3-Coder-Next-FP8	raw	model-*.safetensors	
-Qwen/Qwen3-Embedding-0.6B	raw	model.safetensors	
-Qwen/Qwen3-Omni-30B-A3B-Instruct	hf-asset		voice stack
-Qwen/Qwen3-Reranker-0.6B	raw	model.safetensors	
-Qwen/Qwen3-VL-32B-Instruct	raw	model-*.safetensors	
-Qwen/Qwen3.5-122B-A10B-FP8	raw	model.safetensors-*.safetensors	
-Qwen/Qwen3.5-9B	raw	model.safetensors-*.safetensors	
-ResembleAI/chatterbox	hf-asset		voice stack
-ResembleAI/resemble-enhance	hf-asset		audio tooling
-Tongyi-MAI/Z-Image-Turbo	raw	text_encoder/model-*.safetensors transformer/diffusion_pytorch_model-*.safetensors vae/diffusion_pytorch_model.safetensors	
-Viggle/Qwen-Image-2.1-viggle-turbo	comfy	Qwen-Image-2.1-viggle-turbo-4step-lora-r64.safetensors Qwen-Image-2.1-viggle-turbo-v0.2.1-6step-lora-r128.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-Wan-AI/Wan2.2-S2V-14B	raw	Wan2.1_VAE.pth diffusion_pytorch_model-*.safetensors models_t5_umt5-xxl-enc-bf16.pth wav2vec2-large-xlsr-53-english/flax_model.msgpack wav2vec2-large-xlsr-53-english/language_model/lm.binary wav2vec2-	
-Wan-AI/Wan2.2-TI2V-5B	raw	Wan2.2_VAE.pth diffusion_pytorch_model-*.safetensors models_t5_umt5-xxl-enc-bf16.pth	
-bartowski/huihui-ai_Qwen3-Coder-Next-abliterated-GGUF	gguf	huihui-ai_Qwen3-Coder-Next-abliterated-Q8_0/huihui-ai_Qwen3-Coder-Next-abliterated-Q8_0-*.gguf	
-black-forest-labs/FLUX.2-klein-9b-kv-fp8	comfy	flux-2-klein-9b-kv-fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
-canopylabs/orpheus-3b-0.1-ft	hf-asset		voice stack
 comfyanonymous/flux_text_encoders	comfy	clip_l.safetensors t5xxl_fp8_e4m3fn_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 convaiinnovations/laya	raw		decision model
 crh225/plumb-4b	raw		decision model
 crh225/plumb-4b-GGUF	gguf		decision model
+CrocoCpp/Huihui-Qwen-AgentWorld-35B-A3B-abliterated-Q8_0-GGUF	gguf	huihui-qwen-agentworld-35b-a3b-abliterated-q8_0.gguf	
 csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8	hf-asset		voice stack
 cvssp/audioldm2	hf-asset		audio tooling
 cvssp/audioldm2-large	hf-asset		audio tooling
@@ -75,13 +51,40 @@ jaredpalmer/kev-0.8b	raw		decision model
 jaredpalmer/kev-4b	raw		decision model
 jaredpalmer/kev-9b	raw		decision model
 jonatasgrosman/wav2vec2-large-xlsr-53-english	hf-asset		audio tooling
+Kijai/DepthAnythingV2-safetensors	hf-asset		ComfyUI-DepthAnythingV2 node weights
+Kijai/GIMM-VFI_safetensors	hf-asset		ComfyUI-GIMM-VFI node weights
+Kijai/HunyuanVideo_comfy	hf-asset	hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors hunyuan_video_I2V_720_fixed_fp8_e4m3fn.safetensors hunyuan_video_FastVideo_720_fp8_e4m3fn.safetensors FramePackI2V_HY_fp8_e4m3fn.safetensors hunyuan_video_vae_*.safetensors hy*lora*.safetensors	collection is 300+ GB unfiltered; keep the loadable fp8 set
+Kijai/LivePortrait_safetensors	hf-asset		ComfyUI-LivePortraitKJ node weights
+Kijai/MMAudio_safetensors	hf-asset		comfy node weights
+Kijai/sam2-safetensors	hf-asset		ComfyUI-segment-anything-2 node weights
+Kijai/SUPIR_pruned	hf-asset		ComfyUI-SUPIR node weights
+Krishal/QWen3.6-35B-A3B-Colibri	raw		colibri-format (Colibrì engine)
 kyutai/moshiko-pytorch-bf16	hf-asset		voice stack
 kyutai/pocket-tts	hf-asset		voice stack
 kyutai/stt-1b-en_fr	hf-asset		voice stack
 kyutai/stt-2.6b-en	hf-asset		voice stack
 kyutai/tts-1.6b-en_fr	hf-asset		voice stack
+Lightricks/LTX-2.3	comfy	ltx-2.3-22b-distilled-1.1.safetensors	ComfyUI asset: LTX-2.3 distilled 1.1 checkpoint (DarkStudio render.py LTX_CKPT; video+audio, 8-step)
+Lightricks/LTX-2.5	comfy	diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors vae/ltx-2.5-audio-vae-bf16.safetensors vae/ltx-2.5-video-vae-bf16.safete	ComfyUI asset (checkpoint/lora/vae/controlnet)
 livekit/turn-detector	hf-asset		voice stack
 lj1995/VoiceConversionWebUI	hf-asset		audio tooling
+lllyasviel/fooocus_inpaint	hf-asset		comfyui-inpaint-nodes weights
+LocalLaws/LOCUS-Enforcement-Discretion	raw		LOCUS ModernBERT ordinance classifier/scorer (Enforcement-Discretion), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Function	raw		LOCUS ModernBERT ordinance classifier/scorer (Function), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Opacity	raw		LOCUS ModernBERT ordinance classifier/scorer (Opacity), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Paternalism	raw		LOCUS ModernBERT ordinance classifier/scorer (Paternalism), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Problem-Salience	raw		LOCUS ModernBERT ordinance classifier/scorer (Problem-Salience), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Substantive	raw		LOCUS ModernBERT ordinance classifier/scorer (Substantive), pairs with LocalLaws/LOCUS-v1 dataset
+LocalLaws/LOCUS-Topic	raw		LOCUS ModernBERT ordinance classifier/scorer (Topic), pairs with LocalLaws/LOCUS-v1 dataset
+Mapika/decider-0.8b	raw		decision model
+Mapika/decider-2b	raw		decision model
+Mapika/decider-2b-GGUF	gguf		decision model
+Mapika/decider-2b-vision	raw		decision model
+Mapika/decider-35b-a3b	raw		decision model
+Mapika/decider-4b	raw		decision model
+Mapika/decider-4b-GGUF	gguf		decision model
+meta-models/Muse-Glimmer-30B	raw		agentic 30B VLM (Meta), bf16 safetensors
+microsoft/TRELLIS-image-large	hf-asset		TRELLIS node weights
 microsoft/VibeVoice-1.5B	hf-asset		audio tooling
 microsoft/VibeVoice-Large	hf-asset		audio tooling
 mistralai/Voxtral-4B-TTS-2603	hf-asset		voice stack
@@ -92,13 +95,29 @@ mys/laya-GGUF	gguf		decision model
 mys/laya-multilingual-GGUF	gguf		decision model
 mys/laya-typed-decisions-GGUF	gguf		decision model
 nari-labs/Dia-1.6B-0626	hf-asset		voice stack
+NousResearch/Minos-v1	raw	model.safetensors *.json README.md examples/*	refusal classifier (ModernBERT, chat-pair input): detects model refusals for the Pod adaptive-refusal proxy
 nvidia/parakeet-tdt-0.6b-v3	hf-asset		voice stack
 onnx-community/kev-0.6b-ONNX	gguf		decision model
+OnomaAIResearch/Illustrious-xl-early-release-v0	comfy	Illustrious-XL-v0.1.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+OnomaAIResearch/Illustrious-XL-v2.0	comfy	Illustrious-XL-v2.0.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 openai/whisper-large-v3-turbo	hf-asset		voice stack
 ornith-ai/Ornith-1.5-35B-A3B-GGUF	gguf	Ornith-1.5-35B-Q8_0.gguf mmproj-Ornith-1.5-35B-BF16.gguf	
 ornith-ai/Ornith-1.5-397B-GGUF	gguf	Ornith-1.5-397B-Q4_K_M.gguf mmproj-Ornith-1.5-397B-BF16.gguf	
+peonist-ai/halogen-qwen3.8-flash-next	hf-asset	qwen38-flash-next-mtp.hgn qwen38-flash-next-vision.hgn tokenizer/*	draft head (1.5 GB), vision tower (0.9 GB) and tokenizer that halogen-flash-server needs beside our unsloth GGUF; the full .hgn checkpoints (v2 67 GB + ngram 51 GB, 5.53 bpw) are optional and only load in halogen
 pipecat-ai/smart-turn-v3	hf-asset		voice stack
+PixArt-alpha/PixArt-Sigma-XL-2-1024-MS	comfy	transformer/diffusion_pytorch_model.safetensors vae/diffusion_pytorch_model.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Plachta/Seed-VC	hf-asset		audio tooling
+protectai/distilroberta-base-rejection-v1	raw	model.safetensors *.json merges.txt README.md onnx/*	refusal/rejection classifier (DistilRoBERTa, ONNX included): CPU-cheap refusal detection
+Qwen/Qwen3-Coder-Next-FP8	raw	model-*.safetensors	
+Qwen/Qwen3-Embedding-0.6B	raw	model.safetensors	
+Qwen/Qwen3-Omni-30B-A3B-Instruct	hf-asset		voice stack
+Qwen/Qwen3-Reranker-0.6B	raw	model.safetensors	
+Qwen/Qwen3-VL-32B-Instruct	raw	model-*.safetensors	
+Qwen/Qwen3.5-122B-A10B-FP8	raw	model.safetensors-*.safetensors	
+Qwen/Qwen3.5-9B	raw	model.safetensors-*.safetensors	
 realrebelai/Wan-Animate-2_GGUFs	comfy	Distilled/Wan-Animate-2-14B-TURBO-Q8_0.gguf	ComfyUI asset (checkpoint/lora/vae/controlnet)
+ResembleAI/chatterbox	hf-asset		voice stack
+ResembleAI/resemble-enhance	hf-asset		audio tooling
 rhasspy/piper-voices	hf-asset	en/en_US/* en/en_GB/* voices.json	voice stack
 sesame/csm-1b	hf-asset		voice stack
 stabilityai/stable-audio-open-1.0	hf-asset		audio tooling
@@ -106,6 +125,10 @@ stabilityai/stable-audio-open-small	hf-asset		audio tooling
 stanford-crfm/music-large-800k	hf-asset		audio tooling
 stanford-crfm/music-medium-800k	hf-asset		audio tooling
 stepfun-ai/Step-Audio-2-mini	hf-asset		voice stack
+SupraLabs/SupraElegans-500k	raw		500k-param sparse recurrent LM (no attention), BCI/biosignal-adjacent architecture experiment
+tencent/Hunyuan3D-2.1	hf-asset		ComfyUI-Hunyuan3DWrapper weights
+Tongyi-MAI/Z-Image-Turbo	raw	text_encoder/model-*.safetensors transformer/diffusion_pytorch_model-*.safetensors vae/diffusion_pytorch_model.safetensors	
+unsloth/DeepSeek-V4-Flash-0731-GGUF	gguf	UD-Q8_K_XL dspark-DeepSeek-V4-Flash-0731-Q8_0.gguf	V4 Flash July-31 refresh: native MXFP4 experts + Q8 attention (151 GiB, fits two 128 GB nodes resident); the MindMeld two-node model. Forgotten until 2026-10-01; fetched to bigboy scratch1t then pod-control /data/models/deepseek-v4-flash-0731
 unsloth/GLM-5.3-GGUF	gguf	UD-Q4_K_XL	
 unsloth/Kimi-K2.7-Code-GGUF	gguf	UD-Q3_K_XL mmproj-BF16.gguf	
 unsloth/MiniMax-M3-GGUF	gguf	UD-Q4_K_XL	
@@ -115,37 +138,16 @@ unsloth/NVIDIA-Nemotron-3-Ultra-550B-A55B-GGUF	gguf	UD-Q4_K_XL
 unsloth/Qwen3.8-27B-GGUF	gguf	MTP/mtp-Qwen3.8-27B-Q4_0.gguf Qwen3.8-27B-Q8_0.gguf mmproj-BF16.gguf	
 unsloth/Qwen3.8-Flash-Next-GGUF	gguf	MTP/mtp-Qwen3.8-Flash-Next-Q8_0.gguf MTP/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf UD-IQ4_XS mmproj-BF16.gguf	
 vcruz305/DeepSeek-V4.1-Flash-GGUF	gguf	DeepSeek-V4.1-Flash-Q4_K_M-*.gguf llama.cpp/patches/fix_gguf_engram_kv.py llama.cpp/patches/patch_llamacpp_v41.py	
+Viggle/Qwen-Image-2.1-viggle-turbo	comfy	Qwen-Image-2.1-viggle-turbo-4step-lora-r64.safetensors Qwen-Image-2.1-viggle-turbo-v0.2.1-6step-lora-r128.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Wan-AI/Wan2.2-S2V-14B	raw	Wan2.1_VAE.pth diffusion_pytorch_model-*.safetensors models_t5_umt5-xxl-enc-bf16.pth wav2vec2-large-xlsr-53-english/flax_model.msgpack wav2vec2-large-xlsr-53-english/language_model/lm.binary wav2vec2-	
+Wan-AI/Wan2.2-TI2V-5B	raw	Wan2.2_VAE.pth diffusion_pytorch_model-*.safetensors models_t5_umt5-xxl-enc-bf16.pth	
 wfzyx/von	raw		decision model
+zai-org/glm-4-voice-9b	hf-asset		voice stack
+zai-org/glm-4-voice-decoder	hf-asset		voice stack
+zai-org/glm-4-voice-tokenizer	hf-asset		voice stack
 zai-org/GLM-4.6V-FP8	raw	model-*.safetensors	
 zai-org/GLM-OCR	raw	model.safetensors	
 zai-org/GLM-TTS	raw	flow/flow.pt hift/hift.pt llm/model-*.safetensors speech_tokenizer/model.safetensors vocos2d/generator_jit.ckpt	
 zai-org/SCAIL-2	raw	Wan2.1_VAE.pth model/1/fsdp2_rank_0000_checkpoint.pt model/bias-aware-dpo-lora.pt model/relighting-lora.pt models_clip_open-clip-xlm-roberta-large-vit-huge-14-onlyvisual.pth umt5-xxl/models_t5_umt5-xx	
-zai-org/glm-4-voice-9b	hf-asset		voice stack
-zai-org/glm-4-voice-decoder	hf-asset		voice stack
-zai-org/glm-4-voice-tokenizer	hf-asset		voice stack
-meta-models/Muse-Glimmer-30B	raw		agentic 30B VLM (Meta), bf16 safetensors
-SupraLabs/SupraElegans-500k	raw		500k-param sparse recurrent LM (no attention), BCI/biosignal-adjacent architecture experiment
-Kijai/MMAudio_safetensors	hf-asset		comfy node weights
-Kijai/LivePortrait_safetensors	hf-asset		ComfyUI-LivePortraitKJ node weights
-Kijai/SUPIR_pruned	hf-asset		ComfyUI-SUPIR node weights
-Kijai/DepthAnythingV2-safetensors	hf-asset		ComfyUI-DepthAnythingV2 node weights
-Kijai/sam2-safetensors	hf-asset		ComfyUI-segment-anything-2 node weights
-Kijai/GIMM-VFI_safetensors	hf-asset		ComfyUI-GIMM-VFI node weights
-Kijai/HunyuanVideo_comfy	hf-asset	hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors hunyuan_video_I2V_720_fixed_fp8_e4m3fn.safetensors hunyuan_video_FastVideo_720_fp8_e4m3fn.safetensors FramePackI2V_HY_fp8_e4m3fn.safetensors hunyuan_video_vae_*.safetensors hy*lora*.safetensors	collection is 300+ GB unfiltered; keep the loadable fp8 set
-tencent/Hunyuan3D-2.1	hf-asset		ComfyUI-Hunyuan3DWrapper weights
-microsoft/TRELLIS-image-large	hf-asset		TRELLIS node weights
 ZhengPeng7/BiRefNet	hf-asset		BiRefNet matting (ComfyUI_BiRefNet_ll, rembg)
-lllyasviel/fooocus_inpaint	hf-asset		comfyui-inpaint-nodes weights
 zichenshang/Ornith-1.5-35B-colibri-i8	raw		colibri-format (Colibrì engine)
-Krishal/QWen3.6-35B-A3B-Colibri	raw		colibri-format (Colibrì engine)
-unsloth/DeepSeek-V4-Flash-0731-GGUF	gguf	UD-Q8_K_XL dspark-DeepSeek-V4-Flash-0731-Q8_0.gguf	V4 Flash July-31 refresh: native MXFP4 experts + Q8 attention (151 GiB, fits two 128 GB nodes resident); the MindMeld two-node model. Forgotten until 2026-10-01; fetched to bigboy scratch1t then pod-control /data/models/deepseek-v4-flash-0731
-peonist-ai/halogen-qwen3.8-flash-next	hf-asset	qwen38-flash-next-mtp.hgn qwen38-flash-next-vision.hgn tokenizer/*	draft head (1.5 GB), vision tower (0.9 GB) and tokenizer that halogen-flash-server needs beside our unsloth GGUF; the full .hgn checkpoints (v2 67 GB + ngram 51 GB, 5.53 bpw) are optional and only load in halogen
-NousResearch/Minos-v1	raw	model.safetensors *.json README.md examples/*	refusal classifier (ModernBERT, chat-pair input): detects model refusals for the Pod adaptive-refusal proxy
-protectai/distilroberta-base-rejection-v1	raw	model.safetensors *.json merges.txt README.md onnx/*	refusal/rejection classifier (DistilRoBERTa, ONNX included): CPU-cheap refusal detection
-LocalLaws/LOCUS-Enforcement-Discretion	raw		LOCUS ModernBERT ordinance classifier/scorer (Enforcement-Discretion), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Function	raw		LOCUS ModernBERT ordinance classifier/scorer (Function), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Opacity	raw		LOCUS ModernBERT ordinance classifier/scorer (Opacity), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Paternalism	raw		LOCUS ModernBERT ordinance classifier/scorer (Paternalism), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Problem-Salience	raw		LOCUS ModernBERT ordinance classifier/scorer (Problem-Salience), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Substantive	raw		LOCUS ModernBERT ordinance classifier/scorer (Substantive), pairs with LocalLaws/LOCUS-v1 dataset
-LocalLaws/LOCUS-Topic	raw		LOCUS ModernBERT ordinance classifier/scorer (Topic), pairs with LocalLaws/LOCUS-v1 dataset
