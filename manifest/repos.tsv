@@ -381,6 +381,7 @@ model-source	https://github.com/Wan-Video/Wan2.2
 model-source	https://github.com/ace-step/ACE-Step	
 model-source	https://github.com/black-forest-labs/flux2	
 model-source	https://github.com/deepseek-ai/DeepSeek-OCR-2	
+model-source	https://github.com/facebookresearch/dinov2	DINOv2 reference code (imageboop inject/refbank.py parity; CI-5)
 model-source	https://github.com/facebookresearch/sam-3d-body	
 model-source	https://github.com/facebookresearch/sam-3d-objects	
 model-source	https://github.com/index-tts/index-tts	
