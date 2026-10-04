@@ -60,6 +60,7 @@ cvssp/audioldm2-large	hf-asset		audio tooling
 declare-lab/tango2	hf-asset		audio tooling
 deepdml/faster-whisper-large-v3-turbo-ct2	hf-asset		voice stack
 deepseek-ai/DeepSeek-V4.1-Flash	raw	.gitattributes DeepSeek_V41_Tech_Report.pdf LICENSE encoding/encoding.py encoding/test_encoding.py evaluation/dsh-minimal.patch inference/convert.py inference/engram.py inference/generate.py inference	
+diffusers/stable-diffusion-xl-1.0-inpainting-0.1	hf-asset	*.json *.txt *.fp16.safetensors	SDXL 9-channel inpainting UNet (fp16 variant); ImageBoop concept-injection fixer (inject/fixer.py)
 facebook/audiogen-medium	hf-asset		audio tooling
 facebook/wav2vec2-base-960h	hf-asset		audio tooling
 fishaudio/s1-mini	hf-asset		voice stack
