@@ -41,6 +41,7 @@ Qwen/Qwen3-Reranker-0.6B	raw	model.safetensors
 Qwen/Qwen3-VL-32B-Instruct	raw	model-*.safetensors	
 Qwen/Qwen3.5-122B-A10B-FP8	raw	model.safetensors-*.safetensors	
 Qwen/Qwen3.5-9B	raw	model.safetensors-*.safetensors	
+Qwen/Qwen3.8-Flash-Next	raw		Qwen3.8-Flash-Next raw release (335 GiB, 144 files, BF16 safetensors + n-gram embedding shards): source for strixite's convert_qwen4exp/convert_ngram_table (strixw) and for CPU goldens; fetched 2026-10-04 to bigboy:/mnt/scratch1t/ark-inbox/models
 ResembleAI/chatterbox	hf-asset		voice stack
 ResembleAI/resemble-enhance	hf-asset		audio tooling
 Tongyi-MAI/Z-Image-Turbo	raw	text_encoder/model-*.safetensors transformer/diffusion_pytorch_model-*.safetensors vae/diffusion_pytorch_model.safetensors	

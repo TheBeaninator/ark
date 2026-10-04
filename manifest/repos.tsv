@@ -366,6 +366,7 @@ ml-frameworks	https://github.com/python/cpython
 ml-frameworks	https://github.com/pytorch/audio	
 ml-frameworks	https://github.com/pytorch/pytorch	
 ml-frameworks	https://github.com/pytorch/vision	
+ml-frameworks	https://github.com/ROCm/TheRock	TheRock: AMD's open ROCm build system and the source of the nightly/stable ROCm tarballs (repo.amd.com/rocm/core/tarball); strixite builds against its gfx1151 nightly (see reference.tsv toolchains/therock-gfx1151)
 ml-frameworks	https://gitlab.freedesktop.org/mesa/mesa	
 model-source	https://github.com/FunAudioLLM/CosyVoice	
 model-source	https://github.com/HeartMuLa/heartlib	
