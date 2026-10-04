@@ -109,6 +109,7 @@ stabilityai/stable-audio-open-small	hf-asset		audio tooling
 stanford-crfm/music-large-800k	hf-asset		audio tooling
 stanford-crfm/music-medium-800k	hf-asset		audio tooling
 stepfun-ai/Step-Audio-2-mini	hf-asset		voice stack
+tianweiy/DMD2	hf-asset	dmd2_sdxl_4step_unet_fp16.bin dmd2_sdxl_1step_unet_fp16.bin dmd2_sdxl_4step_lora_fp16.safetensors model/sdv1.5/laion6.25_sd_baseline_8node_guidance1.75_lr5e-7_seed10_dfake10_diffusion1000_gan1e-3_resume_fid8.35_checkpoint_model_041000/pytorch_model.bin	DMD2 distilled SDXL (4/1-step UNet, 4-step LoRA) + SD1.5 1-step generator checkpoint (no SD1.5 4-step exists upstream); ImageBoop/Pareidolia fast renders
 unsloth/GLM-5.3-GGUF	gguf	UD-Q4_K_XL	
 unsloth/Kimi-K2.7-Code-GGUF	gguf	UD-Q3_K_XL mmproj-BF16.gguf	
 unsloth/MiniMax-M3-GGUF	gguf	UD-Q4_K_XL	
