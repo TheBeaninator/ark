@@ -17,6 +17,7 @@ Comfy-Org/flux1-schnell	comfy	flux1-schnell-fp8.safetensors	ComfyUI asset (check
 Comfy-Org/flux2-dev	comfy	split_files/diffusion_models/flux2_dev_fp8mixed.safetensors split_files/text_encoders/mistral_3_small_flux2_fp8.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/gemma-4	comfy	text_encoders/gemma4_e4b_it_fp8_scaled.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/stable-diffusion-v1-5-archive	comfy	v1-5-pruned-emaonly-fp16.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
+Comfy-Org/Wan_2.1_ComfyUI_repackaged	comfy	split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors	ComfyUI asset: umt5-xxl fp8 text encoder for Wan 2.1/2.2 (DarkStudio render.py wan_te)
 Comfy-Org/vae-text-encorder-for-flux-klein-9b	comfy	split_files/text_encoders/qwen_3_8b_fp8mixed.safetensors split_files/vae/flux2-vae.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 Comfy-Org/z_image	comfy	split_files/diffusion_models/z_image_bf16.safetensors split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors split_files/vae/ae.safetensors	ComfyUI asset (checkpoint/lora/vae/controlnet)
 CrocoCpp/Huihui-Qwen-AgentWorld-35B-A3B-abliterated-Q8_0-GGUF	gguf	huihui-qwen-agentworld-35b-a3b-abliterated-q8_0.gguf	
