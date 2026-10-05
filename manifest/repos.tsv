@@ -623,3 +623,17 @@ eval-data	https://github.com/khimaros/quantbench	run terminal-bench against llam
 inference	https://github.com/0xShug0/audio.cpp	ggml speech backend: ASR/TTS/diarization GGUFs (the cstr/* ladder aimbot indexes)
 inference	https://github.com/gufo-org/gufo	Gufo: Strix Halo (gfx1151) inference engine, one host: Qwen3.8 27B/Flash-Next, DeepSeek V4 Flash, Qwen3 ASR/TTS, image/video; aimbot backend; nix or podman toolbox build
 inference	https://github.com/peonist-ai/halogen-flash-server	halogen docs, docker-compose, deploy/ host units, AGENTS.md and benchmark tools (engine itself is the ghcr image in containers.tsv)
+inference	https://github.com/MuchDevSuchCode/halo	Strix Halo XDNA2 NPU: bring-up fix (out-of-tree amdxdna 2.23 built with gcc-15 -> fw 255.0.11.71, 51 TOPS int8), GPU<->NPU zero-copy (hipHostRegister + XRT userptr), open IRON int8 transformer kernels, ggml NPU backend + Gemma-4 MTP segfault patch for atomic-llama; NPU prefill measured 0.31 vs iGPU 329 tok/s
+inference	https://github.com/AtomicBot-ai/atomic-llama-cpp-turboquant	llama.cpp fork: TurboQuant WHT-rotated KV cache/weight compression, Gemma 4 MTP + Qwen 3.6 NextN spec decode; base of halo's NPU backend (patches in halo experiments/atomic-llama/patches)
+inference	https://github.com/MuchDevSuchCode/NeuralDeck-Proxy	local LLM control room: OpenAI+Anthropic multimodal proxy routing by model name over llama-server/vllm, dashboard with AMD/NVIDIA telemetry, --help flag probing for forks, per-request benchmarks; NO AUTH and binds 0.0.0.0 by default, bind 127.0.0.1 and tunnel
+inference	https://github.com/ROCm/FastFlowLM	FastFlowLM: turnkey LLM runtime for the XDNA2 NPU (kernels closed per halo; ex FastFlowLM/FastFlowLM)
+dev-toolchains	https://github.com/amd/xdna-driver	amdxdna NPU driver (XDNA/XDNA2); on Strix Halo build 2.23 out-of-tree with gcc-15 to match XRT 2.23 (see halo scripts/npu-bringup.sh)
+dev-toolchains	https://github.com/Xilinx/XRT	Xilinx Runtime: NPU userspace (xrt-smi, pyxrt, userptr buffers)
+dev-toolchains	https://github.com/Xilinx/mlir-aie	IRON / MLIR-AIE: open AIE kernel toolchain (aie2p = XDNA2); wheels on releases/latest-wheels-2
+dev-toolchains	https://github.com/Xilinx/llvm-aie	Peano: LLVM backend for AIE cores; wheels on releases/nightly
+coding-agents	https://github.com/MuchDevSuchCode/OpenGravity	VS Code coding assistant on local LLMs (Antigravity alternative)
+agents	https://github.com/MuchDevSuchCode/Prompt-Factory	desktop app: plain-language idea -> engineered prompt for 50 AI tools, local LLM or cloud API
+media-tooling	https://github.com/MuchDevSuchCode/Galileo	WinUI 3 / .NET 8 file manager + photo viewer (Windows Explorer/Photos alternative)
+dev-infra	https://github.com/MuchDevSuchCode/KeyWeaver	two-passphrase deterministic cryptographic key generator
+dev-infra	https://github.com/MuchDevSuchCode/FTS-Network-Monitor	dual-WAN monitor: ICMP/TCP loss, latency, jitter to router/gateways/DNS with a local web UI
+image-video	https://github.com/PrismML-Eng/Bonsai-Image-Demo	local image generation demo (upstream of the MuchDevSuchCode fork)

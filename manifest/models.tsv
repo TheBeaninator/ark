@@ -162,3 +162,4 @@ LocalLaws/LOCUS-Topic	raw		LOCUS ModernBERT ordinance classifier/scorer (Topic),
 Kanposer/DeepSeek-V4-Flash-0731-speedy-colibri-mxfp4	raw		colibri-format (Colibrì engine): DeepSeek V4 Flash 0731 mxfp4, 155 GB
 Justvugg/GLM-5.3-colibri-int4-g64	raw		colibri-format (Colibrì engine, author's own checkpoint): GLM-5.3 744B int4-g64, 419 GB, NVMe-streamed experts
 jlnsrk/GLM-5.2-colibri-int4	raw		colibri-format (Colibrì engine): GLM-5.2 744B int4, 379 GB, NVMe-streamed experts
+unsloth/gemma-4-12B-it-qat-GGUF	gguf	gemma-4-12B-it-qat-UD-Q4_K_XL.gguf mmproj-F16.gguf MTP/mtp-gemma-4-12B-it-Q8_0.gguf	halo's reference model: iGPU 329 prefill / ~26 decode tok/s on Strix Halo; MTP head for atomic-llama --spec-type mtp
