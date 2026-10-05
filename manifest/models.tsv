@@ -156,3 +156,6 @@ LocalLaws/LOCUS-Paternalism	raw		LOCUS ModernBERT ordinance classifier/scorer (P
 LocalLaws/LOCUS-Problem-Salience	raw		LOCUS ModernBERT ordinance classifier/scorer (Problem-Salience), pairs with LocalLaws/LOCUS-v1 dataset
 LocalLaws/LOCUS-Substantive	raw		LOCUS ModernBERT ordinance classifier/scorer (Substantive), pairs with LocalLaws/LOCUS-v1 dataset
 LocalLaws/LOCUS-Topic	raw		LOCUS ModernBERT ordinance classifier/scorer (Topic), pairs with LocalLaws/LOCUS-v1 dataset
+Kanposer/DeepSeek-V4-Flash-0731-speedy-colibri-mxfp4	raw		colibri-format (Colibrì engine): DeepSeek V4 Flash 0731 mxfp4, 155 GB
+Justvugg/GLM-5.3-colibri-int4-g64	raw		colibri-format (Colibrì engine, author's own checkpoint): GLM-5.3 744B int4-g64, 419 GB, NVMe-streamed experts
+jlnsrk/GLM-5.2-colibri-int4	raw		colibri-format (Colibrì engine): GLM-5.2 744B int4, 379 GB, NVMe-streamed experts
