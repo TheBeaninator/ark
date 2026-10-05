@@ -62,3 +62,13 @@ url	https://github.com/CGAL/cgal/releases/download/v6.1.1/CGAL-6.1.1-library.tar
 url	https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.gz	toolchains/trellis.cpp-fetchcontent	trellis.cpp optional retopo (TRELLIS_RETOPO_COLLISION): Boost 1.90.0, URL_HASH-pinned
 url	https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz	toolchains/trellis.cpp-fetchcontent	trellis.cpp optional retopo (TRELLIS_RETOPO_COLLISION, Linux): GMP 6.3.0, URL_HASH-pinned
 url	https://www.mpfr.org/mpfr-4.2.2/mpfr-4.2.2.tar.xz	toolchains/trellis.cpp-fetchcontent	trellis.cpp optional retopo (TRELLIS_RETOPO_COLLISION, Linux): MPFR 4.2.2, URL_HASH-pinned
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/melspectrogram.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/embedding_model.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/silero_vad.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/hey_jarvis_v0.1.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/alexa_v0.1.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/hey_mycroft_v0.1.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/hey_rhasspy_v0.1.onnx	voice/openwakeword-v0.5.1	openWakeWord pre-trained ONNX model (the wheel downloads these at first run; offline needs them on disk)
+url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.int8.onnx	voice/kokoro-onnx-v1.0	Kokoro-82M v1.0 English ONNX, int8 (CPU) for the kokoro-onnx package; v1.1 is the zh model
+url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx	voice/kokoro-onnx-v1.0	Kokoro-82M v1.0 English ONNX, fp32
+url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin	voice/kokoro-onnx-v1.0	Kokoro v1.0 voice embeddings for kokoro-onnx
