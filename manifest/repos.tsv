@@ -305,6 +305,7 @@ inference	https://github.com/antirez/ds4
 inference	https://github.com/ggml-org/ggml	
 inference	https://github.com/ggml-org/llama.cpp	
 inference	https://github.com/ggml-org/whisper.cpp	
+inference	https://github.com/pwilkin/trellis.cpp	trellis.cpp: TRELLIS.2-4B image-to-3D (BiRefNet->DINOv3->3 flow DiTs->VAEs->UV-textured GLB) in C++/GGML, no Python/CUDA spconv; vendors pwilkin/ggml (branch trellis) as a submodule; Vulkan is fastest on Strix Halo gfx1151; weights = ilintar/trellis2-gguf; libwebp + optional retopo deps via FetchContent (reference.tsv toolchains/trellis.cpp-fetchcontent)
 inference	https://github.com/ikawrakow/ik_llama.cpp	
 inference	https://github.com/kyuz0/strix-halo-ds4-toolbox	
 inference	https://github.com/leejet/stable-diffusion.cpp	

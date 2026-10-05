@@ -141,6 +141,9 @@ Kijai/GIMM-VFI_safetensors	hf-asset		ComfyUI-GIMM-VFI node weights
 Kijai/HunyuanVideo_comfy	hf-asset	hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors hunyuan_video_I2V_720_fixed_fp8_e4m3fn.safetensors hunyuan_video_FastVideo_720_fp8_e4m3fn.safetensors FramePackI2V_HY_fp8_e4m3fn.safetensors hunyuan_video_vae_*.safetensors hy*lora*.safetensors	collection is 300+ GB unfiltered; keep the loadable fp8 set
 tencent/Hunyuan3D-2.1	hf-asset		ComfyUI-Hunyuan3DWrapper weights
 microsoft/TRELLIS-image-large	hf-asset		TRELLIS node weights
+microsoft/TRELLIS.2-4B	hf-asset		TRELLIS.2 source checkpoints (ComfyUI-Trellis2 node, trellis.cpp tools/convert.py)
+ilintar/trellis2-gguf	gguf	birefnet.gguf dinov3.gguf ss_flow.gguf ss_dec.gguf shape_flow_512.gguf shape_flow_1024.gguf shape_dec.gguf tex_flow_512.gguf tex_flow_1024.gguf tex_dec.gguf README.md	trellis.cpp weight set (full precision, 16.5 GB; q8/ and q4/ subsets also published); point --models at the folder
+Comfy-Org/BiRefNet	comfy	background_removal/birefnet.safetensors	ComfyUI built-in background-removal node (TRELLIS.2 / Pixal3D workflows), models/background_removal/
 ZhengPeng7/BiRefNet	hf-asset		BiRefNet matting (ComfyUI_BiRefNet_ll, rembg)
 lllyasviel/fooocus_inpaint	hf-asset		comfyui-inpaint-nodes weights
 zichenshang/Ornith-1.5-35B-colibri-i8	raw		colibri-format (Colibrì engine)
