@@ -426,6 +426,8 @@ multi-box	https://github.com/BerriAI/litellm
 multi-box	https://github.com/Geramy/OdinLink-Five	OdinLink: Thunderbolt 5/USB4 as an RDMA interconnect (kernel module + ibv_* verbs provider + RCCL/NCCL net plugin); vLLM TP=2 on two Strix Halos +20-26% tok/s over TCP-over-TB; Strix Halo 20/40G negotiation notes in issue #31
 multi-box	https://github.com/hellas-ai/thunderbolt-ibverbs	upstream of donnerkeule: RDMA (ibverbs) over USB4/Thunderbolt, without write striping
 multi-box	https://github.com/neuhaus/donnerkeule#feat/write-striping	thunderbolt_ibverbs kernel module + userspace: USB4/Thunderbolt DMA rings as RoCE v2 RDMA devices (usb4_rdma*); write-striping branch spreads one QP over every ring/cable (2x40G cables ~44 Gbit/s); what gufo TP2 uses
+multi-box	https://github.com/cmetz/ec-su_axb35-linux	ec_su_axb35: out-of-tree Linux driver for the Sixunited AXB35-02 EC (Bosgame M5, GMKtec EVO-X2, ...): sysfs power_mode quiet/balanced/performance (EC 0x31), fan1-3 rpm/mode/level/curves, EC temp; the Pod workers have no other fan or power-mode lever (rebuild per kernel; plain make against the headers)
+multi-box	https://github.com/cmetz/ec-su_axb35-linux#f62c2c228959a08683273a26ef3afd8991e69f6d	PINNED 2026-10-05 commit: the one built into the Pod worker image (7.0.0-34)
 multi-box	https://github.com/neuhaus/ds4-strix-halo-tp-odinlink	neuhaus fork of the above (also InfiniBand); same author as the gufo RDMA fork
 multi-box	https://github.com/neuhaus/gufo	Gufo RDMA fork (default branch rdma): two-Strix-Halo tensor parallel (TP2) over InfiniBand, RoCE v2 or USB4 cables; Qwen3.8 Flash-Next Q4/Q8; build -DGUFO_ENABLE_TP2_RDMA=ON (libibverbs); docs/models/qwen3.8-flash-next/TP2.md
 multi-box	https://github.com/OpenCPIL/prima.cpp	
