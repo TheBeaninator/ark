@@ -30,11 +30,11 @@ fi
 if [ "$MODE" != src ]; then
   rows=$( { tail -n +2 manifest/cargo-repos.tsv; [ -f manifest-private/cargo-repos.tsv ] && tail -n +2 manifest-private/cargo-repos.tsv; } | grep -v '^#' | awk -F'\t' 'NF>=2 && $1!=""')
   # clone/refresh every row first, so all siblings exist before any fetch
-  echo "$rows" | while IFS=$'\t' read -r name url note; do [ -z "$name" ] && continue
+  echo "$rows" | tr -d '\r' | tr '\t' '\037' | while IFS=$'\037' read -r name url note; do [ -z "$name" ] && continue
     r=${url%%#*}; b=; [ "$r" != "$url" ] && b=${url#*#}; d=$WORK/$name
     if [ -d "$d/.git" ]; then (cd "$d" && git fetch -q --depth 1 origin ${b:+"$b"} 2>/dev/null && git reset -q --hard FETCH_HEAD) || echo "UPDATE-FAIL $name"
     else git clone -q --depth 1 ${b:+-b "$b"} "$r" "$d" 2>/dev/null || echo "CLONE-FAIL $name ($url)"; fi
   done
-  echo "$rows" | while IFS=$'\t' read -r name url note; do [ -f "$WORK/$name/Cargo.toml" ] && fetch_dir "$WORK/$name" "own/$name"; done
+  echo "$rows" | tr -d '\r' | tr '\t' '\037' | while IFS=$'\037' read -r name url note; do [ -f "$WORK/$name/Cargo.toml" ] && fetch_dir "$WORK/$name" "own/$name"; done
 fi
 echo "cargo-home: $(ls "$CARGO_HOME"/registry/cache/*/ 2>/dev/null | wc -l) crates, $(du -sh "$CARGO_HOME" 2>/dev/null | cut -f1)"
