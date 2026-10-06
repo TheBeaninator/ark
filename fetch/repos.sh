@@ -5,6 +5,7 @@
 # newer HEADs); it clones into <host>__<owner>__<repo>#<ref with / as __>. A pinned commit is fetched once and never moves.
 set -u; . "$(dirname "$0")/../ark.env"; cd "$(dirname "$0")/.."; mkdir -p "$ARK_SOFTWARE/src"; F=${1:-.}
 { tail -n +2 manifest/repos.tsv; [ -f manifest-private/repos.tsv ] && tail -n +2 manifest-private/repos.tsv; } | awk -F'\t' -v f="$F" '$1 ~ f {print $2}' | while read -r u; do
+  [ -n "${ARK_ONLY:-}" ] && ! grep -qxF "$u" "$ARK_ONLY" && continue   # ARK_ONLY = file of keys (url / hf_id / source) to restrict a run to
   n=$(echo "$u" | sed -E 's#https?://##; s#/#__#g; s#\.git$##'); d="$ARK_SOFTWARE/src/$n"
   r=${u%%#*}; b=; [ "$r" != "$u" ] && b=${u#*#}
   if [[ $b =~ ^[0-9a-f]{40}$ ]]; then

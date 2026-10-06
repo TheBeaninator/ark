@@ -72,3 +72,6 @@ url	https://github.com/dscripka/openWakeWord/releases/download/v0.5.1/hey_rhassp
 url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.int8.onnx	voice/kokoro-onnx-v1.0	Kokoro-82M v1.0 English ONNX, int8 (CPU) for the kokoro-onnx package; v1.1 is the zh model
 url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx	voice/kokoro-onnx-v1.0	Kokoro-82M v1.0 English ONNX, fp32
 url	https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin	voice/kokoro-onnx-v1.0	Kokoro v1.0 voice embeddings for kokoro-onnx
+findlinks	https://github.com/Xilinx/mlir-aie/releases/expanded_assets/latest-wheels-2	mlir_aie	IRON / MLIR-AIE wheel for XDNA2 NPU kernels (halo phases 1-3)
+findlinks	https://github.com/Xilinx/llvm-aie/releases/expanded_assets/nightly	llvm-aie	Peano: LLVM for AIE cores (wheel)
+whence	https://raw.githubusercontent.com/amd/xdna-driver/main/tools/WHENCE	amdnpu-firmware	NPU firmware the current amd/xdna-driver expects (17f0_11 = Strix Halo); halo ran driver 2.23 with dev fw 255.0.11.71

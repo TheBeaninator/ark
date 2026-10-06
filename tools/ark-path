@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""ark-path — where is it on the island right now? Reads the view and index that tools/ark-index.py rebuilds.
+  ark-path software/src/github.com__neuhaus__gufo   -> real path (any path under the view: /data/ark/<path>)
+  ark-path gufo                                     -> every indexed repo/model/hf-asset/wheel/binary whose key contains it
+  ark-path /mnt/nv2/software/wheels                 -> an old drive path, translated through the view
+Exit 1 when nothing matches. ARK_VIEW / ARK_INBOX override /data/ark and /data/ark-inbox.
+"""
+import os, re, sys
+view = os.environ.get('ARK_VIEW', '/data/ark'); inbox = os.environ.get('ARK_INBOX', '/data/ark-inbox')
+if len(sys.argv) != 2 or sys.argv[1] in ('-h', '--help'): print(__doc__.strip()); sys.exit(2)
+q = re.sub(r'^/mnt/[^/]+/', '', sys.argv[1]).strip('/')   # /mnt/<any drive>/X/Y -> X/Y
+p = os.path.join(view, q)
+if os.path.exists(p): print(os.path.realpath(p)); sys.exit(0)
+hits = []
+try:
+    for l in open(os.path.join(inbox, 'ARK-INDEX.tsv')):
+        k, key, path = l.rstrip('\n').split('\t')
+        if k != 'kind' and q.lower() in key.lower() and os.path.exists(path): hits.append(f'{k}\t{key}\t{path}')
+except OSError: pass
+print('\n'.join(hits)) if hits else print(f'ark-path: nothing matches {q!r} (index: {inbox}/ARK-INDEX.tsv)', file=sys.stderr)
+sys.exit(0 if hits else 1)

@@ -83,6 +83,10 @@ It needs cargo >= 1.85 and unpacks the mirror's own toolchain from `binaries/rus
 On the air-gapped side: copy `cargo-home` to writable storage, `export CARGO_HOME=<copy>`, then `cargo build --offline --locked`.
 Lesson (2026-10-03): without pass 2 the pod could not build its own tools (agent-kanban, factmap, Loom), because their crates were never fetched.
 
+## Islands: inbox-sync and the /data/ark view
+
+Commit a manifest row and `tools/inbox-sync.py` fetches whatever an air-gapped island lacks and pushes it into its inbox; on the island, `tools/ark-index.py` keeps `/data/ark` pointing at wherever each item lives, so drives can be moved, swapped or relabelled freely. See [docs/ISLAND.md](docs/ISLAND.md).
+
 ## Private overlay
 Anything you do not want in the public list goes in `manifest-private/` (same files, same columns, git-ignored). Every fetcher reads it after `manifest/`; the validator checks it locally.
 
