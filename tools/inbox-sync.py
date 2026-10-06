@@ -194,7 +194,7 @@ def main():
             ok |= {k for k in keys if l.endswith(' ' + k) or k in l.split() or (kind != 'repos' and os.path.basename(k.rstrip('/')) in l)}
     os.unlink(env['ARK_ONLY'])
     if os.path.isdir(a.stage) and any(os.scandir(a.stage)):
-        r = sh(['rsync', '-a', '--partial', '--chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r', a.stage + '/', f'{a.host}:{a.inbox}/'])
+        r = sh(['rsync', '-a', '--partial', a.stage + '/', f'{a.host}:{a.inbox}/'])
         if r.returncode:
             print('rsync failed: ' + r.stderr[-300:]); status['failed'].append('rsync'); return finish(a, status, push=True)
         shutil.rmtree(a.stage); print(f'pushed into {a.host}:{a.inbox}')
