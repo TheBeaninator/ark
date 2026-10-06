@@ -118,8 +118,11 @@ def present(c, f, isl):
         c['why'] = f"{len(gone)}/{len(c['files'])} files absent, e.g. {gone[0]}" if gone else ''
         if not gone: return True
         # a whole-repo row mirrored selectively (safetensors kept, duplicate .bin skipped) still counts once any payload or its dir is there
-        if c.get('whole') and (len(gone) < len(c['files']) or any(x in f['dirs_l'] for x in c.get('dir', []))): c['stale'] = 'partial'; return True
-        if all(n in f['names'] for n in gone): c['stale'] = 'upstream changed size'; return True   # same names, older versions
+        # ...but only when the matched files hold real weight: shared tokenizers (every Gemma has the same tokenizer.model) must not count
+        tot = sum(s for _, s in c['files']) or 1; have = tot - sum(s for n, s in c['files'] if n in gone)
+        if c.get('whole') and have / tot >= 0.3: c['stale'] = f'partial ({have * 100 // tot}% of bytes)'; return True
+        own_dir = any(x in f['dirs_l'] for x in c['dir']) if c.get('dir') else True   # url rows: the file name itself is distinctive
+        if own_dir and all(n in f['names'] for n in gone): c['stale'] = 'upstream changed size'; return True   # same names in its own folder: older versions
         return False
     if 'dir' in c:
         d = c['dir'] if isinstance(c['dir'], list) else [c['dir']]

@@ -86,7 +86,7 @@ kyutai/stt-1b-en_fr	hf-asset		voice stack
 kyutai/stt-2.6b-en	hf-asset		voice stack
 kyutai/tts-1.6b-en_fr	hf-asset		voice stack
 livekit/turn-detector	hf-asset		voice stack
-lj1995/VoiceConversionWebUI	hf-asset		audio tooling
+lj1995/VoiceConversionWebUI	hf-asset	hubert_base.pt rmvpe.pt rmvpe.onnx pretrained_v2/* uvr5_weights/HP2-* uvr5_weights/HP5-* uvr5_weights/VR-DeEchoAggressive.pth RVC20260718Nvidia50x0.7z README.md	RVC voice conversion: hubert + rmvpe + v2 pretrains + three UVR5 separators + the latest release bundle (9.2 GB of a 103 GB repo of legacy files)
 microsoft/VibeVoice-1.5B	hf-asset		audio tooling
 aoi-ot/VibeVoice-Large	hf-asset		VibeVoice-Large TTS (MIT): byte copy of microsoft/VibeVoice-Large from ModelScope; Microsoft pulled the HF repo (Sept 2025), the code is mirrored as github.com/microsoft/VibeVoice
 mistralai/Voxtral-4B-TTS-2603	hf-asset		voice stack
