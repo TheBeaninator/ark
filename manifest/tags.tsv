@@ -1,0 +1,36 @@
+# Tags for manifest rows, keyed by the row key (repos: url, models/datasets: hf_id, reference: source, containers: image, assets: source).
+# tags = comma-separated kebab-case. Filter with ARK_EXCLUDE_TAGS=<tag>[,<tag>] or tools/inbox-sync.py --exclude-tag <tag>.
+#   license-agreement: obtaining or using it means accepting terms beyond a standard open licence (HF-gated, an ungated copy of a gated original,
+#   or a licence/EULA that says "by using/clicking ... you agree"). OpenRAIL, CC and GPL-family licences are not agreements and are not tagged.
+key	tags	note
+Lightricks/LTX-2.5	license-agreement	gated on Hugging Face (accept terms to download); LTX-2.x Community License Agreement
+Lightricks/LTX-2.3	license-agreement	LTX-2 Community License Agreement ("by using or distributing ... you agree")
+Comfy-Org/ltx-2	license-agreement	LTX-2 Community License Agreement; bundles the Gemma 3 text encoder (gated original, Gemma Terms of Use)
+canopylabs/orpheus-3b-0.1-ft	license-agreement	gated on Hugging Face (accept terms to download); Llama 3.2 base (Llama Community License)
+fishaudio/s1-mini	license-agreement	gated on Hugging Face (accept terms to download); CC-BY-NC-SA
+kyutai/pocket-tts	license-agreement	gated on Hugging Face (accept terms to download) (use conditions on voice cloning)
+sesame/csm-1b	license-agreement	gated on Hugging Face (accept terms to download) (use conditions)
+stabilityai/stable-audio-open-1.0	license-agreement	gated on Hugging Face (accept terms to download); Stability AI Community License
+stabilityai/stable-audio-open-small	license-agreement	gated on Hugging Face (accept terms to download); Stability AI Community License
+Comfy-Org/Krea-2	license-agreement	ungated copy of gated krea/Krea-2-Raw; Krea-2 Community License
+Comfy-Org/flux1-dev	license-agreement	ungated copy of gated black-forest-labs/FLUX.1-dev; FLUX.1 [dev] Non-Commercial License
+Comfy-Org/flux1-kontext-dev_ComfyUI	license-agreement	ungated copy of gated FLUX.1-Kontext-dev; FLUX.1 [dev] Non-Commercial License
+Comfy-Org/flux1-schnell	license-agreement	ungated copy of gated black-forest-labs/FLUX.1-schnell (licence itself is Apache-2.0)
+Comfy-Org/flux2-dev	license-agreement	ungated copy of gated FLUX.2-dev; FLUX [dev] Non-Commercial License
+Comfy-Org/vae-text-encorder-for-flux-klein-9b	license-agreement	ungated copy from gated FLUX.2-klein-9B; FLUX Non-Commercial License
+black-forest-labs/FLUX.2-klein-9b-kv-fp8	license-agreement	FLUX Non-Commercial License (agreement)
+FastFlowLM/Llama-3.2-1B-NPU2	license-agreement	Llama 3.2 Community License (gated original meta-llama/Llama-3.2-1B-Instruct)
+fixie-ai/ultravox-v0_5-llama-3_1-8b	license-agreement	built on Llama 3.1 8B: Llama 3.1 Community License applies
+FastFlowLM/Embedding-Gemma-300M-NPU2	license-agreement	Gemma Terms of Use (gated original google/embeddinggemma-300m)
+ggml-org/embeddinggemma-300M-GGUF	license-agreement	Gemma Terms of Use (gated original google/embeddinggemma-300m)
+unsloth/embeddinggemma-300m	license-agreement	Gemma Terms of Use (ungated copy of gated google/embeddinggemma-300m)
+livekit/turn-detector	license-agreement	LiveKit Model License ("by clicking I accept or by downloading ... you agree"); LiveKit Agents use only
+Comfy-Org/Qwen-Image-2.1	license-agreement	Qwen Research License Agreement (non-commercial; "by clicking to agree or by using")
+Viggle/Qwen-Image-2.1-viggle-turbo	license-agreement	Qwen Research License Agreement (derivative of Qwen-Image-2.1)
+Kijai/HunyuanVideo_comfy	license-agreement	Tencent Hunyuan Community License Agreement (excludes EU, UK, South Korea)
+tencent/Hunyuan3D-2.1	license-agreement	Tencent Hunyuan Community License Agreement (excludes EU, UK, South Korea)
+unsloth/MiniMax-M3-GGUF	license-agreement	MiniMax Community License (non-commercial; "you agree" prohibited-use appendix)
+OnomaAIResearch/Illustrious-xl-early-release-v0	license-agreement	Fair AI Public License 1.0-SD ("by using this model, users agree")
+ghcr.io/peonist-ai/halogen-flash-server:0.16.0	license-agreement	closed-binary engine under its own EULA
+https://pypi.amd.com/ryzenai_llm/1.8.0/linux/simple/onnxruntime-vitisai/	license-agreement	wheel LICENSE.txt: "By using this wheel file, you agree to" the AMD EULA (metadata says MIT)
+https://pypi.amd.com/ryzenai_llm/1.8.0/linux/simple/voe/	license-agreement	wheel LICENSE.txt: "By using this wheel file, you agree to" the AMD EULA (metadata says MIT)

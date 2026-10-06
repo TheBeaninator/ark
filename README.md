@@ -17,6 +17,8 @@ verify/resolve-offline.sh      # does everything in src/ install from wheels/ al
 verify/catalog.sh && verify/hash-manifest.sh
 python3 report/inventory.py && python3 report/gen-manifest.py inventory.json manifest.html
 ```
+To leave out everything that needs a licence agreement (gated or EULA-bound rows, see `manifest/tags.tsv`), export `ARK_EXCLUDE_TAGS=license-agreement` before running the fetchers (or `tools/inbox-sync.py --exclude-tag license-agreement`); `tools/ark-tags.py --show license-agreement` lists them with the reason.
+
 Fetchers are idempotent and resumable; re-run them to refresh. Expect several TB and days on a fast link for the full set; start with `fetch/repos.sh` and the wheel lanes, which are the part that makes everything else usable.
 
 ## What is in the ark

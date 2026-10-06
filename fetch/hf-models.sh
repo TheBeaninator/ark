@@ -5,6 +5,7 @@
 set -u; . "$(dirname "$0")/../ark.env"; cd "$(dirname "$0")/.."
 { tail -n +2 manifest/models.tsv; [ -f manifest-private/models.tsv ] && tail -n +2 manifest-private/models.tsv; } | tr -d '\r' | tr '\t' '\037' | while IFS=$'\037' read -r id kind inc note; do   # \037, not tab: bash collapses empty tab fields
   [ -n "${ARK_ONLY:-}" ] && ! grep -qxF "$id" "$ARK_ONLY" && continue
+  ark_skip "$id" && continue
   case $kind in raw|gguf) d="$ARK_MODELS/${id//\//__}/$kind";; *) d="$ARK_HF_ASSETS/$id";; esac; mkdir -p "$d"
   args=(); for p in $inc; do args+=(--include "$p"); done
   timeout 14400 hf download "$id" --local-dir "$d" "${args[@]}" --exclude "tf_*" --exclude "flax_*" --exclude "*.h5" --exclude "*.msgpack" >/dev/null 2>"$d.err"; rc=$?

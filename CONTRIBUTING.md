@@ -10,6 +10,7 @@ ark holds **references, never data**. A contribution is a line in one of the TSV
 | `reference.tsv` | offline reference data | `kind  source  pattern_or_target  note` — `zim` (Kiwix directory + filename pattern, latest wins), `zim-set` (brace list of tools), `url` (`{REL}` = latest Ensembl release), `iso`, `findlinks` (pattern = a pip requirement, source = a find-links page: latest wheel), `whence` (source = an amd/xdna-driver `tools/WHENCE`: the NPU firmware it lists) |
 | `assets.tsv` | CC0 / permissive asset sources | `source  type  selection  license` |
 | `containers.tsv` | docker image | `image  note` |
+| `tags.tsv` | tags on any row above | `key  tags  note` — key = the row's url / hf_id / source / image; tags comma-separated kebab-case |
 | `pypi-extra.txt` | PyPI package name beyond the repos' own requirements | one per line |
 
 Rules
@@ -17,5 +18,6 @@ Rules
 - Newest version of a model line only. Add the new one and remove the superseded one in the same change.
 - Source access matters, licences do not gate inclusion. Prefer things whose source we can mirror; something without source still gets in if it is good enough, with a note on how to obtain and run it. Note gated repos and licence caveats in the note column; the fetcher tolerates gated repos.
 - Categories are kebab-case and by purpose (what it is *for*), never by when it was added.
+- Tag a row `license-agreement` in `tags.tsv` when getting or using it means accepting terms beyond a standard open licence: the repo is gated on Hugging Face, it is an ungated copy of a gated original (FLUX dev, Gemma, Llama mirrors), or its licence/EULA says "by using/clicking/downloading … you agree". OpenRAIL, Creative Commons and GPL-family licences are licences, not agreements: no tag. Check the actual licence file, not the metadata (AMD's wheels declare MIT while their LICENSE.txt binds you to the AMD EULA).
 - Prefer a repo over a wheel and a raw release over a repack: everything else can be derived offline (see `docs/TOOLCHAIN.md`).
 - Run `python3 verify/validate-manifest.py --online` before opening a PR.

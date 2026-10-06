@@ -57,6 +57,20 @@ for i,r in rows('containers.tsv'):
 for i,r in rows('assets.tsv'):
     if r['source'] not in ('polyhaven','ambientcg','url'): bad.append(f'assets.tsv:{i}: unknown source {r["source"]}')
     if r['license'].upper() not in ('CC0','CC-BY','CC-BY-4.0','PUBLIC-DOMAIN','MIT'): bad.append(f'assets.tsv:{i}: license must be stated and permissive')
+# tags.tsv (public + private): every key must be a row key, tags kebab-case, one line per key
+KEYS={r['url'] for _,r in rows('repos.tsv')}|{r['hf_id'] for _,r in rows('models.tsv')}|{r['hf_id'] for _,r in rows('datasets.tsv')}|{r['source'] for _,r in rows('reference.tsv')}|{r['image'] for _,r in rows('containers.tsv')}
+for base in (M,P):
+    p=os.path.join(base,'tags.tsv'); seen=set()
+    if not os.path.isfile(p): continue
+    for i,l in enumerate(open(p,encoding='utf-8').read().replace('\r','').split('\n'),1):
+        if not l.strip() or l.startswith('#') or l.startswith('key\t'): continue
+        f_=l.split('\t'); where=f'{"private:" if base==P else ""}tags.tsv:{i}'
+        if len(f_)<2 or not f_[1].strip(): bad.append(f'{where}: needs key<TAB>tags'); continue
+        if f_[0] not in KEYS: bad.append(f'{where}: no manifest row has key {f_[0]}')
+        if f_[0] in seen: bad.append(f'{where}: duplicate key {f_[0]}')
+        seen.add(f_[0])
+        for t in f_[1].split(','):
+            if not re.match(r'^[a-z0-9]+(-[a-z0-9]+)*$',t.strip()): bad.append(f'{where}: tag must be kebab-case: {t!r}')
 dups=[u for u in [c[2] for c in checks if c[0]=='repo']]; 
 for u in set(dups):
     if dups.count(u)>1: bad.append(f'repos.tsv: duplicate {u}')

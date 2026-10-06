@@ -137,6 +137,8 @@ def main():
     ap.add_argument('--max-gb', type=float, default=float(os.environ.get('ARK_SYNC_MAX_GB', 40)))
     ap.add_argument('--only', default='repos,models,reference')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--exclude-tag', default=os.environ.get('ARK_EXCLUDE_TAGS', ''),
+                    help='comma-separated manifest/tags.tsv tags to leave out, e.g. license-agreement')
     a = ap.parse_args(); only = set(a.only.split(','))
     os.makedirs(STATE, exist_ok=True)
     lock = open(os.path.join(STATE, 'lock'), 'w')
@@ -145,6 +147,11 @@ def main():
     if sh(['ssh', '-o', 'ConnectTimeout=8', '-o', 'BatchMode=yes', a.host, 'true']).returncode:
         print(f'island unreachable ({a.host})'); return 0
     cache = Cache(); W = wanted(only, cache); cache.save()
+    if a.exclude_tag:
+        sys.path.insert(0, os.path.join(ARK, 'tools')); import importlib; skip = set(importlib.import_module('ark-tags').keys_with(a.exclude_tag))
+        n = len(W); W = [w for w in W if w[1] not in skip]
+        print(f'excluding tag(s) {a.exclude_tag}: {n - len(W)} rows left out')
+        os.environ['ARK_EXCLUDE_TAGS'] = a.exclude_tag   # the fetchers skip them too
     names, sizes, exts = set(), set(), set()
     for _, _, _, c in W:
         for n, s in c.get('files') or []: names.add(n); sizes.add(s); exts.add(ext(n) or '.pdf')
