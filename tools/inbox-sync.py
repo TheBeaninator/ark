@@ -194,8 +194,10 @@ def main():
             status['fetched'].append(l)
             ok |= {k for k in keys if l.endswith(' ' + k) or k in l.split() or (kind != 'repos' and os.path.basename(k.rstrip('/')) in l)}
     os.unlink(env['ARK_ONLY'])
-    if os.path.isdir(a.stage) and any(os.scandir(a.stage)):
-        r = sh(['rsync', '-a', '--partial', a.stage + '/', f'{a.host}:{a.inbox}/'])
+    has_files = any(fs for _, _, fs in os.walk(a.stage))
+    if not has_files: shutil.rmtree(a.stage, ignore_errors=True)   # nothing downloaded: push nothing (an empty dir would read as present)
+    else:
+        r = sh(['rsync', '-a', '--partial', '--prune-empty-dirs', a.stage + '/', f'{a.host}:{a.inbox}/'])
         if r.returncode:
             print('rsync failed: ' + r.stderr[-300:]); status['failed'].append('rsync'); return finish(a, status, push=True)
         shutil.rmtree(a.stage); print(f'pushed into {a.host}:{a.inbox}')
