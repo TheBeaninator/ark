@@ -168,5 +168,6 @@ FastFlowLM/Qwen3-4B-Instruct-2507-NPU2	raw	*.q4nx *.xclbin *.json *.md	FastFlowL
 FastFlowLM/Llama-3.2-1B-NPU2	raw	*.q4nx *.xclbin *.json *.md	FastFlowLM q4nx weights + xclbins for the XDNA2 NPU (flm llama3.2:1b, 1.3 GB): NP-2 job 4
 FastFlowLM/Whisper-V3-Turbo-NPU2	raw	*.q4nx *.xclbin *.json *.md	FastFlowLM Whisper large-v3-turbo for the XDNA2 NPU (flm whisper-v3:turbo, 0.65 GB): NP-2 job 2, STT on the NPU
 FastFlowLM/Embedding-Gemma-300M-NPU2	raw	*.q4nx *.xclbin *.json *.md	FastFlowLM EmbeddingGemma-300M for the XDNA2 NPU (flm embed-gemma:300m, 0.65 GB): NPU-native embeddings
-unsloth/embeddinggemma-300m	hf-asset		EmbeddingGemma 300M (sentence-transformers layout): ungated copy of google/embeddinggemma-300m; CPU/iGPU baseline for the FastFlowLM NPU2 embed-gemma (NP-2)
+unsloth/embeddinggemma-300m	hf-asset	*.safetensors *.json tokenizer.model README.md	EmbeddingGemma 300M (sentence-transformers layout): ungated copy of google/embeddinggemma-300m; CPU/iGPU baseline for the FastFlowLM NPU2 embed-gemma (NP-2)
+ggml-org/embeddinggemma-300M-GGUF	gguf	embeddinggemma-300M-Q8_0.gguf	EmbeddingGemma 300M Q8_0 GGUF (official ggml-org, only quant offered; llama-embedding/llama-server --embeddings): llama.cpp CPU/iGPU baseline for the FastFlowLM NPU2 embed-gemma (NP-2)
 unsloth/Qwen3-4B-Instruct-2507-GGUF	gguf	Qwen3-4B-Instruct-2507-Q4_K_M.gguf	llama.cpp iGPU/CPU baseline for FastFlowLM qwen3-it:4b on the NPU (NP-2 job 4)
