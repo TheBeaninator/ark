@@ -34,6 +34,12 @@ def tiers(inbox):
     try: return {l.split('\t')[0]: l.split('\t')[1].strip() for l in open(os.path.join(inbox, 'ARK-TIERS.tsv')) if '\t' in l and not l.startswith('#')}
     except OSError: return {}
 
+def extra_roots(inbox):
+    """<inbox>/ARK-ROOTS.tsv: one path per line, e.g. /data/models — working copies outside the ark layout (Pod model
+    caches). Checked for content by --want so the sync doesn't refetch them; never merged into the view."""
+    try: return [l.split('\t')[0].strip() for l in open(os.path.join(inbox, 'ARK-ROOTS.tsv')) if l.strip() and not l.startswith('#')]
+    except OSError: return []
+
 def mounts(inbox):
     T = tiers(inbox)
     out = []
@@ -128,6 +134,14 @@ def scan(drives, inbox, W, deep):
     names, sizes, exts, lexts = set(W.get('names', [])), set(W.get('sizes', [])), set(W.get('exts', [])), set(W.get('list_exts', []))
     idx = {k: {} for k in ('repos', 'models', 'hf', 'wheels', 'binaries')}
     found = {'ns': set(), 'se': set(), 'sz': set(), 'names': set(), 'dirs': set(), 'whence': set()}
+    def match(files, dirs):
+        found['dirs'] |= dirs
+        for f, szs in files.items():
+            e = os.path.splitext(f)[1].lower()
+            if f in names or e in lexts: found['names'].add(f)
+            if f in names or e in exts:
+                for sz in szs:
+                    if sz in sizes: found['ns'].add(f'{f}|{sz}'); found['se'].add(f'{sz}|{e}'); found['sz'].add(sz)
     for lab, uuid, mp, dev in drives:
         base = mp.rstrip('/').count('/')
         for root, ds, fs in os.walk(mp):   # layout only: a few levels, cheap even on a busy HDD
@@ -148,13 +162,9 @@ def scan(drives, inbox, W, deep):
             ds[:] = [d for d in ds if d not in PRUNE and not os.path.islink(os.path.join(root, d))] if root.count('/') < base + 3 else []
         if not deep: continue
         files, dirs = walk_files(mp, tiers(inbox).get(lab) == 'cold', inbox, uuid)
-        found['dirs'] |= dirs
-        for f, szs in files.items():
-            e = os.path.splitext(f)[1].lower()
-            if f in names or e in lexts: found['names'].add(f)
-            if f in names or e in exts:
-                for sz in szs:
-                    if sz in sizes: found['ns'].add(f'{f}|{sz}'); found['se'].add(f'{sz}|{e}'); found['sz'].add(sz)
+        match(files, dirs)
+    for r in extra_roots(inbox) if deep else []:
+        if os.path.isdir(r): match(*walk_files(r, False, inbox, ''))
     if os.access(inbox, os.W_OK):
         with open(inbox + '/ARK-INDEX.tsv.tmp', 'w') as f:
             f.write('kind\tkey\tpath\n')

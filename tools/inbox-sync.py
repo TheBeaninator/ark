@@ -178,6 +178,7 @@ def main():
         return finish(a, status, push=not a.dry_run)
     if not isl['writable']: print(f'{a.inbox} is not writable on {a.host}'); return 1
     os.makedirs(a.stage, exist_ok=True)
+    a.stage = tempfile.mkdtemp(prefix='run-', dir=a.stage)   # this run's own folder: never push or clear anyone else's staging
     env = dict(os.environ, ARK_SOFTWARE=a.stage, ARK_MODELS=a.stage + '/models', ARK_HF_ASSETS=a.stage + '/hf-assets', ARK_DATA=a.stage)
     with tempfile.NamedTemporaryFile('w', delete=False) as t:
         t.write('\n'.join(k for _, k, _, _ in fetch) + '\n'); env['ARK_ONLY'] = t.name
