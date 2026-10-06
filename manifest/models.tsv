@@ -70,7 +70,6 @@ ggerganov/whisper.cpp	raw	ggml-large-v3-turbo*.bin ggml-base.en*.bin ggml-small.
 ggml-org/Qwen3-ASR-1.7B-GGUF	gguf	Qwen3-ASR-1.7B-Q8_0.gguf mmproj-Qwen3-ASR-1.7B-Q8_0.gguf	
 ggml-org/Qwen3-Omni-30B-A3B-Instruct-GGUF	hf-asset	*Q8_0.gguf mmproj-* README.md	voice stack
 ggml-org/Qwen3-TTS-12Hz-1.7B-Base-GGUF	gguf	Qwen3-TTS-12Hz-1.7B-Base-Q8_0.gguf mmproj-Qwen3-TTS-12Hz-1.7B-Base-Q8_0.gguf	
-haoheliu/voicefixer	hf-asset		audio tooling
 hexgrad/Kokoro-82M	hf-asset		voice stack
 hotdogs/Qwen35B-Agent-R2-Abliterated	gguf	GGUF/Qwen35B-Agent-R2-Abliterated.Q6_K.gguf model-*.safetensors	
 hotdogs/Qwen35b-agent-R2O3	gguf	GGUF-MTP/Qwen35b-agent-R2O3-MTP.Q6_K.gguf	
