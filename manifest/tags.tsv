@@ -34,3 +34,11 @@ OnomaAIResearch/Illustrious-xl-early-release-v0	license-agreement	Fair AI Public
 ghcr.io/peonist-ai/halogen-flash-server:0.16.0	license-agreement	closed-binary engine under its own EULA
 https://pypi.amd.com/ryzenai_llm/1.8.0/linux/simple/onnxruntime-vitisai/	license-agreement	wheel LICENSE.txt: "By using this wheel file, you agree to" the AMD EULA (metadata says MIT)
 https://pypi.amd.com/ryzenai_llm/1.8.0/linux/simple/voe/	license-agreement	wheel LICENSE.txt: "By using this wheel file, you agree to" the AMD EULA (metadata says MIT)
+https://download.pytorch.org/whl/xpu/intel-cmplr-lib-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/intel-cmplr-lib-ur/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/intel-cmplr-lic-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/intel-sycl-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/dpcpp-cpp-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/intel-opencl-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/intel-openmp/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://download.pytorch.org/whl/xpu/onemkl-license/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
