@@ -637,3 +637,7 @@ media-tooling	https://github.com/MuchDevSuchCode/Galileo	WinUI 3 / .NET 8 file m
 dev-infra	https://github.com/MuchDevSuchCode/KeyWeaver	two-passphrase deterministic cryptographic key generator
 dev-infra	https://github.com/MuchDevSuchCode/FTS-Network-Monitor	dual-WAN monitor: ICMP/TCP loss, latency, jitter to router/gateways/DNS with a local web UI
 image-video	https://github.com/PrismML-Eng/Bonsai-Image-Demo	local image generation demo (upstream of the MuchDevSuchCode fork)
+image-video	https://github.com/zacharydenton/h3-hrx	MiniMax H3 video+audio on Strix Halo gfx1151 in Rust (Loom kernels + HRX, no Python/PyTorch/ROCm SDK); needs glibc 2.43 bundle (shim/26.04) + int8_convrot DiTs
+inference	https://github.com/zacharydenton/hrx-rs	Rust GPU/NPU compute over AMD HRX + Loom (h3-hrx, krea2-hrx family); provisions the native bundle
+inference	https://github.com/zacharydenton/hrx-rs#8f0e084a9efd69ec0045b5cd7d032852d048195d	h3-hrx pin (newer than the 0.8.16 release)
+inference	https://github.com/ROCm/hrx-system	HRX: Hip Runtime Extended (AMD) - source for building the native bundle on older glibc
