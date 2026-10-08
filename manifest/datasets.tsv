@@ -22,3 +22,4 @@ nlphuji/flickr30k		Flickr30k captions (was on the crucial drive)
 tanganke/stanford_cars		Stanford Cars (was on the crucial drive)
 LocalLaws/LOCUS-v1		LOCUS v1 (Berkeley Responsibility Lab Local Law Observatory): 2.2M sections of US municipal+county ordinance law, 2309 counties, labelled function/topic/opacity/paternalism/discretion/salience (1.8 GB parquet, CC-BY-NC, arXiv 2606.19334)
 LocalLaws/LOCUS-Fines		LOCUS fines/penalties supplement (87 MB parquet)
+caiovicentino1/ekbasis-data		Ekbasis evaluation + training data (0.44 GB): git3 known/held, ftest_family, multi_test sets used by its pre-registered quantized-build gate
