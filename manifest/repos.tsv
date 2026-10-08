@@ -641,3 +641,4 @@ image-video	https://github.com/zacharydenton/h3-hrx	MiniMax H3 video+audio on St
 inference	https://github.com/zacharydenton/hrx-rs	Rust GPU/NPU compute over AMD HRX + Loom (h3-hrx, krea2-hrx family); provisions the native bundle
 inference	https://github.com/zacharydenton/hrx-rs#8f0e084a9efd69ec0045b5cd7d032852d048195d	h3-hrx pin (newer than the 0.8.16 release)
 inference	https://github.com/ROCm/hrx-system	HRX: Hip Runtime Extended (AMD) - source for building the native bundle on older glibc
+voice	https://github.com/shawnshekari/navi-tts	navi-tts: Qwen3-TTS 0.6B in hand-written HIP for gfx1100/gfx1151 (same author as strixite); OpenAI + XTTS APIs, voice cloning; Strix RTF 0.27, ~2.7 GiB; builds with TheRock ROCm >=10.1 clang; AGPL-3.0; no auth (LAN only)
