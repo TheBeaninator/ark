@@ -124,7 +124,7 @@ def walk_files(mp, rot, inbox, uuid):
         for f in fs:
             try: files.setdefault(f, []).append(os.lstat(os.path.join(root, f)).st_size)
             except OSError: pass
-    if rot and os.access(inbox, os.W_OK):
+    if rot and files and os.access(inbox, os.W_OK):   # never cache an empty walk: a wedged/unmounted drive would read as 'has nothing' for a day and every HDD-only row would be refetched (2026-10-12)
         os.makedirs(os.path.dirname(cache), exist_ok=True)
         with open(cache + '.tmp', 'w') as fh: json.dump({'files': files, 'dirs': sorted(dirs)}, fh)
         os.replace(cache + '.tmp', cache)
