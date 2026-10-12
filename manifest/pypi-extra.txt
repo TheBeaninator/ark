@@ -148,3 +148,5 @@ vunit_hdl
 cocotb
 cocotb-bus
 pyuvm
+pyrealsense2
+freenect

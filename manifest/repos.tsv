@@ -645,3 +645,6 @@ voice	https://github.com/shawnshekari/navi-tts	navi-tts: Qwen3-TTS 0.6B in hand-
 inference	https://github.com/Nathanw1014/strix-halo-llamacpp	Nathanw strix-halo-llamacpp: Vulkan llama.cpp tuned for gfx1151 (FA/MoE-prefill/GDN/MTP work), portable tarball bundles Mesa 26.2.4 RADV; dev moving to halo-box/strix-llama.cpp
 agents	https://github.com/openinterpretability/ekbasis	Ekbasis: calibrated consequence model for agents (git/shell guard before execution, Claude Code PreToolUse hook, MCP, look-when-unsure simulator); serves on vLLM>=0.30 letter-logprob readout; 2 Zenodo papers, pre-registered evals
 reverse-engineering	https://github.com/morluto/rea	agentic reverse engineering (app behaviour down to native binaries; TypeScript, MIT); pairs with the device-workshop
+edge-vision	https://github.com/IntelRealSense/librealsense	RealSense D4xx depth+RGB driver (librealsense2, rsusb backend, udev rules); djinn DJ-7 camera on pod-control
+edge-vision	https://github.com/OpenKinect/libfreenect2	Kinect v2 driver (depth+RGB over USB3); djinn DJ-7 alternative camera
+edge-vision	https://github.com/OpenKinect/libfreenect	Kinect v1 driver (firmware loader pulls it off the sensor); djinn DJ-7 alternative camera
