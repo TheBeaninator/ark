@@ -648,3 +648,5 @@ reverse-engineering	https://github.com/morluto/rea	agentic reverse engineering (
 edge-vision	https://github.com/IntelRealSense/librealsense	RealSense D4xx depth+RGB driver (librealsense2, rsusb backend, udev rules); djinn DJ-7 camera on pod-control
 edge-vision	https://github.com/OpenKinect/libfreenect2	Kinect v2 driver (depth+RGB over USB3); djinn DJ-7 alternative camera
 edge-vision	https://github.com/OpenKinect/libfreenect	Kinect v1 driver (firmware loader pulls it off the sensor); djinn DJ-7 alternative camera
+orchestration	https://github.com/AMD-AGI/Hyperloom	ROCm Hyperloom (MIT, v1.1.3): multi-agent harness that auto-optimizes LLM inference on AMD GPUs (prelude baseline+roofline -> framework flags/diffs -> kernel agent -> sweep; recipe knowledge base; bounded edits). dad 2026-10-12; sibling of the overmind epic and strixite/dsv4 ROCm tuning
+orchestration	https://github.com/AMD-AGI/GEAK	GEAK: AMD kernel-generation agent backend that Hyperloom delegates hot kernels to (Triton/HIP)
