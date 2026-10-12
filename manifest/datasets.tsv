@@ -23,3 +23,7 @@ tanganke/stanford_cars		Stanford Cars (was on the crucial drive)
 LocalLaws/LOCUS-v1		LOCUS v1 (Berkeley Responsibility Lab Local Law Observatory): 2.2M sections of US municipal+county ordinance law, 2309 counties, labelled function/topic/opacity/paternalism/discretion/salience (1.8 GB parquet, CC-BY-NC, arXiv 2606.19334)
 LocalLaws/LOCUS-Fines		LOCUS fines/penalties supplement (87 MB parquet)
 caiovicentino1/ekbasis-data		Ekbasis evaluation + training data (0.44 GB): git3 known/held, ftest_family, multi_test sets used by its pre-registered quantized-build gate
+MLLM-CL/VTCBench		VTCBench: long-context retrieval/reasoning/memory under vision-text compression (OMF H2 public comparator)
+MrSunshy/VisionGraph_GraphStructure_hf		VisionGraph: rendered graphs + node/edge perception and graph-theory QA
+Anonymous112233/FlowGen		FlowGen: synthetic flowcharts per renderer (Mermaid/Graphviz/PlantUML/Diagrams), 3840 train / 1440 test each, by difficulty
+jopan/FlowLearn		FlowLearn: scientific + simulated flowcharts with Mermaid, OCR and VQA annotations
