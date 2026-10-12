@@ -19,7 +19,8 @@ import argparse, json, os, re, shutil, sys, time
 
 JUNK = {'lost+found', '.Trash-1000', 'System Volume Information', '$RECYCLE.BIN'}
 PRUNE = {'.git', 'src', 'ubuntu-mirror', 'cargo-home', 'npm-cache', 'pnpm-store', 'gomodcache', 'bun-cache', 'debs', 'rocm',
-         'node_modules', '__pycache__', 'containers', '.cache'} | JUNK
+         'node_modules', '__pycache__', 'containers', '.cache',
+         'ark-inbox'} | JUNK   # the inbox may live on a drive (/mnt/nvN/ark-inbox, symlinked from /data); it is scanned via --inbox only
 INBOX_AS = {'src': 'software/src', 'wheels': 'software/wheels', 'binaries': 'software/binaries', 'hf-assets': 'hf-assets',
             'models': 'models', 'reference': 'reference', 'data': 'data'}
 
