@@ -1,4 +1,4 @@
-hf_id	kind	include	note
+hf_id	kind	include	note	revision
 ggml-org/MiMo-V2.6-Pro-RL-GGUF	gguf	MiMo-V2.6-Pro-RL-MXFP4/* mmproj-MiMo-V2.6-Pro-RL-Q8_0.gguf mtp-MiMo-V2.6-Pro-RL-Q8_0.gguf dflash-MiMo-V2.6-Pro-RL-Q8_0.gguf	MiMo-V2.6-Pro-RL MXFP4 (553 GB) + vision mmproj + MTP and DFlash speculative-decoding sidecars; replaces AesSedai/MiMo-V2.6-Pro-RL-GGUF (repo deleted Oct 2026), whose 13-way MXFP4 split of the same quant is what the reference island holds
 AngelSlim/Hy4-preview-GGUF	gguf	Hy4-preview-Q4_K_M.gguf	
 antirez/deepseek-v4-gguf	gguf	DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix-0731.gguf DeepSeek-V4-Flash-DSpark-support-0731.gguf DeepSeek-V4-Flash-MTP-Q4K-Q8_0-F32.gguf DeepSeek-V4-Flash-Vision-Encoder.gguf README.md	DeepSeek V4 Flash 0731, antirez IQ2XXS (81 GiB, fits ONE Strix Halo) + DSpark draft + MTP + vision encoder: gufo single-node 18-21 t/s on the Pod (2026-10-03), also the ds4 TP=2 input
@@ -42,6 +42,7 @@ Qwen/Qwen3-VL-32B-Instruct	raw	model-*.safetensors
 Qwen/Qwen3.5-122B-A10B-FP8	raw	model.safetensors-*.safetensors	
 Qwen/Qwen3.5-9B	raw	model.safetensors-*.safetensors	
 Qwen/Qwen3.8-Flash-Next	raw		Qwen3.8-Flash-Next raw release (335 GiB, 144 files, BF16 safetensors + n-gram embedding shards): source for strixite's convert_qwen4exp/convert_ngram_table (strixw) and for CPU goldens; fetched 2026-10-04 to bigboy:/mnt/scratch1t/ark-inbox/models
+Qwen/Qwen3.5-4B-Base	raw		base for jaredpalmer/kev-4b (PEFT LoRA + head.pt load only on this exact snapshot; OC-11 open-chat eval)	1001bb4d826a52d1f399e183466143f4da7b741b
 ResembleAI/chatterbox	hf-asset		voice stack
 ResembleAI/resemble-enhance	hf-asset		audio tooling
 Tongyi-MAI/Z-Image-Turbo	raw	text_encoder/model-*.safetensors transformer/diffusion_pytorch_model-*.safetensors vae/diffusion_pytorch_model.safetensors	
