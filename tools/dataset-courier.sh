@@ -28,7 +28,18 @@ while IFS=$'\t' read -r f sz sha <&3; do   # fd 3: ssh/hf/rsync below must not e
   if [ "$have" = "$sz" ] && [ "$sz" != 0 ]; then skip=$((skip+1)); continue; fi
   avail=$(df --output=avail -B1 "$STAGE" | tail -1); [ "$avail" -gt $((sz + 5000000000)) ] || { log "SKIP $f: laptop has $((avail/1000000000)) GB free, need $((sz/1000000000))"; fail=$((fail+1)); continue; }
   log "fetch $f ($((sz/1000000000)) GB)"
-  if ! HF_HUB_ENABLE_HF_TRANSFER=0 hf download "$ID" --repo-type dataset --include "$f" --local-dir "$STAGE" >/dev/null 2>"$STAGE/.err" </dev/null; then log "FETCH-FAIL $f: $(tail -1 "$STAGE/.err" | cut -c1-120)"; fail=$((fail+1)); rm -rf "$STAGE/$f" "$STAGE/.cache"; continue; fi
+  # fetch with a stall watchdog: hf download hangs silently now and then (shard 4 sat at 670 MB for 45 min, 2026-10-13);
+  # kill it when the stage stops growing for STALL_SECS and retry (the .cache/*.incomplete part resumes), up to FETCH_TRIES.
+  got_file=0
+  for try in $(seq 1 "${FETCH_TRIES:-3}"); do
+    HF_HUB_ENABLE_HF_TRANSFER=0 hf download "$ID" --repo-type dataset --include "$f" --local-dir "$STAGE" >/dev/null 2>"$STAGE/.err" </dev/null & hp=$!
+    last=$(du -sb "$STAGE" | cut -f1); still=0
+    while kill -0 $hp 2>/dev/null; do sleep 30; now=$(du -sb "$STAGE" | cut -f1); if [ "$now" = "$last" ]; then still=$((still+30)); else still=0; last=$now; fi
+      if [ $still -ge "${STALL_SECS:-600}" ]; then log "STALL $f try $try: no growth for ${still}s at $((now/1000000)) MB; killing hf"; kill $hp 2>/dev/null; sleep 2; kill -9 $hp 2>/dev/null; break; fi; done
+    if wait $hp 2>/dev/null; then got_file=1; break; fi
+    [ $try -lt "${FETCH_TRIES:-3}" ] && { log "retry $f ($((try+1))/${FETCH_TRIES:-3})"; sleep 15; }
+  done
+  if [ $got_file != 1 ]; then log "FETCH-FAIL $f: $(tail -1 "$STAGE/.err" | tr '\r' '\n' | tail -1 | cut -c1-120)"; fail=$((fail+1)); rm -rf "$STAGE/$f" "$STAGE/.cache"; continue; fi
   if [ "$sha" != "-" ]; then got=$(sha256sum "$STAGE/$f" | cut -d' ' -f1); [ "$got" = "$sha" ] || { log "SHA-FAIL $f"; fail=$((fail+1)); rm -f "$STAGE/$f"; continue; }; fi
   if rsync -a --partial --inplace -e "$SSH" "$STAGE/$f" "$HOST:$DEST/$N/$f" </dev/null; then log "LANDED $f (sha ok)"; ok=$((ok+1)); rm -f "$STAGE/$f"; rm -rf "$STAGE/.cache"; else log "PUSH-FAIL $f (stage kept)"; fail=$((fail+1)); fi
 done 3< "$STAGE/.files.tsv"
