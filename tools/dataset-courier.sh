@@ -23,15 +23,15 @@ PY
 TOTAL=$(awk -F'\t' '{s+=$2} END{printf "%.0f", s/1e9}' "$STAGE/.files.tsv"); log "$ID: $(wc -l < "$STAGE/.files.tsv") files, $TOTAL GB -> $HOST:$DEST/$N"
 $SSH $HOST "mkdir -p $DEST/$N" || { log "cannot mkdir on $HOST"; exit 1; }
 ok=0; skip=0; fail=0
-while IFS=$'\t' read -r f sz sha; do
-  have=$($SSH $HOST "stat -c %s '$DEST/$N/$f' 2>/dev/null" || echo 0)
+while IFS=$'\t' read -r f sz sha <&3; do   # fd 3: ssh/hf/rsync below must not eat the list
+  have=$($SSH $HOST "stat -c %s '$DEST/$N/$f' 2>/dev/null" </dev/null || echo 0)
   if [ "$have" = "$sz" ] && [ "$sz" != 0 ]; then skip=$((skip+1)); continue; fi
   avail=$(df --output=avail -B1 "$STAGE" | tail -1); [ "$avail" -gt $((sz + 5000000000)) ] || { log "SKIP $f: laptop has $((avail/1000000000)) GB free, need $((sz/1000000000))"; fail=$((fail+1)); continue; }
   log "fetch $f ($((sz/1000000000)) GB)"
-  if ! HF_HUB_ENABLE_HF_TRANSFER=0 hf download "$ID" --repo-type dataset --include "$f" --local-dir "$STAGE" >/dev/null 2>"$STAGE/.err"; then log "FETCH-FAIL $f: $(tail -1 "$STAGE/.err" | cut -c1-120)"; fail=$((fail+1)); rm -rf "$STAGE/$f" "$STAGE/.cache"; continue; fi
+  if ! HF_HUB_ENABLE_HF_TRANSFER=0 hf download "$ID" --repo-type dataset --include "$f" --local-dir "$STAGE" >/dev/null 2>"$STAGE/.err" </dev/null; then log "FETCH-FAIL $f: $(tail -1 "$STAGE/.err" | cut -c1-120)"; fail=$((fail+1)); rm -rf "$STAGE/$f" "$STAGE/.cache"; continue; fi
   if [ "$sha" != "-" ]; then got=$(sha256sum "$STAGE/$f" | cut -d' ' -f1); [ "$got" = "$sha" ] || { log "SHA-FAIL $f"; fail=$((fail+1)); rm -f "$STAGE/$f"; continue; }; fi
-  if rsync -a --partial --inplace -e "$SSH" "$STAGE/$f" "$HOST:$DEST/$N/$f"; then log "LANDED $f (sha ok)"; ok=$((ok+1)); rm -f "$STAGE/$f"; rm -rf "$STAGE/.cache"; else log "PUSH-FAIL $f (stage kept)"; fail=$((fail+1)); fi
-done < "$STAGE/.files.tsv"
+  if rsync -a --partial --inplace -e "$SSH" "$STAGE/$f" "$HOST:$DEST/$N/$f" </dev/null; then log "LANDED $f (sha ok)"; ok=$((ok+1)); rm -f "$STAGE/$f"; rm -rf "$STAGE/.cache"; else log "PUSH-FAIL $f (stage kept)"; fail=$((fail+1)); fi
+done 3< "$STAGE/.files.tsv"
 rsync -a -e "$SSH" "$STAGE/.files.tsv" "$HOST:$DEST/$N/.files.tsv" 2>/dev/null
 log "DONE $ID: landed=$ok skipped=$skip failed=$fail"
 [ "$fail" = 0 ] && $SSH $HOST "printf '%s\t%s\tdataset-courier\n' '$ID' \"\$(date -u +%FT%TZ)\" >> /data/ark-inbox/ARK-FETCHED.tsv"
