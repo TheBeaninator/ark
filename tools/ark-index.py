@@ -22,7 +22,7 @@ PRUNE = {'.git', 'src', 'ubuntu-mirror', 'cargo-home', 'npm-cache', 'pnpm-store'
          'node_modules', '__pycache__', 'containers', '.cache',
          'ark-inbox'} | JUNK   # the inbox may live on a drive (/mnt/nvN/ark-inbox, symlinked from /data); it is scanned via --inbox only
 INBOX_AS = {'src': 'software/src', 'wheels': 'software/wheels', 'binaries': 'software/binaries', 'hf-assets': 'hf-assets',
-            'models': 'models', 'reference': 'reference', 'data': 'data'}
+            'models': 'models', 'reference': 'reference', 'data': 'data', 'datasets': 'datasets'}
 
 def ls(d):
     try: return sorted(os.listdir(d))
