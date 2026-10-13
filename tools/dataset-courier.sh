@@ -32,12 +32,16 @@ while IFS=$'\t' read -r f sz sha <&3; do   # fd 3: ssh/hf/rsync below must not e
   # kill it when the stage stops growing for STALL_SECS and retry (the .cache/*.incomplete part resumes), up to FETCH_TRIES.
   got_file=0
   for try in $(seq 1 "${FETCH_TRIES:-3}"); do
-    HF_HUB_ENABLE_HF_TRANSFER=0 hf download "$ID" --repo-type dataset --include "$f" --local-dir "$STAGE" >/dev/null 2>"$STAGE/.err" </dev/null & hp=$!
+    # curl, not hf download: hf hangs forever on a half-closed TLS connection (CLOSE-WAIT, 0 B/s for 45 min twice on shard 4,
+    # 2026-10-13) while a plain range GET of the same file ran at 10 MB/s. -C - resumes the .part, --speed-time/-limit abort a stall.
+    mkdir -p "$STAGE/$(dirname "$f")"
+    curl -sSL -C - "${H[@]}" --retry 5 --retry-all-errors --retry-delay 10 --speed-time 60 --speed-limit 200000 \
+      -o "$STAGE/$f.part" "https://huggingface.co/datasets/$ID/resolve/main/$f" 2>"$STAGE/.err" </dev/null && mv -f "$STAGE/$f.part" "$STAGE/$f" & hp=$!
     last=$(du -sb "$STAGE" | cut -f1); still=0
     while kill -0 $hp 2>/dev/null; do sleep 30; now=$(du -sb "$STAGE" | cut -f1); if [ "$now" = "$last" ]; then still=$((still+30)); else still=0; last=$now; fi
       if [ $still -ge "${STALL_SECS:-600}" ]; then log "STALL $f try $try: no growth for ${still}s at $((now/1000000)) MB; killing hf"; kill $hp 2>/dev/null; sleep 2; kill -9 $hp 2>/dev/null; break; fi; done
     if wait $hp 2>/dev/null; then got_file=1; break; fi
-    [ $try -lt "${FETCH_TRIES:-3}" ] && { log "retry $f ($((try+1))/${FETCH_TRIES:-3})"; sleep 15; }
+    [ $try -lt "${FETCH_TRIES:-3}" ] && { log "retry $f ($((try+1))/${FETCH_TRIES:-3}): $(tail -c 160 "$STAGE/.err" | tr '\r\n' '  ')"; sleep 15; }
   done
   if [ $got_file != 1 ]; then log "FETCH-FAIL $f: $(tail -1 "$STAGE/.err" | tr '\r' '\n' | tail -1 | cut -c1-120)"; fail=$((fail+1)); rm -rf "$STAGE/$f" "$STAGE/.cache"; continue; fi
   if [ "$sha" != "-" ]; then got=$(sha256sum "$STAGE/$f" | cut -d' ' -f1); [ "$got" = "$sha" ] || { log "SHA-FAIL $f"; fail=$((fail+1)); rm -f "$STAGE/$f"; continue; }; fi
