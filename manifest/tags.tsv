@@ -2,6 +2,7 @@
 # tags = comma-separated kebab-case. Filter with ARK_EXCLUDE_TAGS=<tag>[,<tag>] or tools/inbox-sync.py --exclude-tag <tag>.
 #   license-agreement: obtaining or using it means accepting terms beyond a standard open licence (HF-gated, an ungated copy of a gated original,
 #   or a licence/EULA that says "by using/clicking ... you agree"). OpenRAIL, CC and GPL-family licences are not agreements and are not tagged.
+#   track: a repo whose island copy must follow upstream HEAD (or its #branch); inbox-sync re-fetches and pushes it when it is behind.
 key	tags	note
 Lightricks/LTX-2.5	license-agreement	gated on Hugging Face (accept terms to download); LTX-2.x Community License Agreement
 Lightricks/LTX-2.3	license-agreement	LTX-2 Community License Agreement ("by using or distributing ... you agree")
@@ -42,3 +43,5 @@ https://download.pytorch.org/whl/xpu/dpcpp-cpp-rt/	license-agreement	wheel LICEN
 https://download.pytorch.org/whl/xpu/intel-opencl-rt/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
 https://download.pytorch.org/whl/xpu/intel-openmp/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
 https://download.pytorch.org/whl/xpu/onemkl-license/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
+https://github.com/shawnshekari/strixite	track	dad 2026-10-13: strixite moves fast (v0.2.x); keep the island current
+https://github.com/shawnshekari/navi-tts	track	same author/cadence as strixite

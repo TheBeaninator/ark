@@ -11,6 +11,9 @@ Runs on a machine with internet AND ssh to the island's control node (reference 
   3. fetch: only the rows found nowhere, with the normal fetch/ scripts (ARK_ONLY row filter) into a local stage that has
      the inbox layout; models over --max-gb, or of unknown size, are listed as TOO-BIG instead.
   4. push: rsync the stage into <inbox>, clear the stage, append the keys to <inbox>/ARK-FETCHED.tsv, re-index, and write
+  5. refresh: repos tagged `track` in manifest/tags.tsv are compared with upstream (git ls-remote); when the island's inbox
+     copy is behind, it is re-fetched and pushed with --delete (ARK-FETCHED gets a `refresh <sha>` line). Pinned (#<sha>) rows and
+     copies that live on a read-only drive are never refreshed (a drive copy needs a new drive build).
      <inbox>/SYNC-STATUS.json so island agents can see what is coming and what is stuck.
   5. requests: island agents may append lines to <inbox>/REQUESTS.tsv or any /data/pod/plans/*/fetch-requests.txt; they are
      reported, never fetched, until a manifest row exists (what enters the island is always on the list).
@@ -185,6 +188,7 @@ def main():
               'skipped': skipped, 'requests': [l for _, l in isl['requests']], 'fetched': [], 'failed': []}
     if a.dry_run or not fetch:
         if not fetch: print('nothing to fetch')
+        if 'repos' in only: refresh_tracked(a, isl, status)
         return finish(a, status, push=not a.dry_run)
     if not isl['writable']: print(f'{a.inbox} is not writable on {a.host}'); return 1
     os.makedirs(a.stage, exist_ok=True)
@@ -213,7 +217,44 @@ def main():
         shutil.rmtree(a.stage); print(f'pushed into {a.host}:{a.inbox}')
         sh(['ssh', '-o', 'BatchMode=yes', a.host, f'cat >> {a.inbox}/ARK-FETCHED.tsv'], input=''.join(f"{k}\t{status['utc']}\n" for k in sorted(ok)))
         island(a.host, a.inbox, {'names': [], 'sizes': [], 'exts': []})   # re-index: ARK-INDEX.tsv shows the new arrivals
+    if 'repos' in only: refresh_tracked(a, isl, status)
     return finish(a, status, push=True)
+
+def refresh_tracked(a, isl, status):
+    """Repos tagged `track`: re-fetch + push when upstream HEAD (or the tracked branch) differs from the island's inbox copy."""
+    sys.path.insert(0, os.path.join(ARK, 'tools')); import importlib
+    tracked = [u for u in importlib.import_module('ark-tags').keys_with('track') if u.startswith('http')]
+    status['refreshed'] = []
+    if not tracked: return
+    for u in tracked:
+        r, b = u.split('#')[0], (u.split('#')[1] if '#' in u else '')
+        if re.fullmatch(r'[0-9a-f]{40}', b): status['skipped'].append(f'{u} (pinned, not refreshed)'); continue
+        d = repo_dir(u)
+        up = sh(['git', 'ls-remote', r, b or 'HEAD'])
+        up_sha = up.stdout.split('	')[0] if up.returncode == 0 and up.stdout else ''
+        if not up_sha: status['failed'].append(f'ls-remote {r}'); continue
+        q = sh(['ssh', '-o', 'BatchMode=yes', a.host, f'test -d {a.inbox}/src/{d}/.git && git -C {a.inbox}/src/{d} rev-parse HEAD'])
+        if q.returncode:   # not in the inbox: on a drive (read-only) or absent (the MISSING pass handles absent)
+            if d in isl['repos']: status['skipped'].append(f'{u} (tracked but on a read-only drive: refresh needs a drive build)')
+            continue
+        isl_sha = q.stdout.strip()
+        if isl_sha == up_sha: continue
+        print(f'REFRESH   repos     {u}  {isl_sha[:7]} -> {up_sha[:7]}')
+        if a.dry_run: continue
+        st = tempfile.mkdtemp(prefix='refresh-', dir=a.stage if os.path.isdir(a.stage) else None)
+        with tempfile.NamedTemporaryFile('w', delete=False) as t: t.write(u + '\n'); only = t.name
+        env = dict(os.environ, ARK_SOFTWARE=st, ARK_ONLY=only)
+        f = subprocess.run(['bash', os.path.join(ARK, 'fetch/repos.sh')], env=env, text=True, capture_output=True, cwd=ARK)
+        os.unlink(only)
+        src = os.path.join(st, 'src', d)
+        if not os.path.isdir(os.path.join(src, '.git')):
+            status['failed'].append(f'refresh {u}: ' + (f.stdout.strip().splitlines() or ['no checkout'])[-1][:120]); shutil.rmtree(st, ignore_errors=True); continue
+        p = sh(['rsync', '-a', '--delete', src + '/', f'{a.host}:{a.inbox}/src/{d}/'])
+        shutil.rmtree(st, ignore_errors=True)
+        if p.returncode: status['failed'].append(f'refresh rsync {u}: ' + p.stderr[-160:]); continue
+        sh(['ssh', '-o', 'BatchMode=yes', a.host, f'cat >> {a.inbox}/ARK-FETCHED.tsv'], input=f"{u}\t{status['utc']}\trefresh {up_sha[:12]}\n")
+        status['refreshed'].append(f'{u} {isl_sha[:7]}->{up_sha[:7]}'); print(f'  refreshed {d} -> {up_sha[:7]}')
+    if status['refreshed'] and not a.dry_run: island(a.host, a.inbox, {'names': [], 'sizes': [], 'exts': []})
 
 def finish(a, status, push):
     json.dump(status, open(os.path.join(STATE, 'last.json'), 'w'), indent=1)
