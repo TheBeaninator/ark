@@ -24,7 +24,7 @@ LocalLaws/LOCUS-v1		LOCUS v1 (Berkeley Responsibility Lab Local Law Observatory)
 LocalLaws/LOCUS-Fines		LOCUS fines/penalties supplement (87 MB parquet)
 caiovicentino1/ekbasis-data		Ekbasis evaluation + training data (0.44 GB): git3 known/held, ftest_family, multi_test sets used by its pre-registered quantized-build gate
 MLLM-CL/VTCBench		VTCBench: long-context retrieval/reasoning/memory under vision-text compression (OMF H2 public comparator)
-MrSunshy/VisionGraph_GraphStructure_hf	Unweighted_Graph_0.rar	VisionGraph: rendered graphs + node/edge perception and graph-theory QA | full set 304 GB in 10 rar shards; include = one unweighted shard (32 GB) until dad decides (DECIDE card on pod board)
+MrSunshy/VisionGraph_GraphStructure_hf		VisionGraph: rendered graphs + node/edge perception and graph-theory QA| full set, dad 2026-10-13 (DECIDE a4141f7018): pull everything, straight to /mnt/ark/datasets via tools/dataset-courier.sh (never through /data/ark-inbox)
 Anonymous112233/FlowGen		FlowGen: synthetic flowcharts per renderer (Mermaid/Graphviz/PlantUML/Diagrams), 3840 train / 1440 test each, by difficulty
 jopan/FlowLearn		FlowLearn: scientific + simulated flowcharts with Mermaid, OCR and VQA annotations
-MiaSanLei/MindBench	synth_v1_en_01.tar.gz	MindBench synthetic mind maps (Graphviz, bilingual) with structure annotations; CC BY-NC 4.0 | full set 616 GB in 40 tarballs; include = one English v1 shard (42 GB) until dad decides
+MiaSanLei/MindBench		MindBench synthetic mind maps (Graphviz, bilingual) with structure annotations; CC BY-NC 4.0| full set, dad 2026-10-13 (DECIDE a4141f7018): pull everything, straight to /mnt/ark/datasets via tools/dataset-courier.sh (never through /data/ark-inbox)
