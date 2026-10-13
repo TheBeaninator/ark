@@ -433,7 +433,11 @@ multi-box	https://github.com/neuhaus/gufo	Gufo RDMA fork (default branch rdma): 
 multi-box	https://github.com/OpenCPIL/prima.cpp	
 multi-box	https://github.com/b4rtaz/distributed-llama	
 multi-box	https://github.com/exo-explore/exo	
-multi-box	https://github.com/lemonade-sdk/lemonade	
+inference	https://github.com/lemonade-sdk/lemonade	Lemonade (AMD-backed, Apache-2.0, C++): local LLM server + app launcher for Ryzen AI / Radeon, OpenAI API + MCP, Vulkan/ROCm llama.cpp and ONNX-RT/NPU backends; dad joined their Discord 2026-10-13 and wants to contribute (Strix Halo Linux, gfx1151, NPU)
+inference	https://github.com/lemonade-sdk/llamacpp-rocm	lemonade-sdk fresh llama.cpp builds with ROCm 7 per GPU family (gfx1151 among them); release zips pinned in reference.tsv
+inference	https://github.com/lemonade-sdk/lemonade-vscode	Lemonade server as the model behind VS Code Copilot Chat
+inference	https://github.com/lemonade-sdk/lemonade-mobile	community mobile client for a Lemonade server
+agents	https://github.com/lemonade-sdk/peel	local-LLM aid inside PowerShell (Lemonade client)
 multi-box	https://github.com/sgl-project/sglang	
 multi-box	https://github.com/vllm-project/vllm	
 multi-box	https://github.com/wkljohn/ds4-strix-halo-tp-odinlink	DeepSeek V4 Flash tensor parallel on two Strix Halos over OdinLink USB4/TB5 RDMA or Mellanox RoCE v2
