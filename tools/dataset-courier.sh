@@ -35,8 +35,12 @@ while IFS=$'\t' read -r f sz sha <&3; do   # fd 3: ssh/hf/rsync below must not e
     # curl, not hf download: hf hangs forever on a half-closed TLS connection (CLOSE-WAIT, 0 B/s for 45 min twice on shard 4,
     # 2026-10-13) while a plain range GET of the same file ran at 10 MB/s. -C - resumes the .part, --speed-time/-limit abort a stall.
     mkdir -p "$STAGE/$(dirname "$f")"
-    curl -sSL -C - "${H[@]}" --retry 5 --retry-all-errors --retry-delay 10 --speed-time 60 --speed-limit 200000 \
-      -o "$STAGE/$f.part" "https://huggingface.co/datasets/$ID/resolve/main/$f" 2>"$STAGE/.err" </dev/null && mv -f "$STAGE/$f.part" "$STAGE/$f" & hp=$!
+    # -f: an HTTP error body (429/5xx page) must not be saved as the file (Weighted_Graph_2 "fetched" 29 GB in 60 s and failed sha);
+    # the size must match the HF listing before the sha check; a short file is a failed try and the .part is dropped.
+    ( curl -fsSL -C - "${H[@]}" --retry 5 --retry-all-errors --retry-delay 10 --speed-time 60 --speed-limit 200000 \
+        -o "$STAGE/$f.part" "https://huggingface.co/datasets/$ID/resolve/main/$f" 2>"$STAGE/.err" </dev/null \
+      && [ "$(stat -c %s "$STAGE/$f.part")" = "$sz" ] && mv -f "$STAGE/$f.part" "$STAGE/$f" \
+      || { echo "size $(stat -c %s "$STAGE/$f.part" 2>/dev/null || echo 0) != $sz or curl failed" >>"$STAGE/.err"; [ "$(stat -c %s "$STAGE/$f.part" 2>/dev/null || echo 0)" -gt "$sz" ] && rm -f "$STAGE/$f.part"; exit 1; } ) & hp=$!
     last=$(du -sb "$STAGE" | cut -f1); still=0
     while kill -0 $hp 2>/dev/null; do sleep 30; now=$(du -sb "$STAGE" | cut -f1); if [ "$now" = "$last" ]; then still=$((still+30)); else still=0; last=$now; fi
       if [ $still -ge "${STALL_SECS:-600}" ]; then log "STALL $f try $try: no growth for ${still}s at $((now/1000000)) MB; killing hf"; kill $hp 2>/dev/null; sleep 2; kill -9 $hp 2>/dev/null; break; fi; done
