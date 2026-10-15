@@ -150,3 +150,4 @@ cocotb-bus
 pyuvm
 pyrealsense2
 freenect
+capstone

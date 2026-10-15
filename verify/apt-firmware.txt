@@ -1,0 +1,9 @@
+# verify/apt-firmware.txt — bare-metal ARM firmware kit (WiFi microscope GPL326xx rewrite, 2026-10-14); check with verify/apt-coverage.sh verify/apt-firmware.txt
+gcc-arm-none-eabi
+binutils-arm-none-eabi
+libnewlib-arm-none-eabi
+libstdc++-arm-none-eabi-newlib
+gdb-multiarch
+flashrom
+picocom
+binwalk
