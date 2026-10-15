@@ -33,13 +33,13 @@ three repos (2026-10-15, app HEAD of 2026-10-06), and where each item lives in t
 - Dev/test: vitest 4 + jsdom 30 + `@vitest/coverage-v8`, eslint 10. No Playwright/Chrome.
 - Not present and worth knowing: **no Draco, KTX2/Basis or meshopt decoder**. A Draco-compressed GLB will not import; decompress with Blender or `gltf-transform` first.
 
-### Binaries (reference.tsv `url` rows, `fetch/reference.sh` → `$ARK_DATA/reference/<target>/`)
+### Binaries (reference.tsv `binaries` rows, `fetch/reference.sh` → `$ARK_SOFTWARE/binaries/<target>/`)
 | target | item | why |
 |---|---|---|
-| `toolchains/node-v24.22.0-linux-x64` | Node 24 LTS tarball | noble ships nodejs 18; vite 8 / vitest 4 need ≥ 20 |
-| `toolchains/rust-1.99.1-x86_64-unknown-linux-gnu` | Rust stable standalone installer | noble's rustc 1.75 is below Tauri 2's MSRV; `fetch/cargo.sh` needs cargo ≥ 1.85 and looks for `rust-*.tar.*` in **`$ARK_SOFTWARE/binaries/`**: copy or link it there |
-| `3d/blender-5.2.2-linux-x64` | Blender 5.2.2 release tarball (383 MB) | the assets are 5.0 files, noble has 4.0.2; building `blender/blender` needs its precompiled `lib-linux_x64` tree (multi-GB, not mirrored) |
-| `tauri/bundler-tools` | `linuxdeploy-x86_64.AppImage` (tauri-apps build `07333c6`), `AppRun-x86_64`, `linuxdeploy-plugin-appimage-x86_64.AppImage` | **tauri-bundler downloads these during `tauri build`** for the `appimage` target. Pre-seed `~/.cache/tauri/` with them named `linuxdeploy-07333c6-x86_64.AppImage`, `AppRun-x86_64`, `linuxdeploy-plugin-appimage.AppImage`, or build only the `deb` target (`tauri build --bundles deb`), which downloads nothing |
+| `node/` | Node 24 LTS tarball | noble ships nodejs 18; vite 8 / vitest 4 need ≥ 20 |
+| `.` (binaries root) | Rust stable standalone installer | noble's rustc 1.75 is below Tauri 2's MSRV; `fetch/cargo.sh` needs cargo ≥ 1.85 and finds `rust-*.tar.*` here on its own |
+| `blender/` | Blender 5.2.2 release tarball (383 MB) | the assets are 5.0 files, noble has 4.0.2; building `blender/blender` needs its precompiled `lib-linux_x64` tree (multi-GB, not mirrored) |
+| `tauri-tools/` | `linuxdeploy-x86_64.AppImage` (tauri-apps build `07333c6`), `AppRun-x86_64`, `linuxdeploy-plugin-appimage-x86_64.AppImage` | **tauri-bundler downloads these during `tauri build`** for the `appimage` target. Pre-seed `~/.cache/tauri/` with them named `linuxdeploy-07333c6-x86_64.AppImage`, `AppRun-x86_64`, `linuxdeploy-plugin-appimage.AppImage`, or build only the `deb` target (`tauri build --bundles deb`), which downloads nothing |
 
 ### Crates (`fetch/cargo.sh`, `$ARK_SOFTWARE/cargo-home`)
 `src-tauri/Cargo.lock` lists 477 crates (tauri 2.11.2, wry 0.55.1, tao 0.35.3, gtk 0.18.2). Covered by pass 1 of
@@ -68,7 +68,7 @@ tarball dlopens, docker-ce for the compose path.
 
 ## Bring-up on the island
 ```
-export PATH=$ARK_DATA/reference/toolchains/node-v24.22.0-linux-x64/bin:$PATH   # after tar -xf
+export PATH=$ARK_SOFTWARE/binaries/node/node-v24.22.0-linux-x64/bin:$PATH   # after tar -xf
 cd $ARK_SOFTWARE/src/github.com__Mesh2Motion__mesh2motion-app
 npm ci --prefer-offline --no-audit --no-fund       # or reuse the node_modules shipped in the clone
 npm run dev -- --host                               # http://<node>:5173 ; /preview-generator/ and /retarget/ live there too
@@ -80,9 +80,6 @@ CARGO_HOME=<writable copy of cargo-home> cargo tauri build --bundles deb --offli
 ```
 
 ## Gaps left open
-- Rust and Node tarballs land under `$ARK_DATA/reference/toolchains/` because `reference.tsv` has no `binaries/` kind;
-  `fetch/cargo.sh` expects the Rust tarball under `$ARK_SOFTWARE/binaries/`. One `cp` or a `binaries` kind in
-  `fetch/reference.sh` closes it.
 - Only x86-64 tarballs and npm optional deps are listed. Add aarch64 rows if an ARM node ever needs the desktop build.
 - Tauri 2.11's MSRV was not pinned here; Rust stable 1.99.1 clears it with margin, but the row will age like the other
   version-pinned `url` rows. Refresh when `inbox-sync` flags it.
