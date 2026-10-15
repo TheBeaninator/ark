@@ -242,6 +242,9 @@ games	https://github.com/mapeditor/tiled
 games	https://github.com/phaserjs/phaser	
 games	https://github.com/pygame/pygame	
 games	https://github.com/raysan5/raylib	
+games	https://github.com/Mesh2Motion/mesh2motion-app	Mesh2Motion (MIT): browser auto-rigger + animation library, the open Mixamo replacement; import GLB/GLTF/DAE/FBX, pick a skeleton (human, horse, fox, bird, dragon, spider, snake, fish, kaiju), fit it, export bundled animations as GLB/FBX; 170+ CC0 animations ship in the app; TS/Vite, builds and serves offline (npm run dev / docker compose)
+games	https://github.com/Mesh2Motion/mesh2motion-assets	Mesh2Motion Blender sources (CC0, ~385 MB): rigs, animations and sample models behind mesh2motion-app; needed to add or retarget animations on the island
+games	https://github.com/Mesh2Motion/mesh2motion-desktop	Mesh2Motion desktop wrapper: the offline build of the app for machines without a dev toolchain
 genome	https://github.com/Ensembl/ensembl-vep	
 genome	https://github.com/MultiQC/MultiQC	
 genome	https://github.com/OpenGene/fastp	
