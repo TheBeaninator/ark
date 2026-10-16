@@ -724,3 +724,8 @@ model-source	https://github.com/opendatalab/MinerU	MinerU document parsing pipel
 model-source	https://github.com/zai-org/GLM-OCR	GLM-OCR code + tech report
 eval-data	https://github.com/opendatalab/OmniDocBench	OmniDocBench v1.5: the document-parsing benchmark every OCR model above reports on
 model-source	https://github.com/deepseek-ai/DeepSeek-OCR	DeepSeek-OCR v1 code + vLLM recipe
+3d	https://github.com/aframevr/aframe	A-Frame: declarative WebXR/WebGL scenes on three.js (super-three fork); dist/aframe-v*.min.js is self-contained (three bundled, ~330 KB gz) so a scene runs from a microcontroller with no CDN; rickroll-ap's council chambers
+3d	https://github.com/donmccurdy/glTF-Transform	glTF-Transform: CLI + library to optimise glTF (meshopt/draco geometry, texture resize/webp/ktx2, dedup, prune); shrinks baked Blender exports for flash-sized web scenes
+3d	https://github.com/zeux/meshoptimizer	meshoptimizer: mesh simplification/compression; EXT_meshopt_compression decoder (~20 KB js) that three.js/A-Frame load glTF through; gltfpack CLI
+embedded	https://github.com/Links2004/arduinoWebSockets	arduinoWebSockets (Arduino lib 'WebSockets'): WebSocket server/client for ESP32/ESP8266 Arduino cores; WEBSOCKETS_SERVER_CLIENT_MAX must be set as a build flag (array size in a header), not in the sketch
+dev-toolchains	https://github.com/microsoft/playwright	Playwright: drives Chromium/WebKit/Firefox headless for page tests (device emulation, CDP touch, network throttling); its browser builds are downloads, not derivable from the repo
