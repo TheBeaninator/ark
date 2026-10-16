@@ -166,6 +166,35 @@ comfyui	https://github.com/yolain/ComfyUI-Easy-Use
 conversion	https://github.com/efzero/diffusioncontroller	
 conversion	https://github.com/p-e-w/heretic	
 conversion	https://github.com/vllm-project/llm-compressor	
+creative-apps	https://github.com/storytold/artcraft	ArtCraft: the ArtCraft org's (storytold) 'intentional crafting engine' for artists, designers and filmmakers; pure Rust; Apache-2.0; 1.3 GB repo (assets in tree); hub of the Craft apps below; dad 2026-10-16
+creative-apps	https://github.com/storytold/photocraft	PhotoCraft: open-source photo editor from scratch in pure Rust (ArtCraft Craft app, Apache-2.0); needs craft-libs and the storytold winprint.rs fork at pinned revs (git deps, in cargo-home)
+creative-apps	https://github.com/storytold/lightcraft	LightCraft: non-destructive photo editor (Lightroom-style) in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/filmcraft	FilmCraft: nonlinear video editor in pure Rust (ArtCraft, Apache-2.0); git dep craft-libs
+creative-apps	https://github.com/storytold/effectcraft	EffectCraft: motion graphics and compositing (After Effects-style) in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/vectorcraft	VectorCraft: vector art tool (Illustrator-style) in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/designcraft	DesignCraft: page and layout design editor (InDesign-style) in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/figcraft	FigCraft: interface design and prototyping, clean-room Figma-style collaborative design in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/deckcraft	DeckCraft: presentations and slide shows, clean-room PowerPoint reimplementation in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/wordcraft	WordCraft: clean-room Microsoft Word reimplementation in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/gridcraft	GridCraft: clean-room Excel-style spreadsheet in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/pdfcraft	PdfCraft: PDF reader and editor in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/cadcraft	CADCraft: clean-room AutoCAD-style 2D CAD and drafting in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/soundcraft	SoundCraft: clean-room Avid Pro Tools reimplementation (DAW) in pure Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/AniCraft	AniCraft: 2D animation editor in pure Rust (ArtCraft; new 2026-10, no licence file yet)
+creative-apps	https://github.com/storytold/craft-libs	craft-libs: shared Rust libraries for the Craft apps (Apache-2.0); the apps pin it as a git dependency by rev, so the matching revs live in cargo-home/git
+creative-apps	https://github.com/storytold/craft-fonts	craft-fonts: fonts bundled by the Craft apps (36 MB, Apache-2.0)
+creative-apps	https://github.com/storytold/craft-launcher	craft-launcher: the Craft App Launcher (installs/updates the apps) in Rust (ArtCraft, Apache-2.0)
+creative-apps	https://github.com/storytold/craft-launcher-assets	craft-launcher-assets: screenshots the launcher downloads at run time (details pages); mirrored so the launcher works offline
+creative-apps	https://github.com/storytold/artcraft-services	artcraft-services: ArtCraft backend and web frontend (Rust; 1.3 GB; no licence file, NOASSERTION: source access only, check before reuse)
+creative-apps	https://github.com/storytold/artcraftx	ArtCraft-X (Rust, 37 MB, no licence file)
+creative-apps	https://github.com/storytold/crafthub	crafthub: ArtCraft hub repo (new 2026-10-16, near-empty; tracked as it fills)
+creative-apps	https://github.com/storytold/craft-contrib	craft-contrib: ArtCraft contributor material (new 2026-10-15)
+creative-apps	https://github.com/storytold/craft-common-actions	craft-common-actions: shared GitHub Actions (Python) the Craft apps build with; source of their Linux build-dependency list
+creative-apps	https://github.com/storytold/craft-repo-status-app	craft-repo-status-app: PR/build status board for the Craft repos (Rust)
+creative-apps	https://github.com/storytold/indd-utils	indd-utils: read Adobe INDD files without InDesign and convert to IDML (Rust, Apache-2.0); DesignCraft import path
+creative-apps	https://github.com/storytold/photocraft-corpus	photocraft-corpus: test images and data for PhotoCraft (Apache-2.0)
+creative-apps	https://github.com/storytold/winprint.rs	storytold fork of winprint.rs (BSD-3-Clause): pinned git dependency of craft-libs and photocraft
+creative-apps	https://github.com/storytold/winit	storytold fork of winit (Apache-2.0, master): the window layer the Craft apps patch; kept for their fork-specific fixes
 decision-models	https://github.com/Mapika/decider	
 decision-models	https://github.com/Mushroom-Systems/lichen	
 decision-models	https://github.com/TheoLeeCJ/SemIf-OpenJev	
@@ -688,3 +717,10 @@ embedded	https://github.com/lionyhw/JHDH-8412_1247	JoyHonest GPCV1248 camera boa
 embedded	https://github.com/wythe-lin/ZTKVR	Generalplus GPL326xx (GP6813) car-DVR SDK: driver_l1/l2, gplib incl. AviPackerV3, project + tool dirs; second reference copy of the GP326 platform for the WiFi microscope firmware
 reverse-engineering	https://github.com/czietz/wifimicroscope	JHCMD UDP protocol proof of concept for the JoyHonest/Generalplus WiFi microscope (first public write-up of the protocol)
 reverse-engineering	https://github.com/gregsadetsky/wifi-endoscope-hd-1200p	JHCMD protocol + vendor APK findings for the sibling JoyHonest WiFi Check endoscope (GP4225); dump + OpenCV viewer scripts
+model-source	https://github.com/Ucas-HaoranWei/GOT-OCR2.0	GOT-OCR2.0 code
+model-source	https://github.com/allenai/olmocr	olmOCR pipeline + olmOCR-bench
+model-source	https://github.com/rednote-hilab/dots.ocr	dots.ocr code
+model-source	https://github.com/opendatalab/MinerU	MinerU document parsing pipeline
+model-source	https://github.com/zai-org/GLM-OCR	GLM-OCR code + tech report
+eval-data	https://github.com/opendatalab/OmniDocBench	OmniDocBench v1.5: the document-parsing benchmark every OCR model above reports on
+model-source	https://github.com/deepseek-ai/DeepSeek-OCR	DeepSeek-OCR v1 code + vLLM recipe
