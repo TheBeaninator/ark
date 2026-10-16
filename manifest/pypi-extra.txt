@@ -150,4 +150,6 @@ cocotb-bus
 pyuvm
 pyrealsense2
 freenect
+flash-linear-attention[rocm]
+einops
 capstone
