@@ -45,3 +45,4 @@ https://download.pytorch.org/whl/xpu/intel-openmp/	license-agreement	wheel LICEN
 https://download.pytorch.org/whl/xpu/onemkl-license/	license-agreement	wheel LICENSE.txt: Intel EULA for Developer Tools, "By downloading, installing, copying or using the Materials, You agree to be bound"
 https://github.com/shawnshekari/strixite	track	dad 2026-10-13: strixite moves fast (v0.2.x); keep the island current
 https://github.com/shawnshekari/navi-tts	track	same author/cadence as strixite
+https://github.com/warpfront/hipfire	track	weekly Tuesday releases; strixite reference engine (claude-laptop 2026-10-16, dad: "should at least add it to the ark")
