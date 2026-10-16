@@ -124,3 +124,24 @@ binaries	https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-x64.tar.xz	node	No
 binaries	https://github.com/tauri-apps/binary-releases/releases/download/linuxdeploy-07333c6/linuxdeploy-x86_64.AppImage	tauri-tools	tauri-bundler downloads this at `tauri build` time for the appimage target (crates/tauri-bundler/src/bundle/linux/appimage/linuxdeploy.rs, commit hash 07333c6 hard-coded); offline: drop it in ~/.cache/tauri/ as linuxdeploy-07333c6-x86_64.AppImage
 binaries	https://github.com/tauri-apps/binary-releases/releases/download/apprun-old/AppRun-x86_64	tauri-tools	tauri-bundler downloads this at build time for the appimage target; offline: ~/.cache/tauri/AppRun-x86_64
 binaries	https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage	tauri-tools	optional: tauri-bundler tries this at build time and falls back to linuxdeploy's built-in plugin if the download fails; offline: ~/.cache/tauri/linuxdeploy-plugin-appimage.AppImage
+url	https://arxiv.org/pdf/2510.18234	papers/optical-memory	DeepSeek-OCR: Contexts Optical Compression (arXiv 2510.18234)
+url	https://arxiv.org/pdf/2601.20552	papers/optical-memory	DeepSeek-OCR 2: Visual Causal Flow (arXiv 2601.20552)
+url	https://arxiv.org/pdf/2606.23050	papers/optical-memory	Unlimited OCR Works (Baidu, R-SWA constant KV, dozens of pages per 32K pass) (arXiv 2606.23050)
+url	https://arxiv.org/pdf/2510.17800	papers/optical-memory	Glyph: scaling context windows via visual-text compression (THU CoAI + Zhipu) (arXiv 2510.17800)
+url	https://arxiv.org/pdf/2510.18279	papers/optical-memory	Text or Pixels? It Takes Half: token efficiency of visual text inputs in multimodal LLMs (arXiv 2510.18279)
+url	https://arxiv.org/pdf/2502.00791	papers/optical-memory	Vision-centric token compression in large language models (arXiv 2502.00791)
+url	https://arxiv.org/pdf/2412.04467	papers/optical-memory	VisionZip: longer is better but not necessary in VLMs (visual token pruning) (arXiv 2412.04467)
+url	https://arxiv.org/pdf/2409.01704	papers/optical-memory	GOT-OCR2.0: general OCR theory (arXiv 2409.01704)
+url	https://arxiv.org/pdf/2502.18443	papers/optical-memory	olmOCR: unlocking trillions of tokens in PDFs with VLMs (arXiv 2502.18443)
+url	https://arxiv.org/pdf/2509.22186	papers/optical-memory	MinerU2.5: decoupled two-stage document parsing (arXiv 2509.22186)
+url	https://arxiv.org/pdf/2510.14528	papers/optical-memory	PaddleOCR-VL: 0.9B ultra-compact VLM for document parsing (arXiv 2510.14528)
+url	https://arxiv.org/pdf/2308.13418	papers/optical-memory	Nougat: neural optical understanding for academic documents (arXiv 2308.13418)
+url	https://arxiv.org/pdf/2111.15664	papers/optical-memory	Donut: OCR-free document understanding transformer (arXiv 2111.15664)
+url	https://arxiv.org/pdf/2210.03347	papers/optical-memory	Pix2Struct: screenshot parsing as pretraining for visual language understanding (arXiv 2210.03347)
+url	https://arxiv.org/pdf/2309.11419	papers/optical-memory	Kosmos-2.5: a multimodal literate model (arXiv 2309.11419)
+url	https://arxiv.org/pdf/2109.10282	papers/optical-memory	TrOCR: transformer-based OCR with pretrained models (arXiv 2109.10282)
+url	https://arxiv.org/pdf/2311.06242	papers/optical-memory	Florence-2: a unified representation for vision tasks (arXiv 2311.06242)
+url	https://arxiv.org/pdf/2204.08387	papers/optical-memory	LayoutLMv3: pre-training for document AI with unified text and image masking (arXiv 2204.08387)
+url	https://arxiv.org/pdf/2502.13923	papers/optical-memory	Qwen2.5-VL technical report (dynamic resolution, mRoPE, document parsing) (arXiv 2502.13923)
+url	https://arxiv.org/pdf/2502.14786	papers/optical-memory	SigLIP 2: multilingual vision-language encoders (arXiv 2502.14786)
+binaries	https://github.com/goreleaser/nfpm/releases/download/v2.48.0/nfpm_2.48.0_Linux_x86_64.tar.gz	nfpm	nfpm 2.48.0 Linux x86_64 (6.9 MB): the .deb/.rpm packager the ArtCraft Craft suite release pipeline uses (craft-common-actions install-nfpm); build deps list in verify/apt-artcraft.txt

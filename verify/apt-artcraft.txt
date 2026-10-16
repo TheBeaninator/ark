@@ -1,0 +1,24 @@
+# verify/apt-artcraft.txt — debs the ArtCraft Craft suite (creative-apps rows, storytold/*) needs from the apt mirror to build and package on Linux;
+# source: storytold/craft-common-actions actions/install-linux-deps/action.yml + release.yml (2026-10-16). Check with verify/apt-coverage.sh verify/apt-artcraft.txt
+# --- build (winit/wgpu windowing, GL, ALSA audio)
+libxkbcommon-dev
+libwayland-dev
+libx11-dev
+libxrandr-dev
+libxi-dev
+libgl1-mesa-dev
+libasound2-dev
+pkg-config
+# --- packaging (nfpm .deb/.rpm, AppImage/desktop metadata)
+desktop-file-utils
+appstream
+python3-yaml
+zsync
+patchelf
+librsvg2-common
+# --- runtime on the island (Vulkan via wgpu)
+libvulkan1
+mesa-vulkan-drivers
+libxkbcommon0
+libwayland-client0
+libasound2t64
