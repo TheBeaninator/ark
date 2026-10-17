@@ -1,0 +1,7 @@
+# verify/apt-rickroll.txt — rickroll-ap build kit (pack/encode/beatmap/test server, 2026-10-16); check with verify/apt-coverage.sh verify/apt-rickroll.txt
+python3-brotli
+python3-numpy
+python3-websockets
+python3-serial
+ffmpeg
+openssl
