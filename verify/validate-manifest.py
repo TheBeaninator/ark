@@ -48,7 +48,8 @@ for i,r in rows('datasets.tsv'):
     if not re.match(r'^[\w.-]+/[\w.-]+$',r['hf_id']): bad.append(f'datasets.tsv:{i}: hf_id must be org/name')
     checks.append(('hf-dataset',i,r['hf_id']))
 for i,r in rows('reference.tsv'):
-    if r['kind'] not in ('zim','zim-set','url','binaries','iso','findlinks','whence'): bad.append(f'reference.tsv:{i}: kind must be zim|zim-set|url|binaries|iso|findlinks|whence')
+    if r['kind'] not in ('zim','zim-set','url','binaries','iso','findlinks','whence','mpi'): bad.append(f'reference.tsv:{i}: kind must be zim|zim-set|url|binaries|iso|findlinks|whence|mpi')
+    if r['kind'] == 'mpi' and not re.search(r'\.is\.tue\.mpg\.de/.*domain=[\w-]+.*sfile=', r['source']): bad.append(f'reference.tsv:{i}: mpi source must be an is.tue.mpg.de download URL with domain= and sfile=')
     if not r['source'].startswith('https://'): bad.append(f'reference.tsv:{i}: source must be https')
     if r['kind'] in ('url','binaries') and '{REL}' not in r['source']: checks.append(('url',i,r['source']))
     if r['kind'] in ('zim','zim-set','iso','findlinks','whence'): checks.append(('url',i,r['source']))

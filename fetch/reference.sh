@@ -15,4 +15,11 @@ REL=$(curl $UA https://ftp.ensembl.org/pub/ | grep -oE "release-[0-9]+" | sort -
     $ARK_PIP download -q --no-deps --only-binary :all: --python-version "$ARK_PY" "${pl[@]}" --platform linux_x86_64 -f "$src" -d "$d" "$pat" >/dev/null 2>&1 && echo "OK $pat" || echo "FAIL $pat ($src)";;
   whence) d="$ARK_SOFTWARE/binaries/$pat"; t=$(mktemp -d); mkdir -p "$d"; curl $UA -o "$t/WHENCE" "$src" && curl $UA -o "$t/sync.py" "${src%/*}/sync_from_whence.py" \
     && python3 "$t/sync.py" firmware --whence "$t/WHENCE" --out "$d/amdnpu" --commit-file "$d/.whence_commit" >/dev/null 2>&1 && cp "$t/WHENCE" "$d/" && echo "OK $pat ($(tail -1 "$d/.whence_commit"))" || echo "FAIL $pat"; rm -rf "$t";;
+  mpi) # MPI-IS login-gated download (smpl-x, amass, ...): session from tools/mpi-session-from-har.py in $ARK_MPI_AUTH/<domain>.{cookie,referer}
+    dom=$(echo "$src" | grep -oE "domain=[a-z0-9_-]+" | cut -d= -f2); sf=$(echo "$src" | grep -oE "sfile=[^&]+" | cut -d= -f2-)
+    au="${ARK_MPI_AUTH:-$HOME/.config/ark/mpi}"; d="$ARK_DATA/reference/$pat"; f="$d/${sf##*/}"; mkdir -p "$d"
+    [ -s "$f" ] && ! file -b --mime-type "$f" | grep -q html && { echo "have ${sf##*/}"; continue; }
+    [ -r "$au/$dom.cookie" ] || { echo "NOAUTH $dom ${sf##*/} (log in, save a HAR of download.php, run tools/mpi-session-from-har.py)"; continue; }
+    curl -sfL -C - -A Mozilla/5.0 -H "Cookie: $(cat "$au/$dom.cookie")" -e "$(cat "$au/$dom.referer")" -o "$f" "$src" || true
+    file -b --mime-type "$f" 2>/dev/null | grep -q html && { rm -f "$f"; echo "FAIL-AUTH $dom ${sf##*/} (session expired: re-export the HAR)"; } || { [ -s "$f" ] && echo "OK ${sf##*/}" || echo "FAIL ${sf##*/}"; };;
 esac; done
