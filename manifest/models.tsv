@@ -190,3 +190,4 @@ facebook/nougat-base	raw		Nougat (arXiv 2308.13418): academic PDF to markup, Swi
 microsoft/Florence-2-large	raw		Florence-2 large (arXiv 2311.06242): OCR + region tasks; small fast baseline	
 microsoft/trocr-large-printed	raw		TrOCR large printed (arXiv 2109.10282): line-level transformer OCR baseline	
 tencent/Hy-Memory-30B-A3B-GGUF	gguf	Hy-Memory-Step250-Q8_0.gguf README.md	Hy-Memory-30B-A3B long-term-memory WRITER (Tencent, Apache-2.0, 3B active, Q8_0 32 GB): trained write path for Mem0/MemOS/Hy-Memory; dad 2026-10-20, card OMF-HYMEM 256df429c8	
+hazyresearch/ncm-checkpoints	raw		NCM per-task .pt checkpoints (MIT, small); parked 2026-10-20	
