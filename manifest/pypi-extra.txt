@@ -153,3 +153,4 @@ freenect
 flash-linear-attention[rocm]
 einops
 capstone
+hy-memory
