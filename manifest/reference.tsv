@@ -145,3 +145,4 @@ url	https://arxiv.org/pdf/2204.08387	papers/optical-memory	LayoutLMv3: pre-train
 url	https://arxiv.org/pdf/2502.13923	papers/optical-memory	Qwen2.5-VL technical report (dynamic resolution, mRoPE, document parsing) (arXiv 2502.13923)
 url	https://arxiv.org/pdf/2502.14786	papers/optical-memory	SigLIP 2: multilingual vision-language encoders (arXiv 2502.14786)
 binaries	https://github.com/goreleaser/nfpm/releases/download/v2.48.0/nfpm_2.48.0_Linux_x86_64.tar.gz	nfpm	nfpm 2.48.0 Linux x86_64 (6.9 MB): the .deb/.rpm packager the ArtCraft Craft suite release pipeline uses (craft-common-actions install-nfpm); build deps list in verify/apt-artcraft.txt
+url	https://arxiv.org/pdf/2610.14224	papers	Harness2: Recursive Agent Harnessing for an Open World (Google Research); companion to repos github.com/google-research/harness2
