@@ -30,7 +30,6 @@ Comfy-Org/Qwen-Image-2.1	license-agreement	Qwen Research License Agreement (non-
 Viggle/Qwen-Image-2.1-viggle-turbo	license-agreement	Qwen Research License Agreement (derivative of Qwen-Image-2.1)
 Kijai/HunyuanVideo_comfy	license-agreement	Tencent Hunyuan Community License Agreement (excludes EU, UK, South Korea)
 tencent/Hunyuan3D-2.1	license-agreement	Tencent Hunyuan Community License Agreement (excludes EU, UK, South Korea)
-unsloth/MiniMax-M3-GGUF	license-agreement	MiniMax Community License (non-commercial; "you agree" prohibited-use appendix)
 OnomaAIResearch/Illustrious-xl-early-release-v0	license-agreement	Fair AI Public License 1.0-SD ("by using this model, users agree")
 ghcr.io/peonist-ai/halogen-flash-server:0.16.0	license-agreement	closed-binary engine under its own EULA
 https://pypi.amd.com/ryzenai_llm/1.8.0/linux/simple/onnxruntime-vitisai/	license-agreement	wheel LICENSE.txt: "By using this wheel file, you agree to" the AMD EULA (metadata says MIT)
@@ -62,3 +61,11 @@ https://github.com/storytold/cadcraft	track	ArtCraft Craft suite, daily pushes
 https://github.com/storytold/soundcraft	track	ArtCraft Craft suite, daily pushes
 https://github.com/storytold/craft-libs	track	ArtCraft Craft suite, daily pushes
 https://github.com/storytold/craft-launcher	track	ArtCraft Craft suite, daily pushes
+briaai/Fibo-2.0-dev	license-agreement	gated on Hugging Face (accept Bria terms to download); CC-BY-NC-4.0
+briaai/Fibo-2.0-edit-turbo	license-agreement	gated on Hugging Face (accept Bria terms to download); CC-BY-NC-4.0
+Comfy-Org/Fibo-2.0	license-agreement	ungated repack of the gated Bria Fibo 2.0 weights
+hi3d-official/Hi3Dv1.0	license-agreement	Hi3D Open License Agreement 1.0 (commercial use must display "Powered by Hi3D 1.0", scale thresholds need a separate licence)
+MiniMaxAI/MiniMax-M3.1-Flash	license-agreement	MiniMax Community License (non-commercial; "you agree" prohibited-use appendix)
+unsloth/MiniMax-M3.1-Flash-GGUF	license-agreement	MiniMax Community License (non-commercial; "you agree" prohibited-use appendix)
+FastVideo/FastVideo-FastH3-Omni-8-Step-V1	license-agreement	derivative of MiniMax H3 (MiniMax model licence terms)
+FastVideo/FastH3-Omni-FP8-Comfy	license-agreement	derivative of MiniMax H3 (MiniMax model licence terms)

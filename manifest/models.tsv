@@ -114,7 +114,6 @@ stepfun-ai/Step-Audio-2-mini	hf-asset		voice stack
 tianweiy/DMD2	hf-asset	dmd2_sdxl_4step_unet_fp16.bin dmd2_sdxl_1step_unet_fp16.bin dmd2_sdxl_4step_lora_fp16.safetensors model/sdv1.5/laion6.25_sd_baseline_8node_guidance1.75_lr5e-7_seed10_dfake10_diffusion1000_gan1e-3_resume_fid8.35_checkpoint_model_041000/pytorch_model.bin	DMD2 distilled SDXL (4/1-step UNet, 4-step LoRA) + SD1.5 1-step generator checkpoint (no SD1.5 4-step exists upstream); ImageBoop/Pareidolia fast renders
 unsloth/GLM-5.3-GGUF	gguf	UD-Q4_K_XL/*	
 unsloth/Kimi-K2.7-Code-GGUF	gguf	UD-Q3_K_XL mmproj-BF16.gguf	
-unsloth/MiniMax-M3-GGUF	gguf	UD-Q4_K_XL/*	
 unsloth/Mistral-Medium-3.5-128B-GGUF	gguf	UD-Q4_K_XL/*	
 unsloth/Muse-Glimmer-30B-GGUF	gguf	Muse-Glimmer-30B-Q8_0.gguf dflash-kquant.gguf mmproj-Muse-Glimmer-30B-Q8_0.gguf	
 unsloth/NVIDIA-Nemotron-3-Ultra-550B-A55B-GGUF	gguf	UD-Q4_K_XL/*	
@@ -191,3 +190,27 @@ microsoft/Florence-2-large	raw		Florence-2 large (arXiv 2311.06242): OCR + regio
 microsoft/trocr-large-printed	raw		TrOCR large printed (arXiv 2109.10282): line-level transformer OCR baseline	
 tencent/Hy-Memory-30B-A3B-GGUF	gguf	Hy-Memory-Step250-Q8_0.gguf README.md	Hy-Memory-30B-A3B long-term-memory WRITER (Tencent, Apache-2.0, 3B active, Q8_0 32 GB): trained write path for Mem0/MemOS/Hy-Memory; dad 2026-10-20, card OMF-HYMEM 256df429c8	
 hazyresearch/ncm-checkpoints	raw		NCM per-task .pt checkpoints (MIT, small); parked 2026-10-20	
+tencent/WeVisOne-VL-4B	raw		WeVisOne-VL 4B (Apache-2.0, 19 GB): detection/referring/counting/OCR/segmentation/matting VLM, includes mask_decoder.pt; code Tencent/WeVisOne-VL; strixite-vision candidate; dad 2026-10-24
+tencent/WeVisOne-VL-2B	raw		WeVisOne-VL 2B (Apache-2.0, 10 GB): small sibling of the 4B; dad 2026-10-24
+ConwayResearch/Underdog-Bark-3.0-Pro	raw		Underdog Bark 3.0 Pro (CC-BY-4.0, 2.5 GB): English ASR fine-tune of nvidia/parakeet-tdt-0.6b-v3, 4.29% avg WER (vendor), full precision safetensors + CoreML/MLX bundles; the model behind underdog.ai dictation; dad 2026-10-24
+ConwayResearch/Underdog-Bark-3.0-Clean	raw		Underdog Bark 3.0 Clean (CC-BY-4.0, 0.2 GB): dictation variant that drops fillers (um/uh); .bark format + MLX tokenizer; dad 2026-10-24
+briaai/Fibo-2.0-dev	raw		Fibo 2.0 Dev (Bria, 8B flow-matching, 25 GB): generate + edit in one weight set, 50 steps CFG 5; gated (accept Bria terms), CC-BY-NC-4.0 per Comfy repack; AA image-editing arena #1 open-weights (vendor); dad 2026-10-24
+briaai/Fibo-2.0-edit-turbo	raw		Fibo 2.0 Edit Turbo (Bria, 25 GB): distilled editing-only, 4 steps guidance 1.0; gated; dad 2026-10-24
+Comfy-Org/Fibo-2.0	comfy	diffusion_models/fibo2_dev_int8_convrot.safetensors diffusion_models/fibo2_edit_turbo_int8_convrot.safetensors loras/fibo_2.0_turbo_lora_avg_rank_270_bf16.safetensors text_encoders/qwen3vl_4b_int8_convrot.safetensors vae/flux2-vae.safetensors	Fibo 2.0 ComfyUI repack (INT8 ConvRot dev + edit-turbo, turbo LoRA, Qwen3-VL-4B text encoder, FLUX.2 VAE); native support in ComfyUI core since 2026-10-21 (TextEncodeFibo2 node); dad 2026-10-24
+HuggingFaceBio/Carbon-X	raw		Carbon-X (Hugging Face Bio, Apache-2.0, 14.8B, 30 GB): Qwen3-14B fine-tune that reads and writes DNA via a hybrid tokenizer (text BPE + 5,515 6-bp DNA tokens); variant-effect Q&A, ships a carbon-dna agent skill; not clinically validated; pairs with the GRCh38 reference data; dad 2026-10-24
+HuggingFaceBio/Carbon-X-GGUF	gguf	carbon-x-q8_0.gguf	Carbon-X Q8_0 (16 GB) for llama.cpp; the model card and GGUF repo disagree on llama.cpp support, verify the DNA tokenizer round-trips before trusting outputs; dad 2026-10-24
+tencent/Hy-Nomas	raw		Hy-Nomas interactive world model (Tencent, Apache-2.0, 196 GB): base_ar + distilled + distilled_int8 DiT, PE prompt-enhancer (18 shards), cinematic and dual-arm-robotics LoRAs; single-24GB-GPU path uses distilled_int8; code Tencent-Hunyuan/Hy-Nomas; dad 2026-10-24
+tencent/Hy-Nomas-Diffusers	raw		Hy-Nomas Diffusers layout (45 GB): decoder + text encoder for the diffusers pipeline; dad 2026-10-24
+hi3d-official/Hi3Dv1.0	raw		Hi3D v1.0 weights (7.7 GB): sparc3d, transformer_512, transformer_1024, VAE, scheduler; image-to-3D to 1536^3; Hi3D Open License Agreement 1.0; paper arXiv 2505.14521 (Sparc3D); dad 2026-10-24
+cyun9286/PURE	raw		PURE post-trained feed-forward 3D reconstruction weights (ACM MM 2026); code IGL-HKUST/PURE; dad 2026-10-24
+inclusionAI/Ming-3.0-tts-0.5B	raw		Ming-3.0 TTS 0.5B (MIT, 3 GB): dense Qwen2.5-0.5B + DiT head, long-form narration/podcast, voice cloning, includes campplus.onnx speaker encoder + TDS2026 report PDF; voice stack candidate; dad 2026-10-24
+inclusionAI/Ming-3.0-tts-tiny	raw		Ming-3.0 TTS tiny (MIT, 18 GB): bailing-moe-v3 based variant with CFM/DiT vocoder code in-repo; needs its own env; vLLM-Omni support PR exists; dad 2026-10-24
+InternScience/Sage-A1.5	raw		Sage-A1.5 (Apache-2.0, 35B-A3B, 72 GB): agentic MoE with built-in MTP layer, orchestration + verification protocol; code Alpha-Innovator/Sage-A1.5; paper arXiv 2610.28578; dad 2026-10-24
+InternScience/Sage-A1.5-Q8_0-GGUF	gguf	Sage-A1.5-Q8_0.gguf Sage-A1.5-mmproj.gguf	Sage-A1.5 Q8_0 (39 GB) + vision mmproj, official GGUF; fits a 128 GB Strix Halo node; dad 2026-10-24
+MiniMaxAI/MiniMax-M3.1-Flash	raw		MiniMax M3.1 Flash (428B-A23B, 252 GB, text+image+video in, 1M ctx): M3 architecture with sparse attention in the first 3 layers, QAT experts, DSpark speculative decoding (dspark/ sidecar); MiniMax Community License; replaces M3 line; dad 2026-10-24
+unsloth/MiniMax-M3.1-Flash-GGUF	gguf	UD-Q4_K_XL/*	MiniMax M3.1 Flash UD-Q4_K_XL for llama.cpp; supersedes unsloth/MiniMax-M3-GGUF (removed 2026-10-24)
+MemTensor/MemT-1.0-Nano	raw		MemT-1.0 Nano (Apache-2.0, 36B-A3B on Qwen3.6-35B-A3B, 70 GB): memory-native LLM (Gated DeltaNet-2 memory + Mixture-of-Storage, memt_block.safetensors), 66x less persistent storage than KV at 128K (vendor); trust_remote_code, transformers 5.12; OMF candidate; paper arXiv 2610.26825; dad 2026-10-24
+MemTensor/MemT-1.0-Flash	raw		MemT-1.0 Flash (MIT, 288B-A17B on DeepSeek-V4-Flash, 576 GB): large sibling; vLLM/SGLang serve commands given but native memory features only shown via Transformers; fetch last; dad 2026-10-24
+inclusionAI/Ling-3.0-flash-Sante	raw		Ling 3.0 Flash Sante (inclusionAI, MIT, 124B-A5.1B, 255 GB, 262K ctx): healthcare/medical-reasoning fine-tune of Ling-3.0-flash (base not mirrored), bailing-moe-v3 arch; research model not a medical device; dad 2026-10-24
+FastVideo/FastVideo-FastH3-Omni-8-Step-V1	raw		FastH3 Omni (Hao AI Lab FastVideo, 70 GB): 8-step reference-conditioned MiniMax H3 - up to 9 images, 3 videos, 3 audio refs, 24 fps 5/10/15 s with 32 kHz stereo audio; transformer_ref weights, run via hao-ai-lab/FastVideo; MiniMax H3 licence terms apply; dad 2026-10-24
+FastVideo/FastH3-Omni-FP8-Comfy	comfy	fasth3_omniref_fp8_comfy.safetensors	FastH3 Omni FP8 single-file for ComfyUI (23 GB); reuses the Comfy-Org/MiniMax-H3 text encoder and VAE; dad 2026-10-24

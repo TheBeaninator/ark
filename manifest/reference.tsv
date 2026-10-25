@@ -148,3 +148,9 @@ binaries	https://github.com/goreleaser/nfpm/releases/download/v2.48.0/nfpm_2.48.
 url	https://arxiv.org/pdf/2610.14224	papers	Harness2: Recursive Agent Harnessing for an Open World (Google Research); companion to repos github.com/google-research/harness2
 url	https://arxiv.org/pdf/2610.22196	papers	Hy-Memory-30B-A3B technical report (memory on-policy distillation + attributed memory RL); card OMF-HYMEM 256df429c8
 url	https://arxiv.org/pdf/2610.14162	papers	Next-Concept Modeling (NCM), Hazy Research 2026-10-09; parked, see spike 2026-10-20
+url	https://arxiv.org/pdf/2610.31329	papers	WeVisOne-VL: Unified Visual Perception from Objects to Pixels (Tencent WeChat Vision)
+url	https://arxiv.org/pdf/2610.14698	papers	PURE: Refining Feed-forward 3D Reconstruction with Unlabeled Post-training (ACM MM 2026)
+url	https://arxiv.org/pdf/2610.28578	papers	Sage-A1.5: From Long-Horizon Execution to Scientific Exploration with Capability Composition (Shanghai AI Lab)
+url	https://arxiv.org/pdf/2610.26825	papers	MemT-1.0: Towards Memory-Native Evolution (MemTensor); OMF literature
+url	https://arxiv.org/pdf/2505.14521	papers	Sparc3D: sparse representation + high-res geometry for image-to-3D (basis of Hi3D v1.0)
+url	https://arxiv.org/pdf/2606.13392	papers	MiniMax M3 / M3.1 Flash technical report
