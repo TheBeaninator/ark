@@ -183,7 +183,8 @@ def scan(drives, inbox, W, deep):
                 for r in ls(os.path.join(root, 'src')):
                     if r.count('__') >= 2: idx['repos'].setdefault(r, os.path.join(root, 'src', r))
             if here in ('models', 'llm') and root.count('/') <= base + 1:
-                for m in ds: idx['models'].setdefault(m, os.path.join(root, m))
+                for m in ds:
+                    if any(True for _ in os.scandir(os.path.join(root, m))): idx['models'].setdefault(m, os.path.join(root, m))   # empty landing-bind dirs are not models
             if parent in ('hf-assets', 'hf'):
                 for r in ds: idx['hf'].setdefault(here + '/' + r, os.path.join(root, r))
             if parent == 'binaries': idx['binaries'].setdefault(here, root)
