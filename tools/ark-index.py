@@ -103,12 +103,43 @@ def build_view(drives, inbox, view):
     tmp = view + '.new'
     if os.path.lexists(tmp): os.unlink(tmp)
     os.symlink(new, tmp); os.replace(tmp, view)
+    publish_stable(root, new)   # the island's NFS clients mount .ark-views/stable (card 71d498e061): same tree, inode never replaced
     views = sorted(d for d in ls(root) if re.fullmatch(r'\d{8}T\d{6}', d) and os.path.isdir(os.path.join(root, d)) and not os.path.islink(os.path.join(root, d)))
     for old in views[:-2]: shutil.rmtree(os.path.join(root, old), ignore_errors=True)   # keep the live tree and one before it; ONLY timestamp dirs: .ark-views also holds the island's `stable` dir and `current` link, and pruning by raw sort order deleted the just-built view (/data/ark dangled 2026-10-26 00:08-02:15Z)
     with open(os.path.join(inbox, 'ARK-CONFLICTS.tsv'), 'w') as f:
         f.write('view_path\tused\tshadowed\n')
         for c in conflicts: f.write('\t'.join(c) + '\n')
     return n[0], len(conflicts)
+
+def publish_stable(root, new):
+    """Mirror the just-built view into <root>/stable IN PLACE and re-point <root>/current at it (card 71d498e061).
+    Workers mount .ark-views/stable over NFS: a replaced directory inode would hand them ESTALE, so the dir itself is
+    never recreated; entries are compared by name and target, unchanged symlinks are left alone, changed ones are
+    swapped atomically (symlink to a temp name + rename), and names gone from the view are removed."""
+    stable = os.path.join(root, 'stable'); os.makedirs(stable, exist_ok=True)
+    def sync(src, dst):
+        want = {k: os.path.join(src, k) for k in ls(src)}
+        have = set(ls(dst))
+        for k in have - set(want):
+            p = os.path.join(dst, k)
+            if os.path.islink(p) or not os.path.isdir(p): os.unlink(p)
+            else: shutil.rmtree(p, ignore_errors=True)
+        for k, sp in want.items():
+            dp = os.path.join(dst, k)
+            if os.path.islink(sp):
+                tgt = os.readlink(sp)
+                if os.path.islink(dp) and os.readlink(dp) == tgt: continue
+                if os.path.lexists(dp) and os.path.isdir(dp) and not os.path.islink(dp): shutil.rmtree(dp, ignore_errors=True)
+                t = dp + '.new'
+                if os.path.lexists(t): os.unlink(t)
+                os.symlink(tgt, t); os.replace(t, dp)
+            elif os.path.isdir(sp):
+                if os.path.islink(dp): os.unlink(dp)
+                os.makedirs(dp, exist_ok=True); sync(sp, dp)
+    sync(new, stable)
+    cur = os.path.join(root, 'current'); t = cur + '.new'
+    if os.path.lexists(t): os.unlink(t)
+    os.symlink(os.path.basename(new), t); os.replace(t, cur)
 
 HDD_CACHE_S = 86400   # a spinning disk is walked file-by-file at most once a day; its file list is cached in the inbox
 
