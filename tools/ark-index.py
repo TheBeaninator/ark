@@ -103,7 +103,8 @@ def build_view(drives, inbox, view):
     tmp = view + '.new'
     if os.path.lexists(tmp): os.unlink(tmp)
     os.symlink(new, tmp); os.replace(tmp, view)
-    for old in ls(root)[:-2]: shutil.rmtree(os.path.join(root, old), ignore_errors=True)   # keep the live tree and one before it
+    views = sorted(d for d in ls(root) if re.fullmatch(r'\d{8}T\d{6}', d) and os.path.isdir(os.path.join(root, d)) and not os.path.islink(os.path.join(root, d)))
+    for old in views[:-2]: shutil.rmtree(os.path.join(root, old), ignore_errors=True)   # keep the live tree and one before it; ONLY timestamp dirs: .ark-views also holds the island's `stable` dir and `current` link, and pruning by raw sort order deleted the just-built view (/data/ark dangled 2026-10-26 00:08-02:15Z)
     with open(os.path.join(inbox, 'ARK-CONFLICTS.tsv'), 'w') as f:
         f.write('view_path\tused\tshadowed\n')
         for c in conflicts: f.write('\t'.join(c) + '\n')
