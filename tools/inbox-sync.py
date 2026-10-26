@@ -26,6 +26,7 @@ import argparse, fcntl, fnmatch, json, os, re, shutil, subprocess, sys, tempfile
 ARK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.expanduser('~/.local/state/ark-inbox-sync')
 UA = {'User-Agent': 'ark-inbox-sync/1'}
+SHARD_EXTS = {'.safetensors', '.bin', '.pt', '.pth', '.ckpt'}
 HF_EXCLUDE = ('tf_*', 'flax_*', '*.h5', '*.msgpack', '.gitattributes')   # what fetch/hf-models.sh leaves out
 
 def sh(cmd, **kw): return subprocess.run(cmd, text=True, capture_output=True, **kw)
@@ -118,7 +119,9 @@ def present(c, f, isl):
     if 'regex' in c: rx = re.compile(c['regex']); return any(rx.match(n) for n in f['names_all'])
     if 'name' in c: return c['name'] in f['names']
     if c.get('files'):   # every payload file somewhere: same name and size, or same size and extension (a renamed copy)
-        gone = [n for n, s in c['files'] if not (f'{n}|{s}' in f['ns'] or (f'{s}|{ext(n)}' in f['se'] if ext(n) else s in f['sz']))]
+        # the size+extension 'renamed copy' rule is only safe for formats that are renamed in practice (gguf); a fine-tune's
+        # .safetensors/.bin/.pt shards have exactly its base model's sizes, which marked MemT-1.0-Nano present (2026-10-26)
+        gone = [n for n, s in c['files'] if not (f'{n}|{s}' in f['ns'] or (f'{s}|{ext(n)}' in f['se'] if ext(n) and ext(n) not in SHARD_EXTS else (s in f['sz'] if not ext(n) else False)))]
         c['why'] = f"{len(gone)}/{len(c['files'])} files absent, e.g. {gone[0]}" if gone else ''
         if not gone: return True
         # a whole-repo row mirrored selectively (safetensors kept, duplicate .bin skipped) still counts once any payload or its dir is there

@@ -152,7 +152,7 @@ def walk_files(mp, rot, inbox, uuid):
     files, dirs = {}, set()
     for root, ds, fs in os.walk(mp):
         if os.path.basename(root).startswith('wheels'): ds[:] = []; continue
-        dirs.update(ds)
+        if fs: dirs.add(os.path.basename(root))   # a dir counts only once it holds a file: empty landing-bind dirs (ARK-LAND) made rows look present (2026-10-26)
         ds[:] = [d for d in ds if d not in PRUNE and not os.path.islink(os.path.join(root, d))]
         for f in fs:
             try: files.setdefault(f, []).append(os.lstat(os.path.join(root, f)).st_size)
