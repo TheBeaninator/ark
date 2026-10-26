@@ -136,7 +136,8 @@ def wanted(only, cache):
                     c = {'files': [(os.path.basename(src), sz)]} if sz else {'name': os.path.basename(src)}
             elif k in ('zim', 'iso') or (k == 'url'):
                 c = {'regex': '^' + re.escape(pat if k != 'url' else os.path.basename(src)).replace(r'\*', '.*').replace(re.escape('{REL}'), r'\d+') + '$'}
-            elif k == 'findlinks': c = {'wheel': norm(re.split(r'[<>=!~\[ ]', pat)[0])}
+            elif k == 'findlinks':   # a pinned requirement (name==ver) is present only at that version: any older wheel of the same name hid triton-rocm 3.8.0 (2026-10-26)
+                c = {'wheel': norm(re.split(r'[<>=!~\[ ]', pat)[0])}; mv = re.search(r'==\s*([0-9][^,; ]*)', pat); c['wver'] = mv.group(1) if mv else None
             elif k == 'whence': c = {'whence': pat}
             else: c = {'skip': f'kind {k} not tracked'}
             out.append(('reference', src, r, c))
@@ -144,7 +145,7 @@ def wanted(only, cache):
 
 def present(c, f, isl):
     if 'repo' in c: return c['repo'] in isl['repos']
-    if 'wheel' in c: return any(norm(w.split('-')[0]) == c['wheel'] for w in isl['wheels'])
+    if 'wheel' in c: return any(norm(w.split('-')[0]) == c['wheel'] and (not c.get('wver') or w.split('-')[1].split('+')[0] == c['wver']) for w in isl['wheels'])
     if 'whence' in c: return c['whence'] in f['whence']
     if 'regex' in c: rx = re.compile(c['regex']); return any(rx.match(n) for n in f['names_all'])
     if 'name' in c: return c['name'] in f['names']
