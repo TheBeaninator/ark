@@ -213,3 +213,9 @@ MemTensor/MemT-1.0-Nano	raw		MemT-1.0 Nano (Apache-2.0, 36B-A3B on Qwen3.6-35B-A
 inclusionAI/Ling-3.0-flash-Sante	raw		Ling 3.0 Flash Sante (inclusionAI, MIT, 124B-A5.1B, 255 GB, 262K ctx): healthcare/medical-reasoning fine-tune of Ling-3.0-flash (base not mirrored), bailing-moe-v3 arch; research model not a medical device; dad 2026-10-24
 FastVideo/FastVideo-FastH3-Omni-8-Step-V1	raw		FastH3 Omni (Hao AI Lab FastVideo, 70 GB): 8-step reference-conditioned MiniMax H3 - up to 9 images, 3 videos, 3 audio refs, 24 fps 5/10/15 s with 32 kHz stereo audio; transformer_ref weights, run via hao-ai-lab/FastVideo; MiniMax H3 licence terms apply; dad 2026-10-24
 FastVideo/FastH3-Omni-FP8-Comfy	comfy	fasth3_omniref_fp8_comfy.safetensors	FastH3 Omni FP8 single-file for ComfyUI (23 GB); reuses the Comfy-Org/MiniMax-H3 text encoder and VAE; dad 2026-10-24
+liana313/tokengate-niah-qwen3-1.7b	raw		TokenGate gate+LoRA (r16 a32 q/v) on Qwen/Qwen3-1.7B, needle-in-a-haystack, gate_step3000.pt + lora_step3000.pt (0.1 GB); load with tokengate.load_model; dad 2026-10-26	
+liana313/tokengate-2wikimqa-qwen3-1.7b	raw		TokenGate gate+LoRA on Qwen/Qwen3-1.7B, 2WikiMQA (0.1 GB); dad 2026-10-26	
+liana313/tokengate-multinews-qwen3-1.7b	raw		TokenGate gate+LoRA on Qwen/Qwen3-1.7B, MultiNews summarisation (0.1 GB); dad 2026-10-26	
+liana313/tokengate-niah-qwen3.5-2b	raw		TokenGate gate+LoRA on Qwen/Qwen3.5-2B (hybrid attention, gate at layer 1 = a DeltaNet layer, flex attention default), NIAH (0.1 GB); dad 2026-10-26	
+Qwen/Qwen3-1.7B	raw		Qwen3-1.7B (4.1 GB): base of the three liana313 tokengate-*-qwen3-1.7b adapters; dad 2026-10-26	
+Qwen/Qwen3.5-2B	raw		Qwen3.5-2B hybrid-attention (4.6 GB): base of liana313/tokengate-niah-qwen3.5-2b; dad 2026-10-26	

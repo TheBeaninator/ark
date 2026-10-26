@@ -29,3 +29,4 @@ Anonymous112233/FlowGen		FlowGen: synthetic flowcharts per renderer (Mermaid/Gra
 jopan/FlowLearn		FlowLearn: scientific + simulated flowcharts with Mermaid, OCR and VQA annotations
 MiaSanLei/MindBench		MindBench synthetic mind maps (Graphviz, bilingual) with structure annotations; CC BY-NC 4.0| full set, dad 2026-10-13 (DECIDE a4141f7018): pull everything, straight to /mnt/ark/datasets via tools/dataset-courier.sh (never through /data/ark-inbox)
 tencent/Hy-Nomas-Bench		Hy-Nomas-Bench: 4 benchmarks, 280 cases for interactive controllability/consistency of world models; dad 2026-10-24
+BioDEX/BioDEX-Reactions		BioDEX-Reactions (0.44 GB): TokenGate training/eval set (datasets/biodex/biodex_reactions/prepare.py); dad 2026-10-26

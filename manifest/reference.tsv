@@ -154,3 +154,4 @@ url	https://arxiv.org/pdf/2610.28578	papers	Sage-A1.5: From Long-Horizon Executi
 url	https://arxiv.org/pdf/2610.26825	papers	MemT-1.0: Towards Memory-Native Evolution (MemTensor); OMF literature
 url	https://arxiv.org/pdf/2505.14521	papers	Sparc3D: sparse representation + high-res geometry for image-to-3D (basis of Hi3D v1.0)
 url	https://arxiv.org/pdf/2606.13392	papers	MiniMax M3 / M3.1 Flash technical report
+url	https://arxiv.org/pdf/2610.26754	papers	TokenGate: Adapting LLMs for Fast and Memory-Efficient Prefill with Learned Token Pruning (Stanford/Berkeley, 2026-10-19); code github.com/tokengate-models/TokenGate
