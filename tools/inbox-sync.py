@@ -123,10 +123,10 @@ def present(c, f, isl):
         # .safetensors/.bin/.pt shards have exactly its base model's sizes, which marked MemT-1.0-Nano present (2026-10-26)
         gone = [n for n, s in c['files'] if not (f'{n}|{s}' in f['ns'] or (f'{s}|{ext(n)}' in f['se'] if ext(n) and ext(n) not in SHARD_EXTS else (s in f['sz'] if not ext(n) else False)))]
         c['why'] = f"{len(gone)}/{len(c['files'])} files absent, e.g. {gone[0]}" if gone else ''
+        if not gone: return True   # every file found by name+size anywhere: a renamed copy still counts (old drive layouts, GGUF repacks)
         own_dir = any(x in f['dirs_l'] for x in c['dir']) if c.get('dir') else True   # url rows: the file name itself is distinctive
-        if c.get('dir') and not own_dir:   # a MODEL row is present only under its own (non-empty) dir: a fine-tune carries its base
-            c['why'] = (c['why'] + '; ' if c['why'] else '') + 'own dir absent'; return False   # model's exact shard names AND sizes (MemT-1.0-Nano vs Qwen3.6-35B-A3B, 2026-10-26)
-        if not gone: return True
+        if c.get('dir') and not own_dir:   # the partial/stale shortcuts below need the row's OWN non-empty dir: a fine-tune carries its base
+            c['why'] += '; own dir absent'; return False   # model's exact shard names and sizes (MemT-1.0-Nano vs Qwen3.6-35B-A3B, 2026-10-26)
         # a whole-repo row mirrored selectively (safetensors kept, duplicate .bin skipped) still counts once any payload or its dir is there
         # ...but only when the matched files hold real weight: shared tokenizers (every Gemma has the same tokenizer.model) must not count
         tot = sum(s for _, s in c['files']) or 1; have = tot - sum(s for n, s in c['files'] if n in gone)
