@@ -155,3 +155,4 @@ url	https://arxiv.org/pdf/2610.26825	papers	MemT-1.0: Towards Memory-Native Evol
 url	https://arxiv.org/pdf/2505.14521	papers	Sparc3D: sparse representation + high-res geometry for image-to-3D (basis of Hi3D v1.0)
 url	https://arxiv.org/pdf/2606.13392	papers	MiniMax M3 / M3.1 Flash technical report
 url	https://arxiv.org/pdf/2610.26754	papers	TokenGate: Adapting LLMs for Fast and Memory-Efficient Prefill with Learned Token Pruning (Stanford/Berkeley, 2026-10-19); code github.com/tokengate-models/TokenGate
+findlinks	https://download.pytorch.org/whl/rocm7.2/triton-rocm/	triton-rocm==3.8.0	triton-rocm 3.8.0 (linux_x86_64 wheel): the Triton partner of torch 2.14.0+rocm7.2 already on the island; the wheel lane skipped it because its pip download allowed manylinux platforms only (fixed in fetch/wheels-lanes.sh 2026-10-26); without it torch 2.14 rocm cannot resolve offline (TokenGate dry-run), torch 2.12.0+rocm7.2 + triton-rocm 3.7.0 do

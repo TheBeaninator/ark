@@ -29,7 +29,7 @@ py(){ tar tf $B/$TAG/cpython-$1*-x86_64-unknown-linux-gnu-install_only_stripped.
 lane(){ v=$1; abi=cp${v/./}; PY=$(py $v) || { log "  no interpreter for $v"; return; }
   [ -x ~/depaudit/venv$abi/bin/pip ] || $PY -m venv ~/depaudit/venv$abi >/dev/null 2>&1
   PIP=~/depaudit/venv$abi/bin/pip; $PIP install -q -U pip >/dev/null 2>&1
-  PD="$PIP download --dest wheels --disable-pip-version-check -q --python-version $v --implementation cp --abi $abi --platform manylinux_2_28_x86_64 --platform manylinux2014_x86_64 --platform manylinux_2_17_x86_64 --only-binary=:all:"
+  PD="$PIP download --dest wheels --disable-pip-version-check -q --python-version $v --implementation cp --abi $abi --platform manylinux_2_28_x86_64 --platform manylinux2014_x86_64 --platform manylinux_2_17_x86_64 --platform linux_x86_64 --only-binary=:all:"
   SD="$PIP download --dest wheels --disable-pip-version-check -q --no-deps --no-binary=:all:"
   log "== lane $abi: torch stack"; for idx in rocm7.2 cpu; do $PD --index-url https://download.pytorch.org/whl/$idx --extra-index-url https://pypi.org/simple torch torchvision torchaudio >/dev/null 2>&1 && log "  torch $idx $abi ok" || log "  torch $idx $abi: none (expected for cp314)"; done
   log "== lane $abi: requirements + projects"; n=0
