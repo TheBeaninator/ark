@@ -19,7 +19,7 @@ Runs on a machine with internet AND ssh to the island's control node (reference 
      reported, never fetched, until a manifest row exists (what enters the island is always on the list).
 Exits 0 quietly when the island is unreachable, so it is safe on a timer.
 Guard (abdfc29846): the push is refused unless /data on the island keeps 60 GB free after the unbound part of the stage, every new models/<dir> >= 5 GB has a landing bind mount under <inbox>/models, and the landing drive keeps 30 GB. Refused stages are kept for inspection.
-Usage: tools/inbox-sync.py [--dry-run] [--max-gb 40] [--host pod-control-ll] [--inbox /data/ark-inbox] [--only repos,models,reference]
+Usage: tools/inbox-sync.py [--dry-run] [--resume-stage DIR] [--max-gb 40] [--host pod-control-ll] [--inbox /data/ark-inbox] [--only repos,models,reference]
 """
 import argparse, fcntl, fnmatch, json, os, re, shutil, subprocess, sys, tempfile, time, urllib.request
 
@@ -164,7 +164,7 @@ def guard_push(a):
              "ms=[l.split()[1] for l in open('/proc/mounts') if l.split()[1].startswith(%r)];"
              "print(json.dumps({'data':shutil.disk_usage('/data').free,'inbox':shutil.disk_usage('/data').free,"
              "'mounts':ms,'land':(shutil.disk_usage(ms[0]).free if ms else None)}))" % (a.inbox + '/models/'))
-    r = sh(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', a.host, 'python3', '-c', probe], timeout=60)
+    r = sh(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', a.host, 'python3', '-'], input=probe, timeout=60)   # stdin: ssh re-parses argv through the remote shell, which broke the quoted probe (PUSH-REFUSED 2026-10-26 01:3xZ)
     if r.returncode: return False, 'free-space probe failed: ' + (r.stderr.strip() or 'ssh failed')[-200:]
     try: isl = json.loads(r.stdout)
     except ValueError: return False, 'free-space probe unparsable'
@@ -195,6 +195,7 @@ def main():
     ap.add_argument('--max-gb', type=float, default=float(os.environ.get('ARK_SYNC_MAX_GB', 40)))
     ap.add_argument('--only', default='repos,models,reference')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--resume-stage', metavar='DIR', help='push an already-fetched stage dir (one a refused push kept) instead of fetching; models/<Org__Repo> dirs become the ARK-FETCHED keys')
     ap.add_argument('--exclude-tag', default=os.environ.get('ARK_EXCLUDE_TAGS', ''),
                     help='comma-separated manifest/tags.tsv tags to leave out, e.g. license-agreement')
     a = ap.parse_args(); only = set(a.only.split(','))
@@ -204,6 +205,7 @@ def main():
     except OSError: print('another inbox-sync is running'); return 0
     if sh(['ssh', '-o', 'ConnectTimeout=8', '-o', 'BatchMode=yes', a.host, 'true']).returncode:
         print(f'island unreachable ({a.host})'); return 0
+    if a.resume_stage: return resume_stage(a)
     cache = Cache(); W = wanted(only, cache); cache.save()
     if a.exclude_tag:
         sys.path.insert(0, os.path.join(ARK, 'tools')); import importlib; skip = set(importlib.import_module('ark-tags').keys_with(a.exclude_tag))
@@ -314,6 +316,26 @@ def refresh_tracked(a, isl, status):
         sh(['ssh', '-o', 'BatchMode=yes', a.host, f'cat >> {a.inbox}/ARK-FETCHED.tsv'], input=f"{u}\t{status['utc']}\trefresh {up_sha[:12]}\n")
         status['refreshed'].append(f'{u} {isl_sha[:7]}->{up_sha[:7]}'); print(f'  refreshed {d} -> {up_sha[:7]}')
     if status['refreshed'] and not a.dry_run: island(a.host, a.inbox, {'names': [], 'sizes': [], 'exts': []})
+
+def resume_stage(a):
+    """--resume-stage DIR: the push half of a run for a stage the guard (or an rsync failure) left behind. No fetch,
+    no island diff: guard, rsync, ARK-FETCHED keys for the models/<Org__Repo> dirs present, re-index, SYNC-STATUS."""
+    a.stage = os.path.abspath(os.path.expanduser(a.resume_stage))
+    if not os.path.isdir(a.stage) or not any(fs for _, _, fs in os.walk(a.stage)): print(f'resume: {a.stage} is not a non-empty stage dir'); return 1
+    status = {'utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'host': os.uname().nodename, 'resume': a.stage,
+              'fetched': [], 'failed': [], 'too_big': [], 'skipped': [], 'missing': 0, 'stale': 0, 'requests': 0, 'refreshed': 0}
+    mstage = os.path.join(a.stage, 'models')
+    ok = {d.replace('__', '/', 1) for d in os.listdir(mstage)} if os.path.isdir(mstage) else set()
+    gok, gmsg = guard_push(a)
+    if not gok: print('PUSH-REFUSED ' + gmsg + f' (stage kept at {a.stage})'); status['failed'].append('PUSH-REFUSED: ' + gmsg); return finish(a, status, push=True)
+    print(gmsg)
+    r = sh(['rsync', '-a', '--partial', '--prune-empty-dirs', a.stage + '/', f'{a.host}:{a.inbox}/'])
+    if r.returncode: print('rsync failed: ' + r.stderr[-300:]); status['failed'].append('rsync'); return finish(a, status, push=True)
+    shutil.rmtree(a.stage); print(f'pushed {len(ok)} model dir(s) into {a.host}:{a.inbox} (resume)')
+    status['fetched'] = sorted(ok)
+    sh(['ssh', '-o', 'BatchMode=yes', a.host, f'cat >> {a.inbox}/ARK-FETCHED.tsv'], input=''.join(f"{k}\t{status['utc']}\tresume-push\n" for k in sorted(ok)))
+    island(a.host, a.inbox, {'names': [], 'sizes': [], 'exts': []})
+    return finish(a, status, push=True)
 
 def finish(a, status, push):
     json.dump(status, open(os.path.join(STATE, 'last.json'), 'w'), indent=1)
