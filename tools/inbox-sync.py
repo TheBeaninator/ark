@@ -18,6 +18,7 @@ Runs on a machine with internet AND ssh to the island's control node (reference 
   5. requests: island agents may append lines to <inbox>/REQUESTS.tsv or any /data/pod/plans/*/fetch-requests.txt; they are
      reported, never fetched, until a manifest row exists (what enters the island is always on the list).
 Exits 0 quietly when the island is unreachable, so it is safe on a timer.
+Guard (abdfc29846): the push is refused unless /data on the island keeps 60 GB free after the unbound part of the stage, every new models/<dir> >= 5 GB has a landing bind mount under <inbox>/models, and the landing drive keeps 30 GB. Refused stages are kept for inspection.
 Usage: tools/inbox-sync.py [--dry-run] [--max-gb 40] [--host pod-control-ll] [--inbox /data/ark-inbox] [--only repos,models,reference]
 """
 import argparse, fcntl, fnmatch, json, os, re, shutil, subprocess, sys, tempfile, time, urllib.request
@@ -132,6 +133,60 @@ def present(c, f, isl):
         return any(x in f['dirs_l'] for x in (y.lower() for y in d))
     return False
 
+# ARK-LAND guard (card abdfc29846, PM kit /data/pod/plans/abdfc29846/guard, applied by hand 2026-10-26 because the kit's
+# push-line anchor predates the has_files form below): fail closed before the rsync push.
+FLOOR_GB = 60.0       # never let the part of a pass that lands on /data take /data free below this (DISK-FULL-2 5aefa7b515)
+LAND_FLOOR_GB = 30.0  # same floor for the island landing drive (nv5 today, card abdfc29846)
+NEW_LAND_MIN_GB = 5.0 # a NEW models/<dir> row at or over this size must land on an island bind mount, not on /data
+
+def du_bytes(d):
+    t = 0
+    for root, ds, fs in os.walk(d):
+        for f in fs:
+            try: t += os.lstat(os.path.join(root, f)).st_size
+            except OSError: pass
+    return t
+
+def guard_push(a):
+    """Decide whether the stage may be pushed. -> (ok, msg). Refuse unless
+      1. everything not landing on a bound models/<dir> fits: /data free - unbound stage bytes >= FLOOR_GB, and
+      2. every NEW models/<dir> of >= NEW_LAND_MIN_GB in the stage is a bind mount on the island (the big rows
+         land on the island landing drive; an unbound big row would fill /data — the DISK-FULL-2 class), and
+      3. the bound bytes still fit the landing drive with LAND_FLOOR_GB spare.
+    Probes live space ON the island (the stage on this host says nothing about /data there). Fails closed."""
+    mstage = os.path.join(a.stage, 'models')
+    stage_models = {}
+    if os.path.isdir(mstage):
+        for d in sorted(os.listdir(mstage)):
+            p = os.path.join(mstage, d)
+            if os.path.isdir(p): stage_models[d] = du_bytes(p)
+    probe = ("import json,shutil;"
+             "ms=[l.split()[1] for l in open('/proc/mounts') if l.split()[1].startswith(%r)];"
+             "print(json.dumps({'data':shutil.disk_usage('/data').free,'inbox':shutil.disk_usage('/data').free,"
+             "'mounts':ms,'land':(shutil.disk_usage(ms[0]).free if ms else None)}))" % (a.inbox + '/models/'))
+    r = sh(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', a.host, 'python3', '-c', probe], timeout=60)
+    if r.returncode: return False, 'free-space probe failed: ' + (r.stderr.strip() or 'ssh failed')[-200:]
+    try: isl = json.loads(r.stdout)
+    except ValueError: return False, 'free-space probe unparsable'
+    bound = {mp.rstrip('/').rsplit('/', 1)[-1] for mp in isl['mounts']}
+    stage_bytes = du_bytes(a.stage)
+    bound_bytes = sum(sz for d, sz in stage_models.items() if d in bound)
+    unbound = max(0, stage_bytes - bound_bytes)
+    avail = min(isl['data'], isl['inbox'])
+    if unbound and avail - unbound < FLOOR_GB * 1e9:
+        return False, (f'/data free {avail / 1e9:.0f} GB minus {unbound / 1e9:.0f} GB of stage lands on /data '
+                       f'below the {FLOOR_GB:.0f} GB floor; raise the cap down or land the row on the island (card abdfc29846)')
+    for d, sz in sorted(stage_models.items()):
+        if sz < NEW_LAND_MIN_GB * 1e9 or d in bound: continue
+        return False, f'models/{d} ({sz / 1e9:.0f} GB) is new and has no landing bind on the island (card abdfc29846)'
+    if bound_bytes:
+        if isl.get('land') is None: return False, 'landing mounts vanished mid-run'
+        if bound_bytes > isl['land'] - LAND_FLOOR_GB * 1e9:
+            return False, f'landing drive has {isl["land"] / 1e9:.0f} GB free, bound rows need {bound_bytes / 1e9:.0f} GB'
+    return True, (f'guard ok: /data free {avail / 1e9:.0f} GB, {unbound / 1e9:.0f} GB to /data, '
+                  f'{bound_bytes / 1e9:.0f} GB to island binds ({len(bound)} mounted)')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--host', default=os.environ.get('ARK_ISLAND_HOST', 'pod-control-ll'))
@@ -211,6 +266,10 @@ def main():
     has_files = any(fs for _, _, fs in os.walk(a.stage))
     if not has_files: shutil.rmtree(a.stage, ignore_errors=True)   # nothing downloaded: push nothing (an empty dir would read as present)
     else:
+        gok, gmsg = guard_push(a)
+        if not gok:
+            print('PUSH-REFUSED ' + gmsg + f' (stage kept at {a.stage})'); status['failed'].append('PUSH-REFUSED: ' + gmsg); return finish(a, status, push=True)
+        print(gmsg)
         r = sh(['rsync', '-a', '--partial', '--prune-empty-dirs', a.stage + '/', f'{a.host}:{a.inbox}/'])
         if r.returncode:
             print('rsync failed: ' + r.stderr[-300:]); status['failed'].append('rsync'); return finish(a, status, push=True)
