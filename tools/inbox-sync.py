@@ -22,6 +22,8 @@ Guard (abdfc29846): the push is refused unless /data on the island keeps 60 GB f
 Usage: tools/inbox-sync.py [--dry-run] [--resume-stage DIR] [--max-gb 40] [--host pod-control-ll] [--inbox /data/ark-inbox] [--only repos,models,reference]
 """
 import argparse, fcntl, fnmatch, json, os, re, shutil, subprocess, sys, tempfile, time, urllib.request
+import datetime, shlex
+import island_guard            # tools/island_guard.py (AI-4 19f7dca19b)
 
 ARK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.expanduser('~/.local/state/ark-inbox-sync')
@@ -31,11 +33,39 @@ HF_EXCLUDE = ('tf_*', 'flax_*', '*.h5', '*.msgpack', '.gitattributes')   # what 
 
 def sh(cmd, **kw): return subprocess.run(cmd, text=True, capture_output=True, **kw)
 
+GUARDED_TOOLS = ('ark-index.py', 'ark-path')
+FORCE_TOOLS = False   # --force-tools: overwrite island copies even when they are newer
+
+def guard_tools(host, inbox, force):
+    """AI-4 19f7dca19b: never silently clobber a NEWER differing island copy of a shipped tool. Fetch the island
+    copies (mtimes kept), let island_guard decide, and for each 'keep' print the diffstat and log one UPSTREAM line
+    to <inbox>/REQUESTS.tsv (once per path). Returns the tool names to leave out of this run's rsync."""
+    t, keep = os.path.join(ARK, 'tools'), []
+    with tempfile.TemporaryDirectory() as td:
+        sh(['rsync', '-a', *[f'{host}:{inbox}/tools/{n}' for n in GUARDED_TOOLS], td + '/'])   # a missing copy = plain sync
+        for n in GUARDED_TOOLS:
+            rel = 'tools/' + n
+            verdict, _, ds = island_guard.guard_island_copy(os.path.join(t, n), os.path.join(td, n), rel, force=force)
+            if verdict != 'keep': continue
+            print(ds)
+            key = f'UPSTREAM\t{rel}\tisland copy newer'
+            line = f'{datetime.date.today().isoformat()}\t{key} and differs; kept, port it into the ark repo or rerun with --force-tools\tcard=19f7dca19b\n'
+            req = f'{inbox}/REQUESTS.tsv'
+            sh(['ssh', '-o', 'ConnectTimeout=8', '-o', 'BatchMode=yes', host,
+                f'grep -qsF {shlex.quote(key)} {req} || cat >> {req}'], input=line)
+            print(f'island_guard: kept island copy of {rel}; logged to {req}')
+            keep.append(n)
+    return keep
+
 def island(host, inbox, want):
-    """Ship tools/ark-index.py + ark-path to <inbox>/tools (the island runs the same copy on its own timer), then scan."""
+    """Ship tools/ark-index.py + ark-path to <inbox>/tools (the island runs the same copy on its own timer), then scan.
+    A newer island copy is kept, not overwritten (guard_tools)."""
     t = os.path.join(ARK, 'tools')
-    r = sh(['rsync', '-a', '--mkpath', f'{t}/ark-index.py', f'{t}/ark-path', f'{host}:{inbox}/tools/'])
-    if r.returncode: return None, 'rsync tools: ' + r.stderr[-200:]
+    keep = guard_tools(host, inbox, FORCE_TOOLS)
+    ship = [f'{t}/{n}' for n in GUARDED_TOOLS if n not in keep]
+    if ship:
+        r = sh(['rsync', '-a', '--mkpath', *ship, f'{host}:{inbox}/tools/'])
+        if r.returncode: return None, 'rsync tools: ' + r.stderr[-200:]
     r = sh(['ssh', '-o', 'ConnectTimeout=8', '-o', 'BatchMode=yes', host, 'ionice', '-c3', 'nice', 'python3', f'{inbox}/tools/ark-index.py', '--want', '--inbox', inbox],
            input=json.dumps(want), timeout=1800)
     if r.returncode: return None, (r.stderr.strip() or 'ssh failed')[-300:]
@@ -203,7 +233,10 @@ def main():
     ap.add_argument('--resume-stage', metavar='DIR', help='push an already-fetched stage dir (one a refused push kept) instead of fetching; models/<Org__Repo> dirs become the ARK-FETCHED keys')
     ap.add_argument('--exclude-tag', default=os.environ.get('ARK_EXCLUDE_TAGS', ''),
                     help='comma-separated manifest/tags.tsv tags to leave out, e.g. license-agreement')
+    ap.add_argument('--force-tools', action='store_true',
+                    help="overwrite island copies of tools/ even when the island copy is newer (deliberate clobber)")
     a = ap.parse_args(); only = set(a.only.split(','))
+    global FORCE_TOOLS; FORCE_TOOLS = a.force_tools
     os.makedirs(STATE, exist_ok=True)
     lock = open(os.path.join(STATE, 'lock'), 'w')
     try: fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

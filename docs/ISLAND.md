@@ -47,3 +47,42 @@ pip install --no-index --find-links /data/ark/software/wheels ...
 ```
 
 Mounting by `LABEL=` in fstab keeps mountpoints stable across ports; the view keeps paths stable across everything else.
+
+## Island tools are repo-owned (AI-4 19f7dca19b)
+
+**`<inbox>/tools/` (ark-index.py, ark-path, ...) is repo-owned.** The ark repo is the source of truth and
+inbox-sync.py copies `tools/` into the inbox on every island sync. Island copies are downstream artefacts —
+never edit the repo copy by editing only the island copy and expecting the change to survive.
+
+### What inbox-sync now does (ark side, this patch)
+
+inbox-sync's island() step 1 no longer blindly rsyncs over the inbox tools. Before the rsync it fetches the island copies over ssh and calls
+`island_guard.guard_island_copy()` for each of `tools/ark-index.py` and `tools/ark-path`:
+
+- Island copy missing or byte-identical → plain sync, as before.
+- Island copy **newer** and differing → the island copy is **left untouched** (its rsync is skipped for that
+  run), the diffstat is printed, and a request line is appended to `<inbox>/REQUESTS.tsv`:
+  `<date>\tUPSTREAM\ttools/<name>\tisland copy newer and differs; kept, ...\tcard=19f7dca19b` (same tab fields as the island's own rows; logged once per path). REQUESTS.tsv is the
+  island→ark request channel ark-index already surfaces.
+- Island copy older-or-equal and differing → sync (the repo side is the fresh one).
+- **`--force-tools`** bypasses the guard entirely: the repo deliberately overwrites the island copies
+  (use this after you have ported or rejected the island change, so a stale island copy stops re-flagging).
+
+### The island-side rule
+
+Do not hot-patch `<inbox>/tools/*` and leave it there. An island change is:
+
+1. a patch file in `/data/pod/plans/<card>/` (e.g. `ark-index.patch` or the full new file), and
+2. a comment on the card saying **`UPSTREAM ark: <path>`** (e.g. `UPSTREAM ark: /data/pod/plans/ab12cd34ef/ark-index.patch`).
+
+AI-0/pod-ark-watch or the PM carries that patch into the ark repo **within a day**. Until it lands, the
+guard keeps the island copy alive and re-logs the REQUESTS.tsv line instead of clobbering it; after it
+lands, the next sync (or `--force-tools`) converges the island copy and the flag clears.
+
+### Why
+
+The old behaviour silently destroyed island-side fixes (edited ark-index.py/ark-path reverted at the next
+sync, with no trace). The guard makes the divergence visible (diffstat + REQUESTS.tsv) and lossless;
+`--force-tools` keeps a deliberate, human-driven override on the repo side.
+
+Tests: `python3 tools/test_island_guard.py` (guard rules) and `ARK_INDEX_PATH=tools/ark-index.py python3 tools/test_publish_stable.py` (publish_stable / view prune, card 71d498e061).
