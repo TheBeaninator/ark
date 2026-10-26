@@ -219,3 +219,5 @@ liana313/tokengate-multinews-qwen3-1.7b	raw		TokenGate gate+LoRA on Qwen/Qwen3-1
 liana313/tokengate-niah-qwen3.5-2b	raw		TokenGate gate+LoRA on Qwen/Qwen3.5-2B (hybrid attention, gate at layer 1 = a DeltaNet layer, flex attention default), NIAH (0.1 GB); dad 2026-10-26	
 Qwen/Qwen3-1.7B	raw		Qwen3-1.7B (4.1 GB): base of the three liana313 tokengate-*-qwen3-1.7b adapters; dad 2026-10-26	
 Qwen/Qwen3.5-2B	raw		Qwen3.5-2B hybrid-attention (4.6 GB): base of liana313/tokengate-niah-qwen3.5-2b; dad 2026-10-26	
+bartowski/SmolLM2-135M-Instruct-GGUF	gguf	SmolLM2-135M-Instruct-Q8_0.gguf	hierophant test fixture (tied embeddings, dense), pinned revision + sha256 in scripts/fetch_models.py; dad 2026-10-26	09816acd5d99df7be770d85ea30822623dab342c
+ggml-org/stories15M_MOE	gguf	stories15M_MOE-F16.gguf stories15M_MOE-Q8_0.gguf moe_shakespeare15M.gguf	hierophant test fixtures (MoE with untied embeddings at F16 and Q8_0, plus a foreign LoRA), pinned revision in scripts/fetch_models.py; dad 2026-10-26	b6dd737497465570b5f5e962dbc9d9454ed1e0eb

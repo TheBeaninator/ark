@@ -30,3 +30,8 @@ jopan/FlowLearn		FlowLearn: scientific + simulated flowcharts with Mermaid, OCR 
 MiaSanLei/MindBench		MindBench synthetic mind maps (Graphviz, bilingual) with structure annotations; CC BY-NC 4.0| full set, dad 2026-10-13 (DECIDE a4141f7018): pull everything, straight to /mnt/ark/datasets via tools/dataset-courier.sh (never through /data/ark-inbox)
 tencent/Hy-Nomas-Bench		Hy-Nomas-Bench: 4 benchmarks, 280 cases for interactive controllability/consistency of world models; dad 2026-10-24
 BioDEX/BioDEX-Reactions		BioDEX-Reactions (0.44 GB): TokenGate training/eval set (datasets/biodex/biodex_reactions/prepare.py); dad 2026-10-26
+mlabonne/harmful_behaviors		AdvBench harmful prompts: hierophant/heretic direction train+test splits; dad 2026-10-26
+mlabonne/harmless_alpaca		harmless Alpaca prompts (CC-BY-NC-4.0): hierophant/heretic harmless mean + KL test split; dad 2026-10-26
+JailbreakBench/JBB-Behaviors		JBB behaviors (MIT): hierophant extra harmful scoring set (config behaviors, column Goal); dad 2026-10-26
+LLM-LAT/harmful-dataset		LLM-LAT harmful prompts: hierophant extra harmful scoring set (1000 rows, AdvBench overlap excluded); dad 2026-10-26
+Salesforce/wikitext	wikitext-2-raw-v1/*	wikitext-2-raw-v1 test split: hierophant llama-perplexity KL text (only this config, 644 MB whole repo otherwise); dad 2026-10-26
