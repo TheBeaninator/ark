@@ -325,7 +325,7 @@ def resume_stage(a):
     status = {'utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'host': os.uname().nodename, 'resume': a.stage,
               'fetched': [], 'failed': [], 'too_big': [], 'skipped': [], 'missing': 0, 'stale': 0, 'requests': 0, 'refreshed': 0}
     mstage = os.path.join(a.stage, 'models')
-    ok = {d.replace('__', '/', 1) for d in os.listdir(mstage)} if os.path.isdir(mstage) else set()
+    ok = {d.replace('__', '/', 1) for d in os.listdir(mstage) if any(fs for _, _, fs in os.walk(os.path.join(mstage, d)))} if os.path.isdir(mstage) else set()   # an empty dir (a failed gated fetch) is not fetched
     gok, gmsg = guard_push(a)
     if not gok: print('PUSH-REFUSED ' + gmsg + f' (stage kept at {a.stage})'); status['failed'].append('PUSH-REFUSED: ' + gmsg); return finish(a, status, push=True)
     print(gmsg)
