@@ -196,10 +196,13 @@ def guard_push(a):
         for d in sorted(os.listdir(mstage)):
             p = os.path.join(mstage, d)
             if os.path.isdir(p): stage_models[d] = du_bytes(p)
-    probe = ("import json,shutil;"
+    # Each bind may sit on a different landing drive (nv5, nv2, ...): report free space and device per mount, and
+    # let the guard sum bound rows per device (the old single 'land' = ms[0] refused nv2 rows against nv5's free space).
+    probe = ("import json,shutil,os;"
              "ms=[l.split()[1] for l in open('/proc/mounts') if l.split()[1].startswith(%r)];"
+             "lf={m:[os.stat(m).st_dev,shutil.disk_usage(m).free] for m in ms};"
              "print(json.dumps({'data':shutil.disk_usage('/data').free,'inbox':shutil.disk_usage('/data').free,"
-             "'mounts':ms,'land':(shutil.disk_usage(ms[0]).free if ms else None)}))" % (a.inbox + '/models/'))
+             "'mounts':ms,'land':(shutil.disk_usage(ms[0]).free if ms else None),'landfree':lf}))" % (a.inbox + '/models/'))
     r = sh(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', a.host, 'python3', '-'], input=probe, timeout=60)   # stdin: ssh re-parses argv through the remote shell, which broke the quoted probe (PUSH-REFUSED 2026-10-26 01:3xZ)
     if r.returncode: return False, 'free-space probe failed: ' + (r.stderr.strip() or 'ssh failed')[-200:]
     try: isl = json.loads(r.stdout)
@@ -217,8 +220,16 @@ def guard_push(a):
         return False, f'models/{d} ({sz / 1e9:.0f} GB) is new and has no landing bind on the island (card abdfc29846)'
     if bound_bytes:
         if isl.get('land') is None: return False, 'landing mounts vanished mid-run'
-        if bound_bytes > isl['land'] - LAND_FLOOR_GB * 1e9:
-            return False, f'landing drive has {isl["land"] / 1e9:.0f} GB free, bound rows need {bound_bytes / 1e9:.0f} GB'
+        lf = isl.get('landfree') or {}
+        per_dev = {}   # device -> [free, need]
+        for mp in isl['mounts']:
+            d = mp.rstrip('/').rsplit('/', 1)[-1]
+            if d not in stage_models: continue
+            dev, free = lf.get(mp, [mp, isl['land']])
+            per_dev.setdefault(dev, [free, 0])[1] += stage_models[d]
+        for dev, (free, need) in per_dev.items():
+            if need > free - LAND_FLOOR_GB * 1e9:
+                return False, f'landing drive has {free / 1e9:.0f} GB free, bound rows on it need {need / 1e9:.0f} GB'
     return True, (f'guard ok: /data free {avail / 1e9:.0f} GB, {unbound / 1e9:.0f} GB to /data, '
                   f'{bound_bytes / 1e9:.0f} GB to island binds ({len(bound)} mounted)')
 
