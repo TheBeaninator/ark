@@ -1,2 +1,35 @@
+# ARK-LAND-2 landing list (card 6a2b0a3fb6) — master, with a DRIVE COLUMN. Rows:
+#   <org>__<repo> TAB nvN     (the fetch/hf-models.sh staging name = HF id with / -> __)
+# ark-landing-mount.sh binds /mnt/<drive>/models/<name> onto /data/ark-inbox/models/<name>,
+# one per-drive unit instance (ark-landing-mount@nvN.service, ONLY_DRIVE=%i) so a missing
+# drive never blocks the others and a row can never bind the WRONG drive's dir at boot.
+# Drive choice (weight-cache plan sec 6): first /mnt/nv* where free - payload stays >= 30 GB,
+# order nv2 > nv3 > nv4 > nv5 > /mnt/ark; NEVER /data. Content-derived 2026-10-30.
+AtomicChat__Ling-3.1-flash-1019-GGUF	nv2
+briaai__Fibo-2.0-dev	nv5
+briaai__Fibo-2.0-edit-turbo	nv5
+caiovicentino1__Ekbasis-27B	nv5
+ConwayResearch__Underdog-Bark-3.0-Clean	nv5
+ConwayResearch__Underdog-Bark-3.0-Pro	nv5
+cyun9286__PURE	nv5
+FastVideo__FastVideo-FastH3-Omni-8-Step-V1	nv5
+hi3d-official__Hi3Dv1.0	nv5
+HuggingFaceBio__Carbon-X	nv5
+HuggingFaceBio__Carbon-X-GGUF	nv5
+inclusionAI__Ling-3.0-flash-Sante	nv5
+inclusionAI__Ming-3.0-tts-0.5B	nv5
+inclusionAI__Ming-3.0-tts-tiny	nv5
+InternScience__Sage-A1.5	nv5
+InternScience__Sage-A1.5-Q8_0-GGUF	nv5
+Mapika__decider-2b-GGUF	nv5
+Mapika__decider-4b-GGUF	nv5
+MemTensor__MemT-1.0-Nano	nv5
+MiniMaxAI__MiniMax-M3.1-Flash	nv5
+tencent__Hy-Nomas	nv5
+tencent__Hy-Nomas-Diffusers	nv5
+tencent__WeVisOne-VL-2B	nv5
+tencent__WeVisOne-VL-4B	nv5
+unsloth__MiniMax-M3.1-Flash-GGUF	nv5
+zai-org__GLM-5.3-Flash	nv2
 Qwen__Qwen3.8-27B	nv2
 kyutai__pocket-tts	nv2
