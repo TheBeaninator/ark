@@ -751,3 +751,4 @@ inference	https://github.com/hellas-ai/nix-strix-halo	Hellas nix flake for Strix
 inference	https://github.com/hellas-ai/nix-strix-halo#claude/glm53	PR 205: sglang-glm53-rocm + glm53-serve, GLM-5.3-Flash FP8 TP4 on 4 Strix Halo: 22.5 tok/s single, ~49 aggregate at 4 requests, 14.5k prefill 43.8 s
 inference	https://github.com/hellas-ai/nix-strix-halo#claude/strix-ds41-squashed	PR 204: sglang-v41 (SGLang fdf14605 + 88 patches), MSCCL++ v0.9.0 gfx1151 IB small-message all-reduce, rocm-pm4-split; DeepSeek-V4.1-Flash TP4 ~50 tok/s single, 16K prefill 11-12 s
 inference	https://github.com/microsoft/mscclpp#v0.9.0	MSCCL++ v0.9.0 used by hellas sglang-v41 for decode all-reduce over IB verbs on gfx1151
+inference	https://github.com/z-lab/dflash	DFlash / DFlash 2: block-diffusion draft models for speculative decoding (training recipe + SGLang/vLLM integration); the recipe is the question of DFLASH-GLM 58be4dabac (a drafter for GLM-5.3-Flash); dad 2026-10-30
