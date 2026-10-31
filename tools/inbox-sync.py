@@ -162,7 +162,10 @@ def present(c, f, isl):
         # ...but only when the matched files hold real weight: shared tokenizers (every Gemma has the same tokenizer.model) must not count
         tot = sum(s for _, s in c['files']) or 1; have = tot - sum(s for n, s in c['files'] if n in gone)
         if c.get('whole') and have / tot >= 0.3: c['stale'] = f'partial ({have * 100 // tot}% of bytes)'; return True
-        if own_dir and all(n in f['names'] for n in gone): c['stale'] = 'upstream changed size'; return True   # same names in its own folder: older versions
+        # 2026-10-31 (dad's DFlash drop): 'same names in its own folder' matched Qwen/Qwen3.8-27B against the GGUF dir
+        # qwen3.8-27b (own_dir by name) plus 18 shard NAMES that exist elsewhere on the island -> 55.6 GB classed stale, never
+        # fetched. An older version in its own folder still has SOME payload bytes matching by name+size; require 5%.
+        if own_dir and have / tot >= 0.05 and all(n in f['names'] for n in gone): c['stale'] = 'upstream changed size'; return True
         return False
     if 'dir' in c:
         d = c['dir'] if isinstance(c['dir'], list) else [c['dir']]
